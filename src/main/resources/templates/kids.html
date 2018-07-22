@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset=" UTF-8 ">
+    <meta name="viewport " content="width=device-width, initial-scale=1.0 ">
+    <meta http-equiv="X-UA-Compatible " content="ie=edge ">
+    <title>All Kids</title>
+</head>
+
+<body>
+    <header>
+        <h1>All the Kids Love Grandma</h1>
+    </header>
+    <div th:each="kid: ${kids}">
+        <a th:href="@{/kid(id=${kid.id})}" th:text="${kid.name}"></a>
+    </div>
+
+</body>
+
+</html>
