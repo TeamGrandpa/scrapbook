@@ -1,5 +1,7 @@
 package scrapbook;
 
+import java.time.Instant;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -13,7 +15,10 @@ public class Comment {
 	@GeneratedValue
 	private long id;
 
-	private String comment;
+	private String commentContent;
+	
+	private Instant commentTimestamp = Instant.now(); //Default comment instant time stamp from Epoch
+
 	
 	@ManyToOne
 	private Image image;
@@ -23,12 +28,25 @@ public class Comment {
 		
 	}
 
-	public Comment(String comment, Image image) {
-		this.comment = comment;
+	public Comment(String commentContent, Image image) {
+		this.commentContent = commentContent;
 		this.image = image;
 		
 	}
+	
+	//Getters
+	public long getId() {
+		return id;
+	}
 
+	public String getCommentContent() {
+		return getCommentContent();
+	}
+	
+	public String getCommentTimeStamp() {
+		return commentTimestamp.toString();
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

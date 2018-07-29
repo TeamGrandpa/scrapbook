@@ -1,0 +1,24 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>A Single Image</title>
+</head>
+<body>
+		<h1>A Single Image</h1>
+
+		<div th:each = "image: ${images}">
+			<img th:src="@{${image.imageUrl}}" />
+			<h2 th:text = "${image.caption}"></h2>
+		</div>
+		<div th:each = "kid: ${kids}">
+			<h2>Photos belonging to: ></h2>
+			<h3>
+				<a th:href="@{/kid(id=${kid.id})}" th:text = "${kid.name}"></a>
+			</h3>
+		</div>
+			
+		<footer>
+			<a href="http://localhost:8080/images"> Back to Images Home</a>
+		</footer>
+
+</body>
+</html>

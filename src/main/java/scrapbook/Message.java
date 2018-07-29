@@ -1,5 +1,7 @@
 package scrapbook;
 
+import java.time.Instant;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -12,7 +14,9 @@ public class Message {
 	@GeneratedValue
 	private long id;
 
-	private String content;
+	private String messageContent;
+	
+	private Instant messageTimestamp = Instant.now(); //Default message instant time stamp from Epoch
 	
 	@ManyToOne
 	private Kid kid;
@@ -21,10 +25,23 @@ public class Message {
 		
 	}
 
-	public Message(String content, Kid kid) {
-		this.content = content;
+	public Message(String messageContent, Kid kid) {
+		this.messageContent = messageContent;
 		this.kid = kid;
 		
+	}
+	
+	//Getters
+	public long getId() {
+		return id;
+	}
+	
+	public String getMessageContent() {
+		return messageContent;
+	}
+	
+	public String getMessageTimeStamp() {
+		return messageTimestamp.toString();
 	}
 
 	@Override

@@ -1,0 +1,16 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Images</title>
+</head>
+<body>
+	<h1>A List of Images</h1>
+	
+	<div th:each="image: ${images}">
+		<li>
+			<a th:href="@{/image(id=${image.id})}" th:text="${image.caption}"></a>
+		</li>
+	</div>
+
+</body>
+</html>

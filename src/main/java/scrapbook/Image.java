@@ -15,7 +15,7 @@ public class Image {
 	@GeneratedValue
 	private long id;
 
-	private String image;
+	private String imageUrl;
 	private String caption;
 
 	@ManyToOne
@@ -28,8 +28,8 @@ public class Image {
 
 	}
 
-	public Image(String image, String caption, Kid kid) {
-		this.image = image;
+	public Image(String imageUrl, String caption, Kid kid) {
+		this.imageUrl = imageUrl;
 		this.caption = caption;
 		this.kid = kid;
 
@@ -37,6 +37,14 @@ public class Image {
 
 	public long getId() {
 		return id;
+	}
+	
+	public String getImageUrl() {
+		return imageUrl;
+	}
+	
+	public String getCaption() {
+		return caption;
 	}
 
 	public Collection<Comment> getComments() {
