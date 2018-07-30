@@ -11,11 +11,18 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class Kid {
+	
 	@Id
 	@GeneratedValue
 	private long id;
 	
 	private String name;
+	
+	private String portraitImageUrl;
+	
+	private int colorNum;
+	
+	private boolean notify;
 	
 	@OneToMany(mappedBy = "kid")
 	private Collection<Image> images;
@@ -23,23 +30,46 @@ public class Kid {
 	@OneToMany(mappedBy = "kid")
 	private Collection<Message> messages;
 	
-	public long getId() {
-		return id;
-	}
-	//getters
-	public String getName() {
-		return name;
-	}
-
-	public Kid(String name, Image...images) {
-		this.name = name;
-		this.images = new HashSet<>(Arrays.asList(images));
-	}
 	
 	//empty constructor
 	protected Kid() {
 		
 	}
+	
+	public Kid(String name, Image...images) {
+		this.name = name;
+		this.images = new HashSet<>(Arrays.asList(images));
+	}
+	
+	public Kid(String name, String portraitImageUrl, int colorNum, boolean notify, Image...images) {
+		this.name = name;
+		this.portraitImageUrl = portraitImageUrl;
+		this.colorNum = colorNum;
+		this.notify = notify;
+		this.images = new HashSet<>(Arrays.asList(images));
+	}
+	
+	//getters
+	public long getId() {
+		return id;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	
+	public String getPortraitImageUrl() {
+		return portraitImageUrl;
+	}
+	
+	public int getColorNum() {
+		return colorNum;
+	}
+	
+	public boolean getNotify() {
+		return notify;
+	}
+	
 	public Collection<Image> getImages() {		
 		return images;
 	}

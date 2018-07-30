@@ -2,9 +2,11 @@ package scrapbook;
 
 import java.time.Instant;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 
 
@@ -15,6 +17,7 @@ public class Comment {
 	@GeneratedValue
 	private long id;
 
+	@Lob
 	private String commentContent;
 	
 	private Instant commentTimestamp = Instant.now(); //Default comment instant time stamp from Epoch
@@ -40,7 +43,7 @@ public class Comment {
 	}
 
 	public String getCommentContent() {
-		return getCommentContent();
+		return commentContent;
 	}
 	
 	public String getCommentTimeStamp() {

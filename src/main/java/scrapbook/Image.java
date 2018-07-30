@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Image {
 
@@ -21,6 +23,7 @@ public class Image {
 	@ManyToOne
 	private Kid kid;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "image")
 	private Collection<Comment> comments;
 

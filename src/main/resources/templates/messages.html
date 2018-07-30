@@ -1,14 +1,19 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-	<title>Images</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Messages</title>
 </head>
+
 <body>
-	<h1>A List of Images</h1>
+	<h1>A List of Messages</h1>
 	
-	<div th:each="image: ${images}">
+	<div th:each="message: ${messages}">
 		<li>
-			<a th:href="@{/image(id=${image.id})}" th:text="${image.caption}"></a>
+			<a th:href="@{/message(id=${message.id})}" th:text="${message.messageTimestamp}"></a>
 		</li>
 	</div>
 

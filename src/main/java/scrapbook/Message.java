@@ -5,6 +5,7 @@ import java.time.Instant;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -14,6 +15,7 @@ public class Message {
 	@GeneratedValue
 	private long id;
 
+	@Lob
 	private String messageContent;
 	
 	private Instant messageTimestamp = Instant.now(); //Default message instant time stamp from Epoch
@@ -40,7 +42,7 @@ public class Message {
 		return messageContent;
 	}
 	
-	public String getMessageTimeStamp() {
+	public String getMessageTimestamp() {
 		return messageTimestamp.toString();
 	}
 
