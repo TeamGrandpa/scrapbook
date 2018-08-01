@@ -18,7 +18,7 @@ public class Kid {
 	
 	private String name;
 	
-	private String portraitImageUrl;
+	private String portraitUrl;
 	
 	private int colorNum;
 	
@@ -41,9 +41,9 @@ public class Kid {
 		this.images = new HashSet<>(Arrays.asList(images));
 	}
 	
-	public Kid(String name, String portraitImageUrl, int colorNum, boolean notify, Image...images) {
+	public Kid(String name, String portraitUrl, int colorNum, boolean notify, Image...images) {
 		this.name = name;
-		this.portraitImageUrl = portraitImageUrl;
+		this.portraitUrl = portraitUrl;
 		this.colorNum = colorNum;
 		this.notify = notify;
 		this.images = new HashSet<>(Arrays.asList(images));
@@ -58,8 +58,8 @@ public class Kid {
 		return name;
 	}
 	
-	public String getPortraitImageUrl() {
-		return portraitImageUrl;
+	public String getPortraitUrl() {
+		return portraitUrl;
 	}
 	
 	public int getColorNum() {

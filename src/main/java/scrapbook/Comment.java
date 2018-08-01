@@ -20,6 +20,8 @@ public class Comment {
 	@Lob
 	private String commentContent;
 	
+	private String authorName;
+	
 	private Instant commentTimestamp = Instant.now(); //Default comment instant time stamp from Epoch
 
 	
@@ -34,7 +36,12 @@ public class Comment {
 	public Comment(String commentContent, Image image) {
 		this.commentContent = commentContent;
 		this.image = image;
-		
+	}
+	
+	public Comment(String commentContent, String authorName, Image image) {
+		this.commentContent = commentContent;
+		this.authorName = authorName;
+		this.image = image;
 	}
 	
 	//Getters
@@ -44,6 +51,10 @@ public class Comment {
 
 	public String getCommentContent() {
 		return commentContent;
+	}
+	
+	public String getAuthorName() {
+		return authorName;
 	}
 	
 	public String getCommentTimeStamp() {

@@ -6,14 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Kid Channel</title>
+
+    <link rel="stylesheet" type="text/css" href="./css/style.css">
 </head>
 
 <body>
     <div th:each="kid: ${kids}">
-        <h1 th:text="${kid.name} + ' Loves Grandma'"></h1>
-   
-
+        <header th:class="@{'Color' + ${kid.colorNum}}">
+            <h1 th:text="${kid.name}"></h1>
+            <a id="prev" href="/kids">&#10094;</a>
+        </header>
+        <main>
+            <span id="kidId" style="display:none" th:text="${kid.id}"></span>
+            <span id="kidColorClass" style="display:none" th:text="@{'Color' + ${kid.colorNum}}"></span>
+            <section id="whiteBox"></section>
+            <section id="imageContainer"></section>
+        </main>
     </div>
+    <script src="./js/one-kid-viewer.js"></script>
 </body>
 
 </html>
