@@ -9,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Kid {
 	
@@ -24,9 +26,11 @@ public class Kid {
 	
 	private boolean notify;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "kid")
 	private Collection<Image> images;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "kid")
 	private Collection<Message> messages;
 	

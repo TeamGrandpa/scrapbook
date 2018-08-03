@@ -1,5 +1,8 @@
 package scrapbook;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.annotation.Resource;
 
 import org.springframework.boot.CommandLineRunner;
@@ -35,23 +38,26 @@ public class ScrapbookPopulator implements CommandLineRunner {
 		doug = kidRepo.save(doug);
 
 		// Create Images
-		Image sam_img1 = new Image("sam_img1.jpg", "Sam in the park", sam);
+		Image sam_baby = new Image("sam_baby.jpg", "Sam's first time seeing fall leaves", "October 24, 2016", sam);
+		sam_baby = imageRepo.save(sam_baby);
+		
+		Image sam_img2 = new Image("sam_img2.jpg", "Sam making faces", "May 12, 2018", sam);
+		sam_img2 = imageRepo.save(sam_img2);
+		
+		Image sam_img1 = new Image("sam_img1.jpg", "Sam in the park", new SimpleDateFormat("MMMM d, yyyy").format(new Date()), sam);
 		sam_img1 = imageRepo.save(sam_img1);
 
-		Image sam_img2 = new Image("sam_img2.jpg", "Sam making faces", sam);
-		sam_img2 = imageRepo.save(sam_img2);
-
-		Image penny_img1 = new Image("penny_img1.jpg", "Penny enjoying watermelon", penny);
+		Image penny_img1 = new Image("penny_img1.jpg", "Penny enjoying watermelon", "June 5, 2018", penny);
 		penny_img1 = imageRepo.save(penny_img1);
 
-		Image penny_img2 = new Image("penny_img2.jpg", "Penny playing", penny);
+		Image penny_img2 = new Image("penny_img2.jpg", "Penny playing", new SimpleDateFormat("MMMM d, yyyy").format(new Date()), penny);
 		penny_img2 = imageRepo.save(penny_img2);
 
 		// Create Comments
 		Comment comment1 = commentRepo.save(new Comment("You are so special!", "Grandma", sam_img1));
 		Comment comment2 = commentRepo.save(new Comment("So funny!", "Grandma", sam_img2));
 		Comment comment5 = commentRepo.save(new Comment("Why are you wearing a shirt with Leo's name on it?  I thought your name was Sam.", "Grandpa", sam_img1));
-		Comment comment3 = commentRepo.save(new Comment("She loves watermelons so much", "Mom", penny_img1));
+		Comment comment3 = commentRepo.save(new Comment("She loves watermelons so much.", "Mom", penny_img1));
 		Comment comment4 = commentRepo.save(new Comment("What a clever girl you are!", "Grandma", penny_img2));
 
 		// Create Messages

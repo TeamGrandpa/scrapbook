@@ -8,8 +8,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Entity
 public class Image {
 
@@ -19,11 +17,12 @@ public class Image {
 
 	private String imageUrl;
 	private String caption;
+	
+	private String date;
 
 	@ManyToOne
 	private Kid kid;
 
-	@JsonIgnore
 	@OneToMany(mappedBy = "image")
 	private Collection<Comment> comments;
 
@@ -35,7 +34,13 @@ public class Image {
 		this.imageUrl = imageUrl;
 		this.caption = caption;
 		this.kid = kid;
-
+	}
+	
+	public Image(String imageUrl, String caption, String date, Kid kid) {
+		this.imageUrl = imageUrl;
+		this.caption = caption;
+		this.date = date;
+		this.kid = kid;
 	}
 
 	public long getId() {
@@ -48,6 +53,10 @@ public class Image {
 	
 	public String getCaption() {
 		return caption;
+	}
+	
+	public String getDate() {
+		return date;
 	}
 
 	public Collection<Comment> getComments() {

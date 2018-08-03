@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 public class Comment {
@@ -24,7 +26,7 @@ public class Comment {
 	
 	private Instant commentTimestamp = Instant.now(); //Default comment instant time stamp from Epoch
 
-	
+	@JsonIgnore
 	@ManyToOne
 	private Image image;
 	
