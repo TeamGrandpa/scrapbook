@@ -24,10 +24,37 @@ public class ScrapbookControllerTest {
 	private KidRepository kidRepo;
 	
 	@Mock
+	private ImageRepository imageRepo;
+	
+	@Mock
+	private MessageRepository messageRepo;
+	
+	@Mock
+	private CommentRepository commentRepo;
+	
+	@Mock
 	private Kid kid;
 	
 	@Mock
 	private Kid anotherKid;
+	
+	@Mock
+	private Image image;
+	
+	@Mock
+	private Image anotherImage;
+	
+	@Mock
+	private Message message;
+	
+	@Mock
+	private Message anotherMessage;
+	
+	@Mock
+	private Comment comment;
+	
+	@Mock
+	private Comment anotherComment;
 	
 	@Mock
 	private Model model;
@@ -54,5 +81,63 @@ public class ScrapbookControllerTest {
 		underTest.findAllKids(model);
 		verify(model).addAttribute("kids", allKids);
 	}
+	
+	@Test
+	public void shouldAddSingleImageToModel() throws ImageNotFoundException {
+		long arbitraryImageId = 1;
+		when(imageRepo.findById(arbitraryImageId)).thenReturn(Optional.of(image));
+		
+		underTest.findOneImage(arbitraryImageId, model);
+		verify(model).addAttribute("images", image);
+		
+	}
+	
+	@Test
+	public void shouldAddAllImagesToModel() {
+		Collection<Image> allImages = Arrays.asList(image, anotherImage);
+		when(imageRepo.findAll()).thenReturn(allImages);
+		
+		underTest.findAllImages(model);
+		verify(model).addAttribute("images", allImages);
+	}
+	
+	@Test
+	public void shouldAddSingleMessageToModel() throws MessageNotFoundException {
+		long arbitraryMessageId = 1;
+		when(messageRepo.findById(arbitraryMessageId)).thenReturn(Optional.of(message));
+		
+		underTest.findOneMessage(arbitraryMessageId, model);
+		verify(model).addAttribute("messages", message);		
+	}
+	
+	@Test
+	public void shouldAddAllMessagesToModel() {
+		Collection<Message> allMessages = Arrays.asList(message, anotherMessage);
+		when(messageRepo.findAll()).thenReturn(allMessages);
+		
+		underTest.findAllMessages(model);
+		verify(model).addAttribute("messages", allMessages);
+	}
+	
+	@Test
+	public void shouldAddSingleCommentToModel() throws CommentNotFoundException {
+		long arbitraryCommentId = 1;
+		when(commentRepo.findById(arbitraryCommentId)).thenReturn(Optional.of(comment));
+		
+		underTest.findOneComment(arbitraryCommentId, model);
+		verify(model).addAttribute("comments", comment);
+	}
+	
+	@Test
+	public void shouldAddallCommentsToModel() {
+		Collection<Comment> allComments = Arrays.asList(comment, anotherComment);
+		
+		when(commentRepo.findAll()).thenReturn(allComments);
+		
+		underTest.findAllComments(model);
+		verify(model).addAttribute("comments", allComments);		
+		
+	}
+
 
 }
