@@ -12,10 +12,10 @@
 
 <body>
     
-    <form method="POST" th:action="@{/addKid}" id="addKid">
+    <form method="POST" th:action="@{/add-new-channel}" id="add-new-channel">
         <div>
            <h2>Enter First Name: </h2>
-           kidName: <input type="text" name="kidName" placeholder="Enter Child's Name">
+           <input type="text" name="kidName" placeholder="Enter Child's Name">
         </div>
         <div>
             <h2>Choose favorite color: </h2>
@@ -30,10 +30,10 @@
         </div>
         <div>
             <h2>Upload profile picture: </h2>
-            uploadImage: <input accept="image_file_path">
+            <input accept="image_file_path">
         </div>
         <input type = "submit">
         </form>
 </body>
-
+<script src="./js/all-kids-viewer.js"></script>
 </html>
