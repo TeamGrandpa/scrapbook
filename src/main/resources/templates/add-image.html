@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Image Upload</title>
+</head>
+<body>
+  <form method="POST" action="/uploadImage" enctype="multipart/form-data">
+    File to upload: <input type="file" name="imageFile" >
+    <br />
+    Caption: <input type="text" name="caption" >
+    <br />
+    Child name: <input type="text" name="childName">
+    <br />
+    <br />
+    <input type="submit" value="Upload">
+  </form>
+  <span th:if="${flashMessage}" th:text="${flashMessage}">
+  	<!-- here would be a message with a result of processing -->
+  </span>
+</body>
+</html>

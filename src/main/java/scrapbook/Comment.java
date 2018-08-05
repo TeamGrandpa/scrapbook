@@ -22,13 +22,14 @@ public class Comment {
 	@Lob
 	private String commentContent;
 	
-	private String authorName;
-	
 	private Instant commentTimestamp = Instant.now(); //Default comment instant time stamp from Epoch
 
 	@JsonIgnore
 	@ManyToOne
 	private Image image;
+	
+	@ManyToOne
+	private Enduser enduser;
 	
 		
 	protected Comment() {
@@ -40,9 +41,9 @@ public class Comment {
 		this.image = image;
 	}
 	
-	public Comment(String commentContent, String authorName, Image image) {
+	public Comment(String commentContent, Enduser enduser, Image image) {
 		this.commentContent = commentContent;
-		this.authorName = authorName;
+		this.enduser = enduser;
 		this.image = image;
 	}
 	
@@ -55,8 +56,12 @@ public class Comment {
 		return commentContent;
 	}
 	
-	public String getAuthorName() {
-		return authorName;
+	public String getEnduserName() {
+		return enduser.getUserName();
+	}
+	
+	public Enduser getEnduser() {
+		return enduser;
 	}
 	
 	public String getCommentTimeStamp() {

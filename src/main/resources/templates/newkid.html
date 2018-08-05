@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Add Child</title>
+
+    <link rel="stylesheet" type="text/css" href="./css/style.css">
+</head>
+
+<body>
+    
+    <form method="POST" th:action="@{/add-new-channel}" id="add-new-channel">
+        <div>
+           <h2>Enter First Name: </h2>
+           <input type="text" name="kidName" placeholder="Enter Child's Name">
+        </div>
+        <div>
+            <h2>Choose favorite color: </h2>
+            <select name="kidColor">
+                <option value="red">Red</option>
+                <option value="orange">Orange</option>
+                <option value="yellow">Yellow</option>
+                <option value="green">Green</option>
+                <option value="blue">Blue</option>
+                <option value="purple">Purple</option>
+            </select>
+        </div>
+        <div>
+            <h2>Upload profile picture: </h2>
+            <input accept="image_file_path">
+        </div>
+        <input type = "submit">
+        </form>
+</body>
+<script src="./js/all-kids-viewer.js"></script>
+</html>

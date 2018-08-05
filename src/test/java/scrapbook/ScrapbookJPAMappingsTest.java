@@ -9,6 +9,7 @@ import java.util.Optional;
 
 import javax.annotation.Resource;
 
+import org.h2.engine.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -33,6 +34,9 @@ public class ScrapbookJPAMappingsTest {
 
 	@Resource
 	private CommentRepository commentRepo;
+
+	@Resource
+	private EnduserRepository enduserRepo;
 
 	@Test
 	public void shouldSaveAndLoadKid() {
@@ -121,6 +125,53 @@ public class ScrapbookJPAMappingsTest {
 		image = result.get();
 		assertThat(image.getComments(), containsInAnyOrder(comment, comment2));
 
+	}
+
+	@Test
+	public void shouldSaveAndLoadEnduser() {
+		Enduser enduser = enduserRepo.save(new Enduser("enduser", false));
+		long enduserId = enduser.getId();
+
+		entityManager.flush();
+		entityManager.clear();
+
+		Optional<Enduser> result = enduserRepo.findById(enduserId);
+		enduser = result.get();
+		assertThat(enduser.getUserName(), is("enduser"));
+	}
+	
+	@Test
+	public void shouldGenerateEnduserId() {
+		Enduser enduser = enduserRepo.save(new Enduser("enduser", false));
+		long enduserId = enduser.getId();
+		
+		entityManager.flush();
+		entityManager.clear();
+		
+		assertThat(enduserId, is(greaterThan(0L)));		
+		
+	}
+	
+	@Test
+	public void shouldEstablishEnduserToCommentsRelationship() {
+		Enduser enduser = enduserRepo.save(new Enduser("userName", false));
+		long enduserId = enduser.getId();
+		
+//		Image image = imageRepo.save(new Image("", "", null));
+		
+		Comment comment = new Comment("comment content", enduser, null);
+		commentRepo.save(comment);
+		
+		Comment comment2 = new Comment("comment content2", enduser, null);
+		commentRepo.save(comment2);
+		
+		entityManager.flush(); 
+		entityManager.clear();
+		
+		Optional<Enduser> result = enduserRepo.findById(enduserId);
+		enduser = result.get();
+		
+		assertThat(enduser.getComments(), containsInAnyOrder(comment, comment2));
 	}
 
 }
