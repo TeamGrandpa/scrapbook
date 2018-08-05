@@ -135,9 +135,11 @@ public class ScrapbookControllerTest {
 		when(commentRepo.findAll()).thenReturn(allComments);
 		
 		underTest.findAllComments(model);
-		verify(model).addAttribute("comments", allComments);		
+		verify(model).addAttribute("comments", allComments);	
 		
 	}
+	
+	
 
 
 }
