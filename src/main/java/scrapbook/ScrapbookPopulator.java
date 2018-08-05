@@ -41,19 +41,19 @@ public class ScrapbookPopulator implements CommandLineRunner {
 		doug = kidRepo.save(doug);
 
 		// Create Images
-		Image sam_baby = new Image("sam_baby.jpg", "Sam's first time seeing fall leaves", "October 24, 2016", sam);
+		Image sam_baby = new Image("/img/sam_baby.jpg", "Sam's first time seeing fall leaves", "October 24, 2016", sam);
 		sam_baby = imageRepo.save(sam_baby);
 		
-		Image sam_img2 = new Image("sam_img2.jpg", "Sam making faces", "May 12, 2018", sam);
+		Image sam_img2 = new Image("/img/sam_img2.jpg", "Sam making faces", "May 12, 2018", sam);
 		sam_img2 = imageRepo.save(sam_img2);
 		
-		Image sam_img1 = new Image("sam_img1.jpg", "Sam in the park", new SimpleDateFormat("MMMM d, yyyy").format(new Date()), sam);
+		Image sam_img1 = new Image("/img/sam_img1.jpg", "Sam in the park", new SimpleDateFormat("MMMM d, yyyy").format(new Date()), sam);
 		sam_img1 = imageRepo.save(sam_img1);
 
-		Image penny_img1 = new Image("penny_img1.jpg", "Penny enjoying watermelon", "June 5, 2018", penny);
+		Image penny_img1 = new Image("/img/penny_img1.jpg", "Penny enjoying watermelon", "June 5, 2018", penny);
 		penny_img1 = imageRepo.save(penny_img1);
 
-		Image penny_img2 = new Image("penny_img2.jpg", "Penny playing", new SimpleDateFormat("MMMM d, yyyy").format(new Date()), penny);
+		Image penny_img2 = new Image("/img/penny_img2.jpg", "Penny playing", new SimpleDateFormat("MMMM d, yyyy").format(new Date()), penny);
 		penny_img2 = imageRepo.save(penny_img2);
 		
 		//Create Endusers
