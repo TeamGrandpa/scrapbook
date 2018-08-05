@@ -33,6 +33,7 @@
         }
         else {
             kidImages.forEach(image => {
+                console.log('Image Id: ' + image.id);
                 let newImageDiv = document.createElement('div');
                 newImageDiv.setAttribute('id', image.id);
                 newImageDiv.setAttribute('class', 'imageDiv');
@@ -43,7 +44,7 @@
                 newDate.setAttribute('class', 'timeStamp');
                 newDate.textContent = image.date;
                 let newImg = document.createElement('img');
-                newImg.setAttribute('src', '/img/' + image.imageUrl);
+                newImg.setAttribute('src', image.imageUrl);
                 let newFigcaption = document.createElement('figcaption');
                 newFigcaption.textContent = image.caption;
 
@@ -55,10 +56,10 @@
                 //Add image comments
                 let commentContainer = document.createElement('div');
                 commentContainer.setAttribute('class', 'commentsContainer');
-                commentContainer.setAttribute('id', image.id + 'comments');
+                commentContainer.setAttribute('id', 'c' + image.id);
 
                 if (!image.comments.length) {
-
+                	newImageDiv.appendChild(commentContainer);
                 }
                 else {
                     image.comments.forEach(comment => {
@@ -87,17 +88,17 @@
 
                 let addCommentButton = document.createElement('a');
                 addCommentButton.setAttribute('class', 'commentButton');
-                addCommentButton.setAttribute('id', image.id + 'button');
+                addCommentButton.setAttribute('id', 'b' + image.id);
                 addCommentButton.textContent = String.fromCharCode(10011) + ' Add Comment';
                 buttonDiv.appendChild(addCommentButton);
 
                 //Add comment form
                 let commentForm = document.createElement('form');
                 commentForm.setAttribute('class', 'commentForm');
-                commentForm.setAttribute('id', image.id + 'form');
+                commentForm.setAttribute('id', 'f' + image.id);
                 let commentTextInput = document.createElement('textarea');
                 commentTextInput.setAttribute('class', 'commentTextInput');
-                commentTextInput.setAttribute('id', image.id + 'text');
+                commentTextInput.setAttribute('id', 't' + image.id);
                 commentTextInput.setAttribute('form', 'commentInput');
                 commentTextInput.setAttribute('name', 'commentText');
                 commentTextInput.setAttribute('rows', '2');
@@ -137,8 +138,9 @@
 
         commentButtons.forEach(commentButton => {
             let commentButtonId = commentButton.id;
-            let commentTextInput = document.getElementById(commentButtonId[0] + 'text');
-            let commentForm = document.getElementById(commentButtonId[0] + 'form');
+            let imageNum = commentButtonId.substring(1, commentButtonId.length);
+            let commentTextInput = document.getElementById('t' + imageNum);
+            let commentForm = document.getElementById('f' + imageNum);
             commentButton.addEventListener('click', function () {
                 commentButton.setAttribute('style', 'display:none');
                 commentForm.setAttribute('style', 'display:flex');
@@ -150,11 +152,12 @@
     function addImageComment() {
 
         const commentForms = document.querySelectorAll('.commentForm');
-
+        
         commentForms.forEach(commentForm => {
             let commentFormId = commentForm.id;
-            let commentTextInput = document.getElementById(commentFormId[0] + 'text');
-
+            let imageNum = commentFormId.substring(1, commentFormId.length);
+            let commentTextInput = document.getElementById('t' + imageNum);
+            
             commentTextInput.addEventListener('keyup', function (event) {
                 event.preventDefault();
                 if (event.keyCode === 13) {
@@ -167,7 +170,7 @@
                     xhr.onreadystatechange = function () {
                         if (this.readyState == 4 && this.status == 200) {
                             let updatedImageComments = JSON.parse(xhr.response);
-                            let commentContainer = document.getElementById(commentFormId[0] + 'comments');
+                            let commentContainer = document.getElementById('c' + imageNum);
                             commentContainer.innerHTML = '';
 
                             if (!updatedImageComments.length) {
@@ -189,7 +192,7 @@
                             };
 
                             commentForm.querySelector('[name=commentText]').value = '';
-                            let commentButton = document.getElementById(commentFormId[0] + 'button');
+                            let commentButton = document.getElementById('b' + imageNum);
                             commentForm.setAttribute('style', 'display:none');
                             commentButton.setAttribute('style', 'display:block');
 
