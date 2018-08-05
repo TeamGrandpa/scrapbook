@@ -23,6 +23,9 @@ public class ScrapbookRestController {
 
 	@Resource
 	public CommentRepository commentRepo;
+	
+	@Resource
+	public EnduserRepository enduserRepo;
 
 	@GetMapping("/all-kids")
 	public Iterable<Kid> findAllKids() {
@@ -42,14 +45,14 @@ public class ScrapbookRestController {
 	@PostMapping("/addComment")
 	public Iterable<Comment> addComment(
 			@RequestParam(name = "commentText") String commentText,
-			@RequestParam(name = "authorName") String authorName, 
+			@RequestParam(name = "enduser") Enduser enduser, 
 			@RequestParam(name = "imageId") long imageId) {
 
 		Optional<Image> imageOptional = imageRepo.findById(imageId);
 		Image image = imageOptional.get();
 
 		if (commentText != "") {
-			commentRepo.save(new Comment(commentText, authorName, image));
+			commentRepo.save(new Comment(commentText, enduser, image));
 		}
 
 		return commentRepo.findByImageId(imageId);
