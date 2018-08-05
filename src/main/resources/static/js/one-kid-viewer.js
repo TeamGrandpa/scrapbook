@@ -62,11 +62,12 @@
                 }
                 else {
                     image.comments.forEach(comment => {
+                        console.log(comment);
                         let newCommentDiv = document.createElement('div');
                         newCommentDiv.setAttribute('class', 'commentsDiv');
                         let newCommentAuthor = document.createElement('span');
                         newCommentAuthor.setAttribute('class', 'commentAuthor');
-                        newCommentAuthor.textContent = comment.authorName;
+                        newCommentAuthor.textContent = comment.enduser.userName;
                         let newCommentText = document.createElement('span');
                         newCommentText.textContent = comment.commentContent;
                         newCommentDiv.appendChild(newCommentAuthor);
