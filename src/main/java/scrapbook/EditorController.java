@@ -27,47 +27,44 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class EditorController {
-	
+
 	@Resource
 	KidRepository kidRepo;
-	
+
 	@Resource
 	private ImageRepository imageRepo;
-	
+
 	@Resource
 	private CommentRepository commentRepo;
-	
-	//image uploader may go here??
-	
+
+	// image uploader may go here??
+
 	@RequestMapping("/login")
 	public String editorLoginPage() {
-		//serves as login page
-		
+		// serves as login page
+
 		return "login";
 	}
-	
+
 	@RequestMapping("/editor/login")
-	public String editorLogin(
-		HttpServletResponse response // We need the response so we can add cookies,
+	public String editorLogin(HttpServletResponse response // We need the response so we can add cookies,
 	) {
-		
+
 		Cookie editorRoleCookie = new Cookie("role", "editor");
 		editorRoleCookie.setHttpOnly(true); // Only server can modify the cookie
 		editorRoleCookie.setMaxAge(300); // Expires after 300 seconds (5 min)
 		response.addCookie(editorRoleCookie);
-		
+
 		// Redirect the user back to the editor page once login is complete
 		// The new cookie will allow the user to access the page
 		return "redirect:/editor";
 	}
 
 	@RequestMapping("/editor/logout")
-	public String editorLogin(
-		HttpServletRequest request,
-		HttpServletResponse response
-	) {
-		
-		// Find "role" cookie, set it to immediately expire, and send that update to the browser
+	public String editorLogin(HttpServletRequest request, HttpServletResponse response) {
+
+		// Find "role" cookie, set it to immediately expire, and send that update to the
+		// browser
 		Cookie[] cookies = request.getCookies();
 		for (Cookie cookie : cookies) {
 			if (cookie.getName().equals("role")) {
@@ -76,27 +73,21 @@ public class EditorController {
 				break;
 			}
 		}
-		
+
 		return "redirect:/editor";
 	}
-	
-	
+
 	@RequestMapping("/editor")
-	public String editorPanel(
-		@CookieValue(name = "role", defaultValue = "") String role,
-		Model model
-	) {
-//		
-//		System.out.println("ROLE: " + role);
-//		
-//		if (role == null || !role.equals("editor")) {
-//			return "redirect:/login";
-//		}
-//		
-//		System.out.println("SUCCESS");
-//		
-//		Iterable<Kid> kids = kidRepo.findAll();
-//		model.addAttribute("kids", kids);
+	public String editorPanel(@CookieValue(name = "role", defaultValue = "") String role, Model model) {
+
+		if (role == null || !role.equals("editor")) {
+			return "redirect:/login";
+		}
+
+		System.out.println("SUCCESS");
+
+		Iterable<Kid> kids = kidRepo.findAll();
+		model.addAttribute("kids", kids);
 
 		return "editor";
 	}

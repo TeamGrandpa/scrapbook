@@ -1,9 +1,12 @@
 package scrapbook;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 
 
 import javax.annotation.Resource;
+import javax.servlet.http.Cookie;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -43,12 +46,28 @@ public class EditorControllerMockMvcTest {
 	@Mock
 	private Comment comment;
 	
+	final Cookie editorRoleCookie = new Cookie("role", "editor");
+	final Cookie viewerRoleCookie = new Cookie("role", "viewer");
+	
 	//Editor Home Page
 	
 	@Test
 	public void shouldRouteToEditorPanelIfEditor() throws Exception {
-		mvc.perform(get("/editor?role=editor")).andExpect(view().name(is("editor")));
+		mvc.perform(get("/editor").cookie(editorRoleCookie)).andExpect(view().name(is("editor")));
 	}
+	
+	@Test
+	public void shouldBeOkForEditorPanelIfEditor() throws Exception {
+		mvc.perform(get("/editor").cookie(editorRoleCookie)).andExpect(status().isOk()); //200
+	}
+	
+	@Test
+	public void shouldBeUnauthorizedForEditorPanelIfNotEditor() throws Exception {
+		mvc.perform(get("/editor")).andExpect(status().isFound()); //302
+		mvc.perform(get("/editor").cookie(viewerRoleCookie)).andExpect(status().isFound()); //302
+	}
+	
+
 	
 	
 	
