@@ -23,10 +23,7 @@
         kidListSection.innerHTML = '';
 
         //Add element and Tags content
-        if (!allKids.length) {
-            return;
-        }
-        else {
+        if (allKids.length > 0) {
             allKids.forEach(kid => {
                 let newKidDiv = document.createElement('div');
                 let newKidA = document.createElement('a');
@@ -46,6 +43,24 @@
                 kidListSection.appendChild(newKidDiv);
             })
         }
+
+        let addKidDiv = document.createElement('div');
+        let addKidA = document.createElement('a');
+        addKidA.setAttribute('href', '/add-new-channel');
+        addKidA.setAttribute('class', 'ColorDefault');
+        let newH3 = document.createElement('h3');
+        newH3.textContent = 'Add Child';
+        let newImg = document.createElement('img');
+        let newImgSrc = '/img/greyplus2.jpg';
+        newImg.setAttribute('src', newImgSrc);
+
+        addKidA.appendChild(newH3);
+        addKidA.appendChild(newImg);
+        addKidDiv.appendChild(addKidA);
+        kidListSection.appendChild(addKidDiv);
+
+
     }
 
 })();
+
