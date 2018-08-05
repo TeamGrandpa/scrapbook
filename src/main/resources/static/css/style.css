@@ -11,7 +11,7 @@
     --Color2: #b66161;
     --Color3: #5c974e;
     
-    --ColorDefault: #aaa;
+    --ColorDefault: #aaaaaa;
 }
 
 .Color1 {
@@ -111,6 +111,34 @@ h3 {
     border: 1px solid #333;
 }
 
+#addNewKid {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    margin: 1.5rem auto;
+    grid-column-gap: 1.8rem;
+    grid-row-gap: 1.8rem;
+    max-width: 96vh;
+    width: 66%;
+}
+
+#addNewKid a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 0.4rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-bottom: 2rem;
+    text-decoration: none;
+    border-radius: 1rem;
+    cursor: pointer;  
+}
+
+
+
+
+
 #whiteBox {
 	background-color: #fff;
 	height: 3.3rem;
@@ -186,3 +214,14 @@ h3 {
     font-size: 1rem;
     width: 100%;
 }
+
+#newkid {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    margin: 0.5rem auto;
+    grid-column-gap: 1.8rem;
+    grid-row-gap: 0.5rem;
+    width: 100%;
+}
+

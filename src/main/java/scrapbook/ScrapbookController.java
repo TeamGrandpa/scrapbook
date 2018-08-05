@@ -57,7 +57,8 @@ public class ScrapbookController {
 		model.addAttribute("kids", kidRepo.findAll());
 		return ("kids");
 	}
-
+	
+	
 	@RequestMapping("/image")
 	public String findOneImage(@RequestParam(value = "id") long id, Model model) throws ImageNotFoundException {
 		Optional<Image> image = imageRepo.findById(id);
@@ -112,6 +113,12 @@ public class ScrapbookController {
 		
 	}
 	
+
+	@RequestMapping("/add-new-channel")
+	public String index() {
+		return "newkid";
+  }
+
 	@RequestMapping("/add-image")
 	public String index() {
 		return "add-image";
@@ -190,6 +197,7 @@ public class ScrapbookController {
 		// Serve file by streaming it directly to the response
 		InputStream in = new FileInputStream(filePathString);		
 	    IOUtils.copy(in, response.getOutputStream());
+
 	}
 
 }
