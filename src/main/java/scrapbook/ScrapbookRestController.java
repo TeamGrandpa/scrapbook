@@ -45,11 +45,14 @@ public class ScrapbookRestController {
 	@PostMapping("/addComment")
 	public Iterable<Comment> addComment(
 			@RequestParam(name = "commentText") String commentText,
-			@RequestParam(name = "enduser") Enduser enduser, 
+			@RequestParam(name = "authorName") String authorName, 
 			@RequestParam(name = "imageId") long imageId) {
 
 		Optional<Image> imageOptional = imageRepo.findById(imageId);
 		Image image = imageOptional.get();
+		
+		Optional<Enduser> enduserOptional = enduserRepo.findByUserName(authorName);
+		Enduser enduser = enduserOptional.get();
 
 		if (commentText != "") {
 			commentRepo.save(new Comment(commentText, enduser, image));

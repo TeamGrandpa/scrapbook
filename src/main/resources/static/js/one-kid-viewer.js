@@ -108,7 +108,7 @@
                 let hiddenUserId = document.createElement('input');
                 hiddenUserId.setAttribute('type', 'hidden');
                 hiddenUserId.setAttribute('name', 'authorName');
-                hiddenUserId.setAttribute('value', 'Dad');
+                hiddenUserId.setAttribute('value', 'Michael');
                 commentForm.appendChild(hiddenUserId);
                 let hiddenImageId = document.createElement('input');
                 hiddenImageId.setAttribute('type', 'hidden');
@@ -183,7 +183,7 @@
                                     newCommentDiv.setAttribute('class', 'commentsDiv');
                                     let newCommentAuthor = document.createElement('span');
                                     newCommentAuthor.setAttribute('class', 'commentAuthor');
-                                    newCommentAuthor.textContent = comment.authorName;
+                                    newCommentAuthor.textContent = comment.enduser.userName;
                                     let newCommentText = document.createElement('span');
                                     newCommentText.textContent = comment.commentContent;
                                     newCommentDiv.appendChild(newCommentAuthor);
