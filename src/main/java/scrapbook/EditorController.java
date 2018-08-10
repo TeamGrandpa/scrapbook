@@ -51,13 +51,19 @@ public class EditorController {
 	) {
 
 		Cookie editorRoleCookie = new Cookie("role", "editor");
-		editorRoleCookie.setHttpOnly(true); // Only server can modify the cookie
-		editorRoleCookie.setMaxAge(300); // Expires after 300 seconds (5 min)
+//		editorRoleCookie.setHttpOnly(true); // Only server can modify the cookie
+		editorRoleCookie.setPath("/");
+		editorRoleCookie.setMaxAge(60 * 60); // Expires after 3600 seconds (1 hour)
 		response.addCookie(editorRoleCookie);
-
+		
+		Cookie userNameCookie = new Cookie("name", "Dad");
+		userNameCookie.setPath("/");
+		userNameCookie.setMaxAge(60 * 60); 
+		response.addCookie(userNameCookie);
+		
 		// Redirect the user back to the editor page once login is complete
 		// The new cookie will allow the user to access the page
-		return "redirect:/editor";
+		return "redirect:/kids";
 	}
 
 	@RequestMapping("/editor/logout")
@@ -81,15 +87,17 @@ public class EditorController {
 	public String editorPanel(@CookieValue(name = "role", defaultValue = "") String role, Model model) {
 
 		if (role == null || !role.equals("editor")) {
+			System.out.println(role);
 			return "redirect:/login";
 		}
 
 		System.out.println("SUCCESS");
+		System.out.println(role);
 
 		Iterable<Kid> kids = kidRepo.findAll();
 		model.addAttribute("kids", kids);
 
-		return "editor";
+		return "redirect:/kids";
 	}
 
 }

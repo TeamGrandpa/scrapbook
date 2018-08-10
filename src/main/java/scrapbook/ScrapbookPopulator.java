@@ -57,9 +57,9 @@ public class ScrapbookPopulator implements CommandLineRunner {
 		penny_img2 = imageRepo.save(penny_img2);
 		
 		//Create Endusers
-		Enduser Grandma = new Enduser("Martha", false);
+		Enduser Grandma = new Enduser("Grandma", false);
 		Grandma = enduserRepo.save(Grandma);
-		Enduser Dad = new Enduser("Michael", true);
+		Enduser Dad = new Enduser("Dad", true);
 		Dad = enduserRepo.save(Dad);
 		
 

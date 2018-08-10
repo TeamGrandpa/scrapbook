@@ -49,7 +49,6 @@ public class ScrapbookController {
 			return "kid";
 		}
 		throw new KidNotFoundException();
-
 	}
 
 	@RequestMapping("/kids")
@@ -109,21 +108,25 @@ public class ScrapbookController {
 	public String findAllComments(Model model) {
 		model.addAttribute("comments", commentRepo.findAll());
 		return("comments");
-		
-		
 	}
 	
 
 	@RequestMapping("/add-new-channel")
-	public String index() {
+	public String addNewChannel() {
 		return "newkid";
-  }
+	}
 
 	@RequestMapping("/add-image")
-	public String index() {
-		return "add-image";
+	public String addImage(@RequestParam(value = "id") long id, Model model) throws KidNotFoundException {
+		Optional<Kid> kid = kidRepo.findById(id);
+
+		if (kid.isPresent()) {
+			model.addAttribute("kids", kid.get());
+			return "add-image";
+		}
+		throw new KidNotFoundException();
 	}
-	
+
 	private String getUploadDirectory() {
 		// Determine where uploads should be saved
         String userHomeDirectory = System.getProperty("user.home");
@@ -140,7 +143,7 @@ public class ScrapbookController {
 	public String uploadImage(
 		@RequestParam("caption") String caption,
 		@RequestParam("childName") String kidName,
-		@RequestParam("imageFile") MultipartFile imageFile,
+		@RequestParam("file") MultipartFile imageFile,
 		Model model
 	) throws Exception {
 		
