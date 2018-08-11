@@ -23,6 +23,10 @@ public class Enduser {
 	@OneToMany(mappedBy = "enduser")
 	private Collection<Comment> comments;
 	
+	@JsonIgnore
+	@OneToMany(mappedBy = "enduser")
+	private Collection<Heart> hearts;
+	
 
 	// default no args constructor
 	protected Enduser() {
@@ -62,6 +66,10 @@ public class Enduser {
 	public Collection<Comment> getComments() {
 
 		return comments;
+	}
+
+	public Collection<Heart> getHearts() {
+		return hearts;
 	}
 
 	@Override

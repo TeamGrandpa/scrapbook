@@ -81,7 +81,7 @@ public class EditorController {
 		editorRoleCookie.setPath("/");
 		editorRoleCookie.setMaxAge(60 * 60); // Expires after 3600 seconds (1 hour)
 		response.addCookie(editorRoleCookie);
-
+		
 		Cookie userNameCookie = new Cookie("name", name);
 		userNameCookie.setPath("/");
 		userNameCookie.setMaxAge(60 * 60);

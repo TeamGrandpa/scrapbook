@@ -37,6 +37,9 @@ public class ScrapbookJPAMappingsTest {
 
 	@Resource
 	private EnduserRepository enduserRepo;
+	
+	@Resource
+	private HeartRepository heartRepo;
 
 	@Test
 	public void shouldSaveAndLoadKid() {
@@ -172,6 +175,27 @@ public class ScrapbookJPAMappingsTest {
 		enduser = result.get();
 		
 		assertThat(enduser.getComments(), containsInAnyOrder(comment, comment2));
+	}
+	
+	@Test
+	public void shouldSaveAndLoadHeart() {
+		Enduser enduser = enduserRepo.save(new Enduser("userName", false));
+		long enduserId = enduser.getId();
+		
+		Image image = new Image("image", "caption", null);
+		imageRepo.save(image);
+		long imageId = image.getId();
+				
+		Heart heart = heartRepo.save(new Heart(enduser, image));
+		long heartId = heart.getId();
+
+		entityManager.flush();
+		entityManager.clear();
+
+		Optional<Heart> result = heartRepo.findById(heartId);
+		heart = result.get();
+		assertThat(heart.getImage().getId(), is(imageId));
+		assertThat(heart.getEnduser().getId(), is(enduserId));
 	}
 
 }

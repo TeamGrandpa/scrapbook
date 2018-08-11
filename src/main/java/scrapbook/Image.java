@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Image {
 
@@ -25,6 +27,9 @@ public class Image {
 
 	@OneToMany(mappedBy = "image")
 	private Collection<Comment> comments;
+	
+	@OneToMany(mappedBy = "image")
+	private Collection<Heart> hearts;
 
 	protected Image() {
 
@@ -61,6 +66,10 @@ public class Image {
 
 	public Collection<Comment> getComments() {
 		return comments;
+	}
+	
+	public Collection<Heart> getHearts() {
+		return hearts;
 	}
 
 	@Override
