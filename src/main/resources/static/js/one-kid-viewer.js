@@ -82,19 +82,19 @@
                 let newDate = document.createElement('span');
                 newDate.setAttribute('class', 'timeStamp');
                 newDate.textContent = image.date;
-                let newHeart = document.createElement('img');
-                image.hearts.length;
-                newHeart.setAttribute('src', '/img/heart-off.svg');
-                newHeart.classList.add('heartIcon');
+                // let newHeart = document.createElement('img');
+                // image.hearts.length;
+                // newHeart.setAttribute('src', '/img/heart-off.svg');
+                // newHeart.classList.add('heartIcon');
                 let newImg = document.createElement('img');
                 newImg.setAttribute('src', image.imageUrl);
                 let newFigcaption = document.createElement('figcaption');
                 newFigcaption.textContent = image.caption;
-                
-               // toggleHeart();
-                
+
+                // toggleHeart();
+
                 newFigure.appendChild(newDate);
-               newFigure.appendChild(newHeart);
+                //    newFigure.appendChild(newHeart);
                 newFigure.appendChild(newImg);
                 newFigure.appendChild(newFigcaption);
                 newImageDiv.appendChild(newFigure);
@@ -102,17 +102,19 @@
                 // function toggleHeart() {
                 //     const heartCount = document.createElement('span');
                 //     heartCount.innerHTML = image.hearts.length;
-                //     const heart = document.createElement('img');
-                //      if (image.hearts.find(heart => heart.enduser.userName === 'enduserUserName')) {
-                //          heart.setAttribute('src', '/img/heart-on.svg');
-                //          heart.classList.add('has-heart');
+                //     const newHeart = document.createElement('img');
+                //     console.log(image.hearts);
+                //     console.log(getCookie('name'));
+                //     if (image.hearts.find(heart => heart.enduser.userName === (getCookie('name')))) {
+                //         newHeart.setAttribute('src', '/img/heart-on.svg');
+                //         newHeart.classList.add('has-heart');
                 //     }
                 //     else {
-                //         heart.setAttribute('src', '/img/heart-off.svg');
-                //         heart.classList.add('no-heart');
-                //    }
-                // heart.addEventListener('click', toggleHeart, {passive : true });
-                
+                //         newHeart.setAttribute('src', '/img/heart-off.svg');
+                //         newHeart.classList.add('no-heart');
+                //     }
+                //     newHeart.addEventListener('click', toggleHeart, { passive: true });
+
                 //     const xhr = new XMLHttpRequest();
                 //     xhr.onreadystatechange = function () {
                 //         if (this.readyState == 4 && this.status == 200) {
@@ -124,7 +126,7 @@
                 //     xhr.send();
                 // };
 
-                
+
 
 
 
@@ -303,55 +305,55 @@
     //     Get a reference to the heart count
     //     const heartcount = heart.parentElement.querySelector('.___');
 
-        // Check heart class to see if currently hearted
-        // if hearted...
-            // send request to un-heart / delete heart in database
-            // when response comes, change heart class to unhearted and reduce heart count
-        // else (if NOT hearted)...
-            // send request to heart / create heart in db
-            // on response, change heart class to appear red, increase heart count
-    
-        //     var clicks = 0;
-        //     var hasClicked = false;
-        //            function onClick() 
-        //         {
-        //             if (!hasClicked) 
-        //                 {
-        //                     clicks += 1;
-        //                     document.getElementById("output").innerHTML = clicks;
-        //                     hasClicked = true; 
-        //                 };
-                    
-        //         };
-        // }
+    // Check heart class to see if currently hearted
+    // if hearted...
+    // send request to un-heart / delete heart in database
+    // when response comes, change heart class to unhearted and reduce heart count
+    // else (if NOT hearted)...
+    // send request to heart / create heart in db
+    // on response, change heart class to appear red, increase heart count
 
-        return;
+    //     var clicks = 0;
+    //     var hasClicked = false;
+    //            function onClick() 
+    //         {
+    //             if (!hasClicked) 
+    //                 {
+    //                     clicks += 1;
+    //                     document.getElementById("output").innerHTML = clicks;
+    //                     hasClicked = true; 
+    //                 };
 
-        $count.text(function(idx, txt) {
-            // convert text to number and increment by one
+    //         };
+    // }
+
+    return;
+
+    $count.text(function (idx, txt) {
+        // convert text to number and increment by one
+        return +txt + 1;
+    });
+    $(document).on('click', ".notliked", function () {
+        var $this = $(this);
+        $this.removeClass('notliked');
+        $this.addClass('liked')
+        $count = $('.likes-count');
+        $count.text(function (idx, txt) {
             return +txt + 1;
-         });
-         $(document).on('click', ".notliked", function() {
-            var $this = $(this);
-            $this.removeClass('notliked');
-            $this.addClass('liked')
-            $count = $('.likes-count');
-            $count.text(function(idx, txt) {
-              return +txt + 1;
-            });
-        
         });
-        
-        $(document).on('click', ".liked", function() {
-            var $this = $(this);
-            $this.removeClass('liked');
-            $this.addClass('notliked');
-            $count = $('.likes-count');
-            $count.text(function(idx, txt) {
-              return (+txt == 0) ? 0 : (+txt - 1);
-            });
-        
+
+    });
+
+    $(document).on('click', ".liked", function () {
+        var $this = $(this);
+        $this.removeClass('liked');
+        $this.addClass('notliked');
+        $count = $('.likes-count');
+        $count.text(function (idx, txt) {
+            return (+txt == 0) ? 0 : (+txt - 1);
         });
+
+    });
 
 
 })();
