@@ -76,8 +76,8 @@ public class ScrapbookPopulator implements CommandLineRunner {
 
 		// Create Messages
 		Message message1 = messageRepo.save(new Message("To My Special Grandson, Happy Birthday. You shine every way! "
-				+ "I’m so proud of the amazing person you are, and hope this year brings you everything you’ve been wishing for. "
-				+ "The sky’s the limit for you, today and always!", sam));
+				+ "Iâ€™m so proud of the amazing person you are, and hope this year brings you everything youâ€™ve been wishing for. "
+				+ "The skyâ€™s the limit for you, today and always!", sam));
 
 		Message message2 = messageRepo.save(new Message(
 				"My wish for you is simple...Have the very best life imaginable, live like you will never grow old, laugh, giggle cry if you must...Play as hard as you work, "

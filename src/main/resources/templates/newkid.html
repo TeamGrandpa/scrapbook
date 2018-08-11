@@ -7,33 +7,85 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Add Child</title>
 
-    <link rel="stylesheet" type="text/css" href="./css/style.css">
+    <link rel="stylesheet" type="text/css" href="./css/newKid.css">
 </head>
 
 <body>
-    
-    <form method="POST" th:action="@{/add-new-channel}" id="add-new-channel">
-        <div>
-           <h2>Enter First Name: </h2>
-           <input type="text" name="kidName" placeholder="Enter Child's Name">
-        </div>
-        <div>
-            <h2>Choose favorite color: </h2>
-            <select name="kidColor">
-                <option value="red">Red</option>
-                <option value="orange">Orange</option>
-                <option value="yellow">Yellow</option>
-                <option value="green">Green</option>
-                <option value="blue">Blue</option>
-                <option value="purple">Purple</option>
-            </select>
-        </div>
-        <div>
-            <h2>Upload profile picture: </h2>
-            <input accept="image_file_path">
-        </div>
-        <input type = "submit">
-        </form>
+
+    <header class="colorDefault">
+        <h1>Add New Child</h1>
+        <a id="prev" href="/kids">&#10094;</a>
+    </header>
+
+    <main>
+        <section id="whiteBox"></section>
+        <section class="newChildContainer">
+            <form method="POST" th:action="@{/add-new-channel}" id="add-new-channel">
+                <div id="nameBox">
+                    <h2>Enter First Name: </h2>
+                    <input type="text" name="kidName" placeholder="Enter Child's Name">
+                </div>
+                <div id="colorBox">
+                    <h2>Choose favorite color: </h2>
+                    <div id="colorChoices">
+                        <label class="container" >Red
+                            <input type="radio" checked="checked" name="radio">
+                            <span class="checkmark" id="colorRed"></span>
+                        </label>
+                        <label class="container" >Orange
+                            <input type="radio" name="radio">
+                            <span class="checkmark" id="colorOrange"></span>
+                        </label>
+                        <label class="container" >Yellow
+                            <input type="radio" name="radio">
+                            <span class="checkmark" id="colorYellow"></span>
+                        </label>
+                        <label class="container" >Green
+                            <input type="radio" name="radio">
+                            <span class="checkmark" id="colorGreen"></span>
+                        </label>
+                        <label class="container" >Blue
+                            <input type="radio" name="radio">
+                            <span class="checkmark" id="colorBlue"></span>
+                        </label>
+                        <label class="container" >Purple
+                            <input type="radio" name="radio">
+                            <span class="checkmark" id="colorPurple"></span>
+                        </label>
+                    </div>
+                    <!-- <div>
+                    <input type="radio" checked="checked" id="radioOne" name="radio" />
+                </div>
+
+                <div>
+                    <input type="radio" checked="checked" id="radioTwo" name="radio" />
+                </div>
+                <div>
+                    <input type="radio" checked="checked" id="radioThree" name="radio" />
+                </div>
+                <div>
+                    <input type="radio" checked="checked" id="radioFour" name="radio" />
+                </div>
+                <div>
+                    <input type="radio" checked="checked" id="radioFive" name="radio" />
+                </div>
+                <div>
+                    <input type="radio" checked="checked" id="radioSix" name="radio" />
+                </div> -->
+
+                </div>
+                <div id="picBox">
+                    <h2>Upload profile picture: </h2>
+                    <input accept="image_file_path">
+                </div>
+
+                <div id="buttonContainer">
+                    <input id="submitButton" type="submit">
+                </div>
+            </form>
+        </section>
+    </main>
 </body>
-<script src="./js/all-kids-viewer.js"></script>
+<!-- <script src="./js/all-kids-viewer.js"></script> -->
+
 </html>

@@ -99,7 +99,6 @@ public class EditorController {
 				break;
 			}
 		}
-
 		return "redirect:/auth";
 	}
 //

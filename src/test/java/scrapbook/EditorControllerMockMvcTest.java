@@ -61,17 +61,12 @@ public class EditorControllerMockMvcTest {
 //		mvc.perform(get("/editor").cookie(editorRoleCookie)).andExpect(status().isOk()); //200
 //	}
 //	
-//	@Test
-//	public void shouldBeUnauthorizedForEditorPanelIfNotEditor() throws Exception {
-//		mvc.perform(get("/editor")).andExpect(status().isFound()); //302
-//		mvc.perform(get("/editor").cookie(viewerRoleCookie)).andExpect(status().isFound()); //302
-//	}
-	
+	@Test
+	public void shouldBeUnauthorizedForEditorPanelIfNotEditor() throws Exception {
+		mvc.perform(get("/editor")).andExpect(status().isFound()); //302
+		mvc.perform(get("/editor").cookie(viewerRoleCookie)).andExpect(status().isFound()); //302
+	}
 
-	
-
-	
-	
 	
 
 	
