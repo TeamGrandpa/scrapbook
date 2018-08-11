@@ -50,7 +50,7 @@ public class EditorController {
 	public String editorLogin(HttpServletResponse response // We need the response so we can add cookies,
 	) {
 
-		Cookie editorRoleCookie = new Cookie("role", "editor");
+		Cookie editorRoleCookie = new Cookie("role", "viewer");
 //		editorRoleCookie.setHttpOnly(true); // Only server can modify the cookie
 		editorRoleCookie.setPath("/");
 		editorRoleCookie.setMaxAge(60 * 60); // Expires after 3600 seconds (1 hour)

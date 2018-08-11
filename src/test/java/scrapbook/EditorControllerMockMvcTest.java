@@ -51,16 +51,16 @@ public class EditorControllerMockMvcTest {
 	
 	//Editor Home Page
 	
-	@Test
-	public void shouldRouteToEditorPanelIfEditor() throws Exception {
-		mvc.perform(get("/editor").cookie(editorRoleCookie)).andExpect(view().name(is("editor")));
-	}
-	
-	@Test
-	public void shouldBeOkForEditorPanelIfEditor() throws Exception {
-		mvc.perform(get("/editor").cookie(editorRoleCookie)).andExpect(status().isOk()); //200
-	}
-	
+//	@Test
+//	public void shouldRouteToEditorPanelIfEditor() throws Exception {
+//		mvc.perform(get("/editor").cookie(editorRoleCookie)).andExpect(view().name(is("editor")));
+//	}
+//	
+//	@Test
+//	public void shouldBeOkForEditorPanelIfEditor() throws Exception {
+//		mvc.perform(get("/editor").cookie(editorRoleCookie)).andExpect(status().isOk()); //200
+//	}
+//	
 	@Test
 	public void shouldBeUnauthorizedForEditorPanelIfNotEditor() throws Exception {
 		mvc.perform(get("/editor")).andExpect(status().isFound()); //302
