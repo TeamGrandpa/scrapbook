@@ -44,47 +44,47 @@
                 let newDate = document.createElement('span');
                 newDate.setAttribute('class', 'timeStamp');
                 newDate.textContent = image.date;
-                //let newHeart = document.createElement('img');
-                //image.hearts.length;
-                //newHeart.setAttribute('src', '/img/heart-off.svg');
-                //newHeart.classList.add('heartIcon');
+                let newHeart = document.createElement('img');
+                image.hearts.length;
+                newHeart.setAttribute('src', '/img/heart-off.svg');
+                newHeart.classList.add('heartIcon');
                 let newImg = document.createElement('img');
                 newImg.setAttribute('src', image.imageUrl);
                 let newFigcaption = document.createElement('figcaption');
                 newFigcaption.textContent = image.caption;
                 
-                toggleHeart();
+               // toggleHeart();
                 
                 newFigure.appendChild(newDate);
-                newFigure.appendChild(toggleHeart);
+               newFigure.appendChild(newHeart);
                 newFigure.appendChild(newImg);
                 newFigure.appendChild(newFigcaption);
                 newImageDiv.appendChild(newFigure);
 
-                function toggleHeart() {
-                    const heartCount = document.createElement('span');
-                    heartCount.innerHTML = image.hearts.length;
-                    const heart = document.createElement('img');
-                     if (image.hearts.find(heart => heart.enduser.userName === 'enduserUserName')) {
-                         heart.setAttribute('src', '/img/heart-on.svg');
-                         heart.classList.add('has-heart');
-                    }
-                    else {
-                        heart.setAttribute('src', '/img/heart-off.svg');
-                        heart.classList.add('no-heart');
-                   }
-                heart.addEventListener('click', toggleHeart, {passive : true });
+                // function toggleHeart() {
+                //     const heartCount = document.createElement('span');
+                //     heartCount.innerHTML = image.hearts.length;
+                //     const heart = document.createElement('img');
+                //      if (image.hearts.find(heart => heart.enduser.userName === 'enduserUserName')) {
+                //          heart.setAttribute('src', '/img/heart-on.svg');
+                //          heart.classList.add('has-heart');
+                //     }
+                //     else {
+                //         heart.setAttribute('src', '/img/heart-off.svg');
+                //         heart.classList.add('no-heart');
+                //    }
+                // heart.addEventListener('click', toggleHeart, {passive : true });
                 
-                    const xhr = new XMLHttpRequest();
-                    xhr.onreadystatechange = function () {
-                        if (this.readyState == 4 && this.status == 200) {
-                            toggleHeart = JSON.parse(xhr.response);
-                            console.log(toggleHeart);
-                        };
-                    };
-                    xhr.open('GET', '/hearts/' + enduserUserName + '/' + imageId);
-                    xhr.send();
-                };
+                //     const xhr = new XMLHttpRequest();
+                //     xhr.onreadystatechange = function () {
+                //         if (this.readyState == 4 && this.status == 200) {
+                //             toggleHeart = JSON.parse(xhr.response);
+                //             console.log(toggleHeart);
+                //         };
+                //     };
+                //     xhr.open('GET', '/hearts/' + enduserUserName + '/' + imageId);
+                //     xhr.send();
+                // };
 
                 
 
