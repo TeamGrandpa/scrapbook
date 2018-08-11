@@ -115,12 +115,12 @@ public class ScrapbookController {
 	
 
 	@RequestMapping("/add-new-channel")
-	public String index() {
+	public String addNewChannel() {
 		return "newkid";
   }
 
 	@RequestMapping("/add-image")
-	public String index() {
+	public String addImage() {
 		return "add-image";
 	}
 	

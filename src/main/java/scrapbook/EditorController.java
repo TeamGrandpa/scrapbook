@@ -47,13 +47,18 @@ public class EditorController {
 	}
 
 	@RequestMapping("/editor/login")
-	public String editorLogin(HttpServletResponse response // We need the response so we can add cookies,
+	public String editorLogin(HttpServletResponse response,// We need the response so we can add cookies,
+			@RequestParam(value = "username") String username
 	) {
 
 		Cookie editorRoleCookie = new Cookie("role", "editor");
 		editorRoleCookie.setHttpOnly(true); // Only server can modify the cookie
 		editorRoleCookie.setMaxAge(300); // Expires after 300 seconds (5 min)
 		response.addCookie(editorRoleCookie);
+		Cookie usernameCookie = new Cookie("username", username);
+		usernameCookie.setHttpOnly(true); // Only server can modify the cookie
+		usernameCookie.setMaxAge(300); // Expires after 300 seconds (5 min)
+		response.addCookie(usernameCookie);
 
 		// Redirect the user back to the editor page once login is complete
 		// The new cookie will allow the user to access the page
