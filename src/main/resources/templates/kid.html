@@ -22,6 +22,25 @@
             <section id="whiteBox"></section>
             <section id="imageContainer"></section>
         </main>
+
+        <div id="menuIcon">
+            <div class="bar1"></div>
+            <div class="bar2"></div>
+            <div class="bar3"></div>
+        </div>
+        <div id="navMenu" class="slider">
+            <a th:href="@{/add-image(id=${kid.id})}">
+                <div>Post New Photo</div>
+            </a>
+            <div th:class="@{'Color' + ${kid.colorNum}}" id="menuLine"></div>
+            <a>
+                <div>Post New Status</div>
+            </a>
+            <div th:class="@{'Color' + ${kid.colorNum}}" id="menuLine"></div>
+            <a id="lastNavItem">
+                <div>Edit Channel</div>
+            </a>
+        </div>
     </div>
     <script src="./js/one-kid-viewer.js"></script>
 </body>

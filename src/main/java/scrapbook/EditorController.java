@@ -37,35 +37,56 @@ public class EditorController {
 	@Resource
 	private CommentRepository commentRepo;
 
+	@Resource
+	private EnduserRepository enduserRepo;
+
 	// image uploader may go here??
 
 	@RequestMapping("/login")
-	public String editorLoginPage() {
+	public String authLoginPage() {
 		// serves as login page
 
 		return "login";
 	}
 
-	@RequestMapping("/editor/login")
-	public String editorLogin(HttpServletResponse response,// We need the response so we can add cookies,
-			@RequestParam(value = "username") String username
-	) {
+	@RequestMapping("/auth/login")
+	public String authLogin(HttpServletResponse response, // We need the response so we can add cookies,
+			@RequestParam("username") String username, @RequestParam("password") String password) {
+		Optional<Enduser> enduserOpt = enduserRepo.findByUserName(username);
+		if (!enduserOpt.isPresent()) {
+			return "redirect:/login";
+		}
 
-		Cookie editorRoleCookie = new Cookie("role", "editor");
-		editorRoleCookie.setHttpOnly(true); // Only server can modify the cookie
-		editorRoleCookie.setMaxAge(300); // Expires after 300 seconds (5 min)
+		Enduser enduser = enduserOpt.get();
+		String savedPassword = enduser.getPassword();
+		if(savedPassword != password) {
+			return "redirect:/login";
+		}
+		String name = enduser.getUserName();
+
+		String role = "";
+
+		if (enduser.getIsEditor()) {
+			role = "editor";
+		} else {
+			role = "viewer";
+		}
+
+		Cookie editorRoleCookie = new Cookie("role", role);
+		editorRoleCookie.setPath("/");
+		editorRoleCookie.setMaxAge(60 * 60); // Expires after 3600 seconds (1 hour)
 		response.addCookie(editorRoleCookie);
-		Cookie usernameCookie = new Cookie("username", username);
-		usernameCookie.setHttpOnly(true); // Only server can modify the cookie
-		usernameCookie.setMaxAge(300); // Expires after 300 seconds (5 min)
-		response.addCookie(usernameCookie);
+		
+		Cookie userNameCookie = new Cookie("name", name);
+		userNameCookie.setPath("/");
+		userNameCookie.setMaxAge(60 * 60);
+		response.addCookie(userNameCookie);
 
-		// Redirect the user back to the editor page once login is complete
-		// The new cookie will allow the user to access the page
-		return "redirect:/editor";
+		return "redirect:/kids";
+
 	}
 
-	@RequestMapping("/editor/logout")
+	@RequestMapping("/auth/logout")
 	public String editorLogin(HttpServletRequest request, HttpServletResponse response) {
 
 		// Find "role" cookie, set it to immediately expire, and send that update to the
@@ -78,23 +99,22 @@ public class EditorController {
 				break;
 			}
 		}
-
-		return "redirect:/editor";
+		return "redirect:/auth";
 	}
-
-	@RequestMapping("/editor")
-	public String editorPanel(@CookieValue(name = "role", defaultValue = "") String role, Model model) {
-
-		if (role == null || !role.equals("editor")) {
-			return "redirect:/login";
-		}
-
-		System.out.println("SUCCESS");
-
-		Iterable<Kid> kids = kidRepo.findAll();
-		model.addAttribute("kids", kids);
-
-		return "editor";
-	}
+//
+//	@RequestMapping("/auth")
+//	public String editorPanel(@CookieValue(name = "role", defaultValue = "") String role, Model model) {
+//
+//		if (role == null || !role.equals("auth")) {
+//			return "redirect:/login";
+//		}
+//
+//		System.out.println("SUCCESS");
+//
+//		Iterable<Kid> kids = kidRepo.findAll();
+//		model.addAttribute("kids", kids);
+//
+//		return "auth";
+//	}
 
 }

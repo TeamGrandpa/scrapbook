@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -53,12 +54,25 @@ public class ScrapbookRestController {
 		
 		Optional<Enduser> enduserOptional = enduserRepo.findByUserName(authorName);
 		Enduser enduser = enduserOptional.get();
-
+		
 		if (commentText != "") {
 			commentRepo.save(new Comment(commentText, enduser, image));
 		}
 
 		return commentRepo.findByImageId(imageId);
 	}
+	
+	@PutMapping("/removeComment")
+	public Iterable<Comment> removeComment(@RequestParam(name = "commentId") long commentId) {
+		Optional<Comment> commentOptional = commentRepo.findById(commentId);
+		Comment commentToRemove = commentOptional.get();
+		Image image = commentToRemove.getImage();
+		long imageId = image.getId();	
+		
+		commentRepo.delete(commentToRemove);
+		
+		return commentRepo.findByImageId(imageId);	
+	}
+	
 
 }

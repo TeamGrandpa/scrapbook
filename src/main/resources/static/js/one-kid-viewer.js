@@ -5,7 +5,40 @@
     const kidColorClass = document.querySelector('#kidColorClass').textContent;
 
     getKidImages();
-    
+    addNavEventListeners();
+
+    function getCookie(cname) {
+        let name = cname + "=";
+        let decodedCookie = decodeURIComponent(document.cookie);
+        let ca = decodedCookie.split(';');
+        for (let i = 0; i < ca.length; i++) {
+            let c = ca[i];
+            while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
+
+    //Nav open and close
+    function addNavEventListeners() {
+
+        const navMenu = document.querySelector('#navMenu');
+        const menuIcon = document.querySelector('#menuIcon');
+
+        const navClickHandler = function () {
+            navMenu.classList.toggle('open');
+            menuIcon.classList.toggle('change');
+            event.stopPropagation();
+        };
+
+        menuIcon.addEventListener('click', navClickHandler);
+
+    };
+
     function getKidImages() {
         const xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function () {
@@ -21,6 +54,12 @@
 
     function kidImageListRender() {
 
+        //Add editor menu if user is an editor
+        const menuIcon = document.querySelector('#menuIcon');
+        if (getCookie('role') === 'editor') {
+            menuIcon.setAttribute('style', 'display:block');
+        }
+
         //Get container and clear it
         const imageContainer = document.querySelector('#imageContainer');
         imageContainer.innerHTML = '';
@@ -34,7 +73,6 @@
         }
         else {
             kidImages.forEach(image => {
-                console.log('Image Id: ' + image.id);
                 let newImageDiv = document.createElement('div');
                 newImageDiv.setAttribute('id', image.id);
                 newImageDiv.setAttribute('class', 'imageDiv');
@@ -94,26 +132,8 @@
                 let commentContainer = document.createElement('div');
                 commentContainer.setAttribute('class', 'commentsContainer');
                 commentContainer.setAttribute('id', 'c' + image.id);
-
-                if (!image.comments.length) {
-                	newImageDiv.appendChild(commentContainer);
-                }
-                else {
-                    image.comments.forEach(comment => {
-                        console.log(comment);
-                        let newCommentDiv = document.createElement('div');
-                        newCommentDiv.setAttribute('class', 'commentsDiv');
-                        let newCommentAuthor = document.createElement('span');
-                        newCommentAuthor.setAttribute('class', 'commentAuthor');
-                        newCommentAuthor.textContent = comment.enduser.userName;
-                        let newCommentText = document.createElement('span');
-                        newCommentText.textContent = comment.commentContent;
-                        newCommentDiv.appendChild(newCommentAuthor);
-                        newCommentDiv.appendChild(newCommentText);
-                        commentContainer.appendChild(newCommentDiv);
-                    })
-                    newImageDiv.appendChild(commentContainer);
-                }
+                newImageDiv.appendChild(commentContainer);
+                renderComments(commentContainer, image.comments);
 
                 //Add thin line before add comment button
                 let newThinLine = document.createElement('div');
@@ -140,12 +160,13 @@
                 commentTextInput.setAttribute('form', 'commentInput');
                 commentTextInput.setAttribute('name', 'commentText');
                 commentTextInput.setAttribute('rows', '2');
+                commentTextInput.setAttribute('maxlength', '140');
                 commentTextInput.setAttribute('placeholder', 'Type your comment here');
                 commentForm.appendChild(commentTextInput);
                 let hiddenUserId = document.createElement('input');
                 hiddenUserId.setAttribute('type', 'hidden');
                 hiddenUserId.setAttribute('name', 'authorName');
-                hiddenUserId.setAttribute('value', 'Michael');
+                hiddenUserId.setAttribute('value', 'Dad');
                 commentForm.appendChild(hiddenUserId);
                 let hiddenImageId = document.createElement('input');
                 hiddenImageId.setAttribute('type', 'hidden');
@@ -190,12 +211,12 @@
     function addImageComment() {
 
         const commentForms = document.querySelectorAll('.commentForm');
-        
+
         commentForms.forEach(commentForm => {
             let commentFormId = commentForm.id;
             let imageNum = commentFormId.substring(1, commentFormId.length);
             let commentTextInput = document.getElementById('t' + imageNum);
-            
+
             commentTextInput.addEventListener('keyup', function (event) {
                 event.preventDefault();
                 if (event.keyCode === 13) {
@@ -209,26 +230,9 @@
                         if (this.readyState == 4 && this.status == 200) {
                             let updatedImageComments = JSON.parse(xhr.response);
                             let commentContainer = document.getElementById('c' + imageNum);
-                            commentContainer.innerHTML = '';
+                            renderComments(commentContainer, updatedImageComments);
 
-                            if (!updatedImageComments.length) {
-
-                            }
-                            else {
-                                updatedImageComments.forEach(comment => {
-                                    let newCommentDiv = document.createElement('div');
-                                    newCommentDiv.setAttribute('class', 'commentsDiv');
-                                    let newCommentAuthor = document.createElement('span');
-                                    newCommentAuthor.setAttribute('class', 'commentAuthor');
-                                    newCommentAuthor.textContent = comment.enduser.userName;
-                                    let newCommentText = document.createElement('span');
-                                    newCommentText.textContent = comment.commentContent;
-                                    newCommentDiv.appendChild(newCommentAuthor);
-                                    newCommentDiv.appendChild(newCommentText);
-                                    commentContainer.appendChild(newCommentDiv);
-                                })
-                            };
-
+                            //Reset comment form
                             commentForm.querySelector('[name=commentText]').value = '';
                             let commentButton = document.getElementById('b' + imageNum);
                             commentForm.setAttribute('style', 'display:none');
@@ -241,6 +245,54 @@
                 }
             })
         })
+    }
+
+    function removeComment(commentContainer, commentId) {
+
+        const xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                let updatedImageComments = JSON.parse(xhr.response);
+                renderComments(commentContainer, updatedImageComments);
+            };
+        };
+        xhr.open('PUT', `/removeComment?commentId=${commentId}`);
+        xhr.send();
+    }
+
+    function renderComments(commentContainer, imageComments) {
+
+        commentContainer.innerHTML = '';
+        if (!imageComments.length) {
+
+        }
+        else {
+            imageComments.forEach(comment => {
+                let newCommentDiv = document.createElement('div');
+                newCommentDiv.setAttribute('class', 'commentsDiv');
+                let newCommentAuthor = document.createElement('span');
+                newCommentAuthor.setAttribute('class', 'commentAuthor');
+                newCommentAuthor.textContent = comment.enduser.userName;
+                let newCommentText = document.createElement('span');
+                newCommentText.textContent = comment.commentContent;
+
+                if (getCookie('name') === comment.enduser.userName || getCookie('role') === 'editor') {
+                    let commentDeleteButton = document.createElement('a');
+                    commentDeleteButton.setAttribute('class', 'commentDeleteButton');
+                    commentDeleteButton.textContent = String.fromCharCode(10006);
+                    newCommentDiv.appendChild(commentDeleteButton);
+
+                    commentDeleteButton.addEventListener('click', function (event) {
+                        event.preventDefault();
+                        removeComment(commentContainer, comment.id);
+                    });
+                }
+
+                newCommentDiv.appendChild(newCommentAuthor);
+                newCommentDiv.appendChild(newCommentText);
+                commentContainer.appendChild(newCommentDiv);
+            })
+        }
     }
 
     // This will be an event listener
@@ -300,5 +352,6 @@
             });
         
         });
+
 
 })();

@@ -11,7 +11,7 @@
     --Color2: #b66161;
     --Color3: #5c974e;
     
-    --ColorDefault: #aaaaaa;
+    --ColorDefault: #aaa;
 }
 
 .Color1 {
@@ -42,6 +42,7 @@ header {
     color: #fff;
     text-align: center;
     padding: 0.2rem;
+    z-index: 200;
 }
 
 #prev {
@@ -184,10 +185,26 @@ h3 {
     margin-left: 2rem;
     margin-right: 1rem;
     border-radius: 0.7rem;
+    position: relative;
 }
 
 .commentAuthor {
     font-weight: bold;
+}
+
+.commentDeleteButton {
+	/* display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center; */
+    font-size: 0.8rem;
+    cursor: pointer;
+    position: absolute;
+    top: 0.4rem;
+    right: 0.4rem;
+    padding: 0 0.3rem;
+    border-radius: 1rem;
+    background-color: rgba(255, 255, 255, 0.7);
 }
 
 .buttonDiv {
@@ -201,6 +218,7 @@ h3 {
     background-color: #eee;
     padding: 0.3rem 1rem 0.3rem 0.7rem;
     border-radius: 1rem;
+    cursor: pointer;
 }
 
 .commentForm {
@@ -211,8 +229,11 @@ h3 {
 }
 
 .commentTextInput {
+    font-family: inherit;
     font-size: 1rem;
     width: 100%;
+    padding: 5px 10px;
+    border: none;
 }
 
 #newkid {
@@ -228,4 +249,134 @@ h3 {
 .heartIcon {
     height: 1.2em;
     margin-right: auto;
+}
+
+#menuIcon {
+    display: none;
+    position: fixed;
+    top: 0.35rem;
+    right: 0.8rem;
+    cursor: pointer;
+    z-index: 350;
+}
+
+.bar1, .bar2, .bar3 {
+    width: 30px;
+    height: 4px;
+    background-color: #fff;
+    margin: 6px 0;
+    transition: 0.4s;
+}
+
+.change .bar1 {
+    -webkit-transform: rotate(-45deg) translate(-7px, 6px) ;
+    transform: rotate(-45deg) translate(-7px, 6px) ;
+}
+
+.change .bar2 {
+    opacity: 0;
+}
+
+.change .bar3 {
+    -webkit-transform: rotate(45deg) translate(-8px, -8px) ;
+    transform: rotate(45deg) translate(-8px, -8px) ;
+}
+
+#menuLine {
+    height: 0.3rem;
+    width: 100%;
+}
+
+#navMenu {
+    display: block;
+    position: fixed;
+    top: 3.2rem;
+    right: 0;
+    padding-right: 0.5rem;
+    z-index: 199;
+}
+
+#navMenu a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.75rem 0.9rem;
+    background-color: #ddd;
+    color: #222;
+    text-decoration: none;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+#lastNavItem {
+    border-radius: 0 0 0.7rem 0.7rem;
+}
+
+.slider {
+	overflow-y: hidden;
+	max-height: 0; /* approximate max height */
+
+	transition-property: all;
+	transition-duration: 0.4s;
+	transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+}
+
+.slider.open {
+	max-height: 10rem;
+}
+
+#newPhotoContainer {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    margin: 1.5rem 1.5rem;
+    grid-column-gap: 1.8rem;
+    grid-row-gap: 1.8rem;
+    /* max-width: 96vh;
+    width: 90%; */
+}
+
+#fileBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #ddd;
+    padding: 1rem;
+    border-radius: 1rem;
+}
+
+#buttonContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+}
+
+.inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+.inputfile + label {
+    font-size: 1.25rem;
+    font-weight: 700;
+    padding: 0.5rem 1rem;
+    color: white;
+    background-color: black;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.inputfile:focus + label,
+.inputfile + label:hover {
+    background-color: blue;
+}
+
+.inputfile:focus + label {
+	outline: 1px dotted #000;
+	outline: -webkit-focus-ring-color auto 5px;
 }
