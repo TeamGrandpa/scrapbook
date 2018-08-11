@@ -17,22 +17,29 @@ public class Enduser {
 	private long id;
 	private String userName;
 	private boolean isEditor;
-	
+	private String password;
+
 	@JsonIgnore
 	@OneToMany(mappedBy = "enduser")
 	private Collection<Comment> comments;
 	
 
-	//default no args constructor
+	// default no args constructor
 	protected Enduser() {
-		
+
 	}
-	
-	
-	//constructor
+
+	// constructor
 	public Enduser(String userName, boolean isEditor) {
 		this.userName = userName;
 		this.isEditor = isEditor;
+	}
+
+	public Enduser(String userName, boolean isEditor, String password) {
+		this.userName = userName;
+		this.isEditor = isEditor;
+		this.password = password;
+
 	}
 
 	public long getId() {
@@ -40,19 +47,22 @@ public class Enduser {
 	}
 
 	public String getUserName() {
-		
+
 		return userName;
 	}
-	
+
 	public boolean getIsEditor() {
 		return isEditor;
 	}
-
-	public Collection<Comment> getComments() {
-		
-		return comments;
+	
+	public String getPassword() {
+		return password;
 	}
 
+	public Collection<Comment> getComments() {
+
+		return comments;
+	}
 
 	@Override
 	public int hashCode() {
@@ -61,7 +71,6 @@ public class Enduser {
 		result = prime * result + (int) (id ^ (id >>> 32));
 		return result;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -76,7 +85,5 @@ public class Enduser {
 			return false;
 		return true;
 	}
-	
-	
 
 }
