@@ -53,13 +53,18 @@ public class EditorController {
 	public String authLogin(HttpServletResponse response, // We need the response so we can add cookies,
 			@RequestParam("username") String username, @RequestParam("password") String password) {
 		Optional<Enduser> enduserOpt = enduserRepo.findByUserName(username);
+		
 		if (!enduserOpt.isPresent()) {
 			return "redirect:/login";
 		}
 
 		Enduser enduser = enduserOpt.get();
 		String savedPassword = enduser.getPassword();
-		if(savedPassword != password) {
+		System.out.println("**************************");
+		System.out.println("savedPassword: " + savedPassword);
+		System.out.println(password);
+		if(!(savedPassword.equalsIgnoreCase(password))) {
+			System.out.println("I am here");
 			return "redirect:/login";
 		}
 		String name = enduser.getUserName();
