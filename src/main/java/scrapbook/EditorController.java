@@ -58,7 +58,7 @@ public class EditorController {
 		
 		Cookie userNameCookie = new Cookie("name", "Dad");
 		userNameCookie.setPath("/");
-		userNameCookie.setMaxAge(60 * 60); 
+		userNameCookie.setMaxAge(60 * 60);
 		response.addCookie(userNameCookie);
 		
 		// Redirect the user back to the editor page once login is complete
