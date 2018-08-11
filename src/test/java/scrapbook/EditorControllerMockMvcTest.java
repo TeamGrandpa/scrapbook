@@ -66,6 +66,7 @@ public class EditorControllerMockMvcTest {
 		mvc.perform(get("/editor")).andExpect(status().isFound()); //302
 		mvc.perform(get("/editor").cookie(viewerRoleCookie)).andExpect(status().isFound()); //302
 	}
+
 	
 
 	
