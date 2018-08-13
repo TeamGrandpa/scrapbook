@@ -24,11 +24,12 @@
           <div id="fileBox">
             <input type="file" name="file" id="file" class="inputfile" />
             <label for="file">
-                <span>Choose a file...</span>
+              <span>Choose a file...</span>
             </label>
-          
-            <label for="captionInput">Caption:</label>
-            <input type="textarea" id="captionInput" name="caption" />
+            <div id="captionDiv">
+              <label for="captionInput">Caption:</label>
+              <textarea id="captionInput" name="caption" rows="2" maxlength="140" placeholder="Type your caption here"></textarea>
+            </div>
           </div>
 
           <input type="hidden" name="childName" th:value="${kid.name}" />

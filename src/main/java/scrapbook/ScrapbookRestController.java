@@ -1,5 +1,6 @@
 package scrapbook;
 
+import java.util.Collection;
 import java.util.Optional;
 
 import javax.annotation.Resource;
@@ -41,6 +42,22 @@ public class ScrapbookRestController {
 	@GetMapping("/image-comments/{id}")
 	public Iterable<Comment> findAllCommentsByImageId(@PathVariable long id) {
 		return commentRepo.findByImageId(id);
+	}
+	
+	@PutMapping("/removeImage")
+	public Iterable<Image> removeImage(
+			@RequestParam(name = "kidId") long kidId,
+			@RequestParam(name = "imageId") long imageId) {
+		Optional<Image> imageOptional = imageRepo.findById(imageId);
+		Image imageToRemove = imageOptional.get();
+		Collection<Comment> comments = imageToRemove.getComments();
+		for (Comment comment : comments) {
+			commentRepo.delete(comment);
+		}
+		
+		imageRepo.delete(imageToRemove);
+		
+		return imageRepo.findByKidIdOrderByIdDesc(kidId);
 	}
 
 	@PostMapping("/addComment")

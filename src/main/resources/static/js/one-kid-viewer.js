@@ -44,7 +44,6 @@
         xhr.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
                 kidImages = JSON.parse(xhr.response);
-                console.log(kidImages);
                 kidImageListRender();
             };
         };
@@ -82,20 +81,34 @@
                 let newDate = document.createElement('span');
                 newDate.setAttribute('class', 'timeStamp');
                 newDate.textContent = image.date;
+                newFigure.appendChild(newDate);
                 // let newHeart = document.createElement('img');
                 // image.hearts.length;
                 // newHeart.setAttribute('src', '/img/heart-off.svg');
                 // newHeart.classList.add('heartIcon');
                 let newImg = document.createElement('img');
                 newImg.setAttribute('src', image.imageUrl);
+                newFigure.appendChild(newImg);
+
+                if (getCookie('role') === 'editor') {
+                    let imageDeleteButton = document.createElement('a');
+                    imageDeleteButton.setAttribute('class', 'imageDeleteButton');
+                    imageDeleteButton.textContent = String.fromCharCode(10006);
+                    newFigure.appendChild(imageDeleteButton);
+
+                    imageDeleteButton.addEventListener('click', function (event) {
+                        event.preventDefault();
+                        removeImage(image.id);
+                    });
+                }
+
                 let newFigcaption = document.createElement('figcaption');
                 newFigcaption.textContent = image.caption;
 
                 // toggleHeart();
 
-                newFigure.appendChild(newDate);
+                
                 //    newFigure.appendChild(newHeart);
-                newFigure.appendChild(newImg);
                 newFigure.appendChild(newFigcaption);
                 newImageDiv.appendChild(newFigure);
 
@@ -191,6 +204,19 @@
         }
         commentButtonEventListener();
         addImageComment();
+    }
+
+    function removeImage(imageId) {
+
+        const xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                kidImages = JSON.parse(xhr.response);
+                kidImageListRender();
+            };
+        };
+        xhr.open('PUT', `/removeImage?imageId=${imageId}&kidId=${kidId}`);
+        xhr.send();
     }
 
     function commentButtonEventListener() {

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Create Status</title>
+
+    <link rel="stylesheet" type="text/css" href="./css/style.css">
+</head>
+
+<body>
+    <div th:each="kid: ${kids}">
+        <header th:class="@{'Color' + ${kid.colorNum}}">
+            <h1>Post New Status</h1>
+            <a id="prev" th:href="@{/kid(id=${kid.id})}">&#10094;</a>
+        </header>
+
+        <main>
+            <section id="whiteBox"></section>
+
+
+
+
+
+
+
+
+
+
+        </main>
+    </div>
+    <!-- <script src="./js/upload-image.js"></script> -->
+</body>
+
+</html>

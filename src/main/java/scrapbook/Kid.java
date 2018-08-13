@@ -30,11 +30,6 @@ public class Kid {
 	@OneToMany(mappedBy = "kid")
 	private Collection<Image> images;
 	
-	@JsonIgnore
-	@OneToMany(mappedBy = "kid")
-	private Collection<Message> messages;
-	
-	
 	//empty constructor
 	protected Kid() {
 		
@@ -76,10 +71,6 @@ public class Kid {
 	
 	public Collection<Image> getImages() {		
 		return images;
-	}
-	
-	public Collection<Message> getMessages() {		
-		return messages;
 	}
 	
 	@Override

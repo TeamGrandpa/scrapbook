@@ -3,6 +3,7 @@ package scrapbook;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -33,9 +34,6 @@ public class ScrapbookController {
 
 	@Resource
 	ImageRepository imageRepo;
-
-	@Resource
-	MessageRepository messageRepo;
 
 	@Resource
 	CommentRepository commentRepo;
@@ -76,23 +74,6 @@ public class ScrapbookController {
 		return ("images");
 	}
 
-	@RequestMapping("/message")
-	public String findOneMessage(@RequestParam(value = "id") long id, Model model) throws MessageNotFoundException {
-		Optional<Message> message = messageRepo.findById(id);
-
-		if (message.isPresent()) {
-			model.addAttribute("messages", message.get());
-			return "message";
-		}
-		throw new MessageNotFoundException();
-	}
-
-	@RequestMapping("/messages")
-	public String findAllMessages(Model model) {
-		model.addAttribute("messages", messageRepo.findAll());
-		return ("messages");
-	}
-
 	@RequestMapping("/comment")
 	public String findOneComment(@RequestParam(value = "id") long id, Model model) throws CommentNotFoundException {
 		Optional<Comment> comment = commentRepo.findById(id);
@@ -126,6 +107,17 @@ public class ScrapbookController {
 		}
 		throw new KidNotFoundException();
 	}
+	
+	@RequestMapping("/add-status")
+	public String addStatus(@RequestParam(value = "id") long id, Model model) throws KidNotFoundException {
+		Optional<Kid> kid = kidRepo.findById(id);
+
+		if (kid.isPresent()) {
+			model.addAttribute("kids", kid.get());
+			return "add-status";
+		}
+		throw new KidNotFoundException();
+	}
 
 	private String getUploadDirectory() {
 		// Determine where uploads should be saved
@@ -145,12 +137,15 @@ public class ScrapbookController {
 		@RequestParam("childName") String kidName,
 		@RequestParam("file") MultipartFile imageFile,
 		Model model
-	) throws Exception {
+	) throws IOException {
 		
 		// Upload image - stream uploaded data to a temporary file
 		String fileName = imageFile.getOriginalFilename();
 		if ("".equalsIgnoreCase(fileName)) {
-			throw new Exception();
+			Optional<Kid> kidOptional = kidRepo.findByName(kidName);
+			Kid kidForImage = kidOptional.get();
+			long kidId = kidForImage.getId();
+			return "redirect:/kid?id=" + kidId;
 		}
 		File tempFile = File.createTempFile(fileName, "");
         FileOutputStream fos = new FileOutputStream(tempFile); 

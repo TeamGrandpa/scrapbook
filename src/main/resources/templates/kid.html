@@ -33,7 +33,7 @@
                 <div>Post New Photo</div>
             </a>
             <div th:class="@{'Color' + ${kid.colorNum}}" id="menuLine"></div>
-            <a>
+            <a th:href="@{/add-status(id=${kid.id})}">
                 <div>Post New Status</div>
             </a>
             <div th:class="@{'Color' + ${kid.colorNum}}" id="menuLine"></div>
