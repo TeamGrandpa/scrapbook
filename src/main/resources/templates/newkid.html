@@ -20,7 +20,7 @@
     <main>
         <section id="whiteBox"></section>
         <section class="newChildContainer">
-            <img src="/src/main/resources/static/img/newKidLogo.jpg" style="width:80px;height:80px;">
+            <img src="./img/newKidLogo.jpg" style="width:80px;height:80px;">
             <form method="POST" th:action="@{/add-new-channel}" id="add-new-channel">
                 <div id="nameBox">
                     <h2>Enter First Name: </h2>
@@ -59,17 +59,20 @@
                 </div>
                 <div id="picBox">
                     <h2>Upload profile picture: </h2>
-                    <input accept="image_file_path">
-                </div>
+                    <form method="POST" action="/uploadImage" enctype="multipart/form-data">
+                        <div id="fileBox">
+                            <input type="file" name="file" id="file" class="inputfile" />
+                        </div>
 
 
-            </form>
+                    </form>
         </section>
         <div id="buttonContainer">
             <input id="submitButton" type="submit">
         </div>
     </main>
 </body>
-<!-- <script src="./js/all-kids-viewer.js"></script> -->
+<script src="./js/upload-profilepic.js"></script>
 
 </html>
+

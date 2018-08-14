@@ -6,6 +6,10 @@
     padding: 0;
 }
 
+:root {
+    --ShareBear: #951B81;
+}
+
 .loginContainer {
   display: grid;
   grid-template-columns: 1fr;
@@ -17,6 +21,53 @@ img {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width: 50%;
-    margin-top: 1.5em;
+   margin-top: 9em;
+   border-radius: 50%;
 }
+
+input {
+    display: flex;
+    margin: auto;
+    
+}
+
+#usernameBox input {
+    margin-top: 2rem;
+    width: 60%;
+    border: solid 1px black;
+    display: block;
+}
+
+#usernameBox input:focus {
+    border: solid 3px var(--ShareBear);  
+}
+
+#passwordBox input {
+    margin-top: 1.5rem;
+    width: 60%;
+    border: solid 1px black;
+    display: block;
+}
+
+#passwordBox input:focus {
+    border: solid 3px var(--ShareBear);  
+}
+
+#buttonBox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#buttonBox input {
+   text-align: center; 
+   bottom: 2em;
+    padding: .5em 1em;
+    color: white;
+    background-color: var(--ShareBear);
+    border-radius: 20%;
+    width: 30%;
+}
+
+
+
