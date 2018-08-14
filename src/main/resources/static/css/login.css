@@ -22,7 +22,7 @@ img {
     margin-left: auto;
     margin-right: auto;
    margin-top: 9em;
-   border-radius: 50%;
+   border-radius: 25%;
 }
 
 input {
@@ -65,8 +65,11 @@ input {
     padding: .5em 1em;
     color: white;
     background-color: var(--ShareBear);
-    border-radius: 20%;
+    border-radius: 25%;
     width: 30%;
+    font-size: 18px;
+  
+
 }
 
 

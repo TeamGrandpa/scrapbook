@@ -162,7 +162,7 @@ img {
     padding-right: 1em;
     border: 3px solid;
     border-image: linear-gradient(to right, grey 25%, yellow 25%, yellow 50%,red 50%, red 75%, teal 75%) 5;
-   text-align:center;
+    text-align:center;
 }
 
 
