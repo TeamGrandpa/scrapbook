@@ -7,7 +7,6 @@
     function getCookie(cname) {
         let name = cname + "=";
         let decodedCookie = decodeURIComponent(document.cookie);
-        console.log(decodedCookie);
         let ca = decodedCookie.split(';');
         for (let i = 0; i < ca.length; i++) {
             let c = ca[i];
@@ -51,7 +50,7 @@
                 let newH3 = document.createElement('h3');
                 newH3.textContent = kid.name;
                 let newImg = document.createElement('img');
-                let newImgSrc = '/portraits/' + kid.portraitUrl;
+                let newImgSrc = kid.portraitUrl;
                 newImg.setAttribute('src', newImgSrc);
 
                 newKidA.appendChild(newH3);

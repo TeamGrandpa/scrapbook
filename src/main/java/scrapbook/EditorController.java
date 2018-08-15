@@ -26,8 +26,6 @@ public class EditorController {
 	@Resource
 	private EnduserRepository enduserRepo;
 
-	// image uploader may go here??
-
 	@RequestMapping("/login")
 	public String authLoginPage() {
 		// serves as login page
@@ -47,7 +45,6 @@ public class EditorController {
 		String savedPassword = enduser.getPassword();
 
 		if(!(savedPassword.equalsIgnoreCase(password))) {
-			System.out.println("I am here");
 			return "redirect:/login";
 		}
 		

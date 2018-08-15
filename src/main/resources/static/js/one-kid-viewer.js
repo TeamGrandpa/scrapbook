@@ -181,7 +181,7 @@
                 let hiddenUserId = document.createElement('input');
                 hiddenUserId.setAttribute('type', 'hidden');
                 hiddenUserId.setAttribute('name', 'authorName');
-                hiddenUserId.setAttribute('value', 'Dad');
+                hiddenUserId.setAttribute('value', getCookie('name'));
                 commentForm.appendChild(hiddenUserId);
                 let hiddenImageId = document.createElement('input');
                 hiddenImageId.setAttribute('type', 'hidden');

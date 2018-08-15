@@ -54,8 +54,7 @@ public class ScrapbookController {
 		model.addAttribute("kids", kidRepo.findAll());
 		return ("kids");
 	}
-	
-	
+
 	@RequestMapping("/image")
 	public String findOneImage(@RequestParam(value = "id") long id, Model model) throws ImageNotFoundException {
 		Optional<Image> image = imageRepo.findById(id);
@@ -88,9 +87,8 @@ public class ScrapbookController {
 	@RequestMapping("/comments")
 	public String findAllComments(Model model) {
 		model.addAttribute("comments", commentRepo.findAll());
-		return("comments");
+		return ("comments");
 	}
-	
 
 	@RequestMapping("/add-new-channel")
 	public String addNewChannel() {
@@ -107,7 +105,7 @@ public class ScrapbookController {
 		}
 		throw new KidNotFoundException();
 	}
-	
+
 	@RequestMapping("/add-status")
 	public String addStatus(@RequestParam(value = "id") long id, Model model) throws KidNotFoundException {
 		Optional<Kid> kid = kidRepo.findById(id);
@@ -121,24 +119,51 @@ public class ScrapbookController {
 
 	private String getUploadDirectory() {
 		// Determine where uploads should be saved
-        String userHomeDirectory = System.getProperty("user.home");
-        String uploadDirectory = Paths.get(userHomeDirectory, "scrapbook-uploads").toString();
-        
-        // Create if needed
-        new File(uploadDirectory).mkdirs();
-        
-        // Return path
-        return uploadDirectory;
+		String userHomeDirectory = System.getProperty("user.home");
+		String uploadDirectory = Paths.get(userHomeDirectory, "scrapbook-uploads").toString();
+
+		// Create if needed
+		new File(uploadDirectory).mkdirs();
+
+		// Return path
+		return uploadDirectory;
 	}
-	
+
+	@PostMapping("/uploadStatus")
+	public String uploadStatus(@RequestParam("kidId") long kidId, @RequestParam("imgBase64") String imageFile,
+			Model model) {
+
+		System.out.println("*******************************");
+		System.out.println(kidId);
+
+//		String fileName = "test";
+//		File tempFile = File.createTempFile(fileName, "");
+//		FileOutputStream fos = new FileOutputStream(tempFile); 
+//        fos.write(imageFile.getBytes());
+//        fos.close(); 
+//		
+//        // Transfer the temporary file to its permanent location
+//        String uploadDirectory = getUploadDirectory();
+//		File fileUpload = new File(uploadDirectory, fileName); // TODO: ensure it doesn't already exist
+//		imageFile.transferTo(fileUpload);
+//		
+//		
+//		//Add image to imageRepo
+//		Optional<Kid> kidOptional = kidRepo.findByName(kidName);
+//		Kid kidForImage = kidOptional.get();
+//		long kidId = kidForImage.getId();
+//		
+//		String imageUrl = "/uploadedimage/" + fileName;
+//		Image image = imageRepo.save(new Image(imageUrl, caption, new SimpleDateFormat("MMMM d, yyyy").format(new Date()), kidForImage));
+
+		return "redirect:/kid?id=" + kidId;
+
+	}
+
 	@PostMapping("/uploadImage")
-	public String uploadImage(
-		@RequestParam("caption") String caption,
-		@RequestParam("childName") String kidName,
-		@RequestParam("file") MultipartFile imageFile,
-		Model model
-	) throws IOException {
-		
+	public String uploadImage(@RequestParam("caption") String caption, @RequestParam("childName") String kidName,
+			@RequestParam("file") MultipartFile imageFile, Model model) throws IOException {
+
 		// Upload image - stream uploaded data to a temporary file
 		String fileName = imageFile.getOriginalFilename();
 		if ("".equalsIgnoreCase(fileName)) {
@@ -148,54 +173,84 @@ public class ScrapbookController {
 			return "redirect:/kid?id=" + kidId;
 		}
 		File tempFile = File.createTempFile(fileName, "");
-        FileOutputStream fos = new FileOutputStream(tempFile); 
-        fos.write(imageFile.getBytes());
-        fos.close(); 
-		
-        // Transfer the temporary file to its permanent location
-        String uploadDirectory = getUploadDirectory();
+		FileOutputStream fos = new FileOutputStream(tempFile);
+		fos.write(imageFile.getBytes());
+		fos.close();
+
+		// Transfer the temporary file to its permanent location
+		String uploadDirectory = getUploadDirectory();
 		File fileUpload = new File(uploadDirectory, fileName); // TODO: ensure it doesn't already exist
 		imageFile.transferTo(fileUpload);
-		
-		
-		//Add image to imageRepo
+
+		// Add image to imageRepo
 		Optional<Kid> kidOptional = kidRepo.findByName(kidName);
 		Kid kidForImage = kidOptional.get();
 		long kidId = kidForImage.getId();
-		
+
 		String imageUrl = "/uploadedimage/" + fileName;
-		Image image = imageRepo.save(new Image(imageUrl, caption, new SimpleDateFormat("MMMM d, yyyy").format(new Date()), kidForImage));
-		
+		Image image = imageRepo.save(
+				new Image(imageUrl, caption, new SimpleDateFormat("MMMM d, yyyy").format(new Date()), kidForImage));
+
 		model.addAttribute("flashMessage", "File uploaded successfully.");
-		
+
 		return "redirect:/kid?id=" + kidId;
 	}
-	
+
 	@GetMapping("/uploadedimage/{file}")
-	public void serveImage(
-		HttpServletRequest request,
-		HttpServletResponse response,
-		@PathVariable("file") String fileName
-	) throws Exception {
-		
+	public void serveImage(HttpServletRequest request, HttpServletResponse response,
+			@PathVariable("file") String fileName) throws Exception {
+
 		// Determine path of requested file
 		Path filePath = Paths.get(getUploadDirectory(), fileName);
 		String filePathString = filePath.toString();
 		File requestedFile = new File(filePathString);
-		
+
 		// Ensure requested item exists and is a file
 		if (!requestedFile.exists() || !requestedFile.isFile()) {
 			throw new Exception();
 		}
-		
+
 		// Determine and set correct content type of response
-		String fileContentType= Files.probeContentType(filePath);
-	    response.setContentType(fileContentType);
-		
+		String fileContentType = Files.probeContentType(filePath);
+		response.setContentType(fileContentType);
+
 		// Serve file by streaming it directly to the response
-		InputStream in = new FileInputStream(filePathString);		
-	    IOUtils.copy(in, response.getOutputStream());
+		InputStream in = new FileInputStream(filePathString);
+		IOUtils.copy(in, response.getOutputStream());
 
 	}
 
+	@PostMapping("/uploadNewKid")
+	public String uploadNewKid(
+			@RequestParam("kidName") String kidName, 
+			@RequestParam("radio") int colorNum,
+			@RequestParam("file") MultipartFile imageFile, 
+			Model model) throws IOException {
+
+		// Upload image - stream uploaded data to a temporary file
+		String fileName = imageFile.getOriginalFilename();
+		if ("".equalsIgnoreCase(fileName)) {
+//			Optional<Kid> kidOptional = kidRepo.findByName(kidName);
+//			Kid kidForImage = kidOptional.get();
+//			long kidId = kidForImage.getId();
+			return "redirect:/kids";
+		}
+		File tempFile = File.createTempFile(fileName, "");
+		FileOutputStream fos = new FileOutputStream(tempFile);
+		fos.write(imageFile.getBytes());
+		fos.close();
+
+		// Transfer the temporary file to its permanent location
+		String uploadDirectory = getUploadDirectory();
+		File fileUpload = new File(uploadDirectory, fileName); // TODO: ensure it doesn't already exist
+		imageFile.transferTo(fileUpload);
+
+		// Add kid to kidRepo
+
+		String portraitUrl = "/uploadedimage/" + fileName;
+		Kid kid = kidRepo.save(
+				new Kid(kidName, portraitUrl, colorNum, true));
+
+		return "redirect:/kids";
+	}
 }

@@ -27,13 +27,13 @@ public class ScrapbookPopulator implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 
 		// Create Kids
-		Kid sam = new Kid("Sam", "sam_portrait.jpg", 1, true);
+		Kid sam = new Kid("Sam", "/portraits/sam_portrait.jpg", 1, true);
 		sam = kidRepo.save(sam);
 
-		Kid penny = new Kid("Penny", "penny_portrait.jpg", 2, false);
+		Kid penny = new Kid("Penny", "/portraits/penny_portrait.jpg", 2, false);
 		penny = kidRepo.save(penny);
 
-		Kid doug = new Kid("Doug", "sam_portrait.jpg", 3, false);
+		Kid doug = new Kid("Doug", "/portraits/sam_portrait.jpg", 3, false);
 		doug = kidRepo.save(doug);
 
 		// Create Images
@@ -66,7 +66,7 @@ public class ScrapbookPopulator implements CommandLineRunner {
 		// Create Comments
 		Comment comment1 = commentRepo.save(new Comment("You are so special!", Grandma, sam_img1));
 		Comment comment2 = commentRepo.save(new Comment("So funny!", Dad, sam_img2));
-		Comment comment5 = commentRepo.save(new Comment("Why are you wearing a shirt with Leo's name on it?  I thought your name was Sam.", Grandma, sam_img1));
+		Comment comment5 = commentRepo.save(new Comment("Why are you wearing a shirt with Leo's name on it?  I thought your name was Sam.", Grandpa, sam_img1));
 		Comment comment3 = commentRepo.save(new Comment("She loves watermelons so much.", Grandma, penny_img1));
 		Comment comment4 = commentRepo.save(new Comment("What a clever girl you are!", Dad, penny_img2));
 
