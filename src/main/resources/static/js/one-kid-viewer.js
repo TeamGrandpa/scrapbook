@@ -79,10 +79,15 @@
 
                 //Add image with timestamp above and caption below
                 let newFigure = document.createElement('figure');
+                let newDateLikeDiv = document.createElement('div');
+                newDateLikeDiv.classList.add('dateLikeDiv');
                 let newDate = document.createElement('span');
                 newDate.setAttribute('class', 'timeStamp');
                 newDate.textContent = image.date;
-
+                let newLikeDiv = document.createElement('div');
+                newLikeDiv.classList.add('likeDiv');
+                let like = document.createElement('span');
+                like.textContent = ' Likes';
                 //image.hearts.length; // TODO: set the heart count beside the heart
                 const heartCount = document.createElement('span');
                 heartCount.innerHTML = image.hearts.length;
@@ -104,8 +109,11 @@
                 newFigcaption.textContent = image.caption;
                 
                               
-                newFigure.appendChild(newDate);
-                newFigure.appendChild(heartCount);
+                newDateLikeDiv.appendChild(newDate);
+                newLikeDiv.appendChild(heartCount);
+                newLikeDiv.appendChild(like);
+                newDateLikeDiv.appendChild(newLikeDiv);
+                newFigure.appendChild(newDateLikeDiv);
                 newFigure.appendChild(newHeart);
                 newFigure.appendChild(newImg);
                 newFigure.appendChild(newFigcaption);

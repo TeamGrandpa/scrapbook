@@ -161,6 +161,9 @@ h3 {
     grid-template-rows: auto;
     grid-row-gap: 0.5rem;
 }
+#imageContainer figure {
+    position: relative;
+}
 
 #imageContainer figure img{
     margin-top: 0.5rem;
@@ -245,11 +248,19 @@ h3 {
     grid-row-gap: 0.5rem;
     width: 100%;
 }
+.dateLikeDiv {
+    display: flex;
+    justify-content: space-between;
+}
 
 .heartIcon {
-    height: 1.2em;
+    height: 1.6em;
     margin-right: auto;
+    /* position: absolute; */
+    /* top: 2.4rem;
+    right: 0.6rem; */
 }
+
 
 #menuIcon {
     display: none;
