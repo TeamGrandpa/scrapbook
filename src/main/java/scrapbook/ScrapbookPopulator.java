@@ -30,13 +30,12 @@ public class ScrapbookPopulator implements CommandLineRunner {
 		Kid oliver = new Kid("Oliver", "OliverOne.png", 1, true);
 		oliver = kidRepo.save(oliver);
 
-		Kid penny = new Kid("Penny", "penny_portrait.jpg", 2, false);
+		Kid penny = new Kid("Penny", "/portraits/penny_portrait.jpg", 2, false);
 		penny = kidRepo.save(penny);
 
 		Kid alana = new Kid("Alana", "AlanaOne.jpg", 3, false);
 		alana = kidRepo.save(alana);
-		
-	
+
 		// Create Images
 		Image oliver_jacket = new Image("/img/OliverTwo.jpg", "Oliver loves his new leather jacket. Looking cool thanks to Grandma!", "October 24, 2016", oliver);
 		oliver_jacket = imageRepo.save(oliver_jacket);
@@ -71,15 +70,16 @@ public class ScrapbookPopulator implements CommandLineRunner {
 		Grandpa = enduserRepo.save(Grandpa);
 
 		// Create Comments
+
 		Comment comment1 = commentRepo.save(new Comment("I'm glad that it fits! He looks so handsome.", Grandma, oliver_jacket));
 		Comment comment2 = commentRepo.save(new Comment("Awww, he looks so cute when he's napping.", Dad, oliver_sleep));
 		Comment comment5 = commentRepo.save(new Comment("How creative! I love the little jellyfish.", Grandma, oliver_art));
+
 		Comment comment3 = commentRepo.save(new Comment("She loves watermelons so much.", Grandma, penny_img1));
 		Comment comment4 = commentRepo.save(new Comment("What a clever girl you are!", Dad, penny_img2));
 		Comment comment6 = commentRepo.save(new Comment("Harsh! I think I look stunning", Dad, alana_art));
 		Comment comment7 = commentRepo.save(new Comment("My baby girl is beautiful.", Grandma, alana_laugh));
 		
-
 	}
 
 }

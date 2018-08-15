@@ -16,6 +16,7 @@
 
     --Color3: #5c974e;
     --ColorDefault: #aaaaaa;
+    --ShareBear: #951B81;
 }
 
 /* add kid channel styling */
@@ -80,25 +81,58 @@ h1 {
   margin-top: 0.1rem;
 }
 
+ h2 {
+    text-align: center;
+} 
+
 .newChildContainer {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: auto;
-  margin: 0.5rem 1rem;
+  margin: 0.5rem 2rem;
+}
+
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1.5em;
+    border-radius: 50%;
 }
 
 
 #nameBox {
-    padding-bottom: 1rem;  
+    padding-bottom: 2rem;  
+    padding-top: 1rem;
 }
 
 #nameBox input {
     margin-top: 0.5rem;
+    width: 80%;
+    border: solid 1px black;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  
+}
+
+#nameBox input:focus {
+    border: solid 3px var(--ShareBear);  
 }
 
 
 #picBox input {
     margin-top: 1rem; 
+    width: 80%;
+    border: solid 1px black;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  
+}
+
+#picBox input:focus {
+    border: solid 3px var(--ShareBear);  
 }
 
 #buttonContainer {
@@ -108,12 +142,13 @@ h1 {
 }
 
 #submitButton {
-    margin-top: 3rem;
+    margin-top: 2rem;
     text-align: center;
     bottom: 2em;
     padding: .5em 1em;
     color: white;
-    background-color: var(--Color3);
+    background-color: var(--ShareBear);
+    width: 100%;
 }
 
 
@@ -121,31 +156,16 @@ h1 {
 #colorBox {
     display: flex;
     flex-direction: column;
-   
-   /* padding-bottom: 3em; */
-   /* cursor: pointer; */
    margin-bottom: 1rem;
+    /* border: 3px dashed black; */
+    padding-left: 1em;
+    padding-right: 1em;
+    border: 3px solid;
+    border-image: linear-gradient(to right, grey 25%, yellow 25%, yellow 50%,red 50%, red 75%, teal 75%) 5;
+    text-align:center;
 }
 
-/* .colorBox div {
-    display: flex;
-} */
-/* #radioOne {
-    background: var(--Red);
-    border:1px solid black;
- 
-} */
 
-
-
-/* input[type="radio"] {
-    width:75px;
-    height:75px;
-
-    cursor:pointer;
-    -moz-border-radius:  50%;
-    border-radius:  50%;
-} */
 
 #colorChoices {
   display: grid;
@@ -157,11 +177,11 @@ h1 {
 .container {
   display: block;
   position: relative;
-  padding-left: 60px;
+  padding-left: 40px;
   margin-top: 15px;
   margin-bottom: 15px;
   cursor: pointer;
-  font-size: 22px;
+  font-size: 20px;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -182,7 +202,7 @@ h1 {
   height: 50px;
   width: 50px;
   background-color: #eee;
-  border-radius: 50%;
+  /* border-radius: 50%; */
 }
 
 /* On mouse-over, add a grey background color */
@@ -213,6 +233,6 @@ h1 {
   left: 15px;
   width: 20px;
   height: 20px;
-  border-radius: 50%;
+  /* border-radius: 50%; */
   background: white;
 }

@@ -1,0 +1,76 @@
+* {
+    font-family: Helvetica, Arial, sans-serif;
+    line-height: 1.5em;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --ShareBear: #951B81;
+}
+
+.loginContainer {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+  margin: 0.5rem 2rem;
+}
+
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+   margin-top: 9em;
+   border-radius: 25%;
+}
+
+input {
+    display: flex;
+    margin: auto;
+    
+}
+
+#usernameBox input {
+    margin-top: 2rem;
+    width: 60%;
+    border: solid 1px black;
+    display: block;
+}
+
+#usernameBox input:focus {
+    border: solid 3px var(--ShareBear);  
+}
+
+#passwordBox input {
+    margin-top: 1.5rem;
+    width: 60%;
+    border: solid 1px black;
+    display: block;
+}
+
+#passwordBox input:focus {
+    border: solid 3px var(--ShareBear);  
+}
+
+#buttonBox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#buttonBox input {
+   text-align: center; 
+   bottom: 2em;
+    padding: .5em 1em;
+    color: white;
+    background-color: var(--ShareBear);
+    border-radius: 25%;
+    width: 30%;
+    font-size: 18px;
+  
+
+}
+
+
+

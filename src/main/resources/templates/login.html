@@ -1,28 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <!--  <link rel="stylesheet" type="text/css" media="screen" href="styles/main.css" />-->
-  <title>Scrapbook - Log In</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="stylesheet" type="text/css" media="screen" href="./css/login.css" />
+	<title>Scrapbook - Log In</title>
 </head>
+
 <body>
 
 
 	<main>
-		
-		<form class="pane" action="/auth/login">
-			<h3>Log In</h3>
-			<input type="text" name="username" placeholder="Type your name here" />
-			<br>
-			<input type="password" name="password" placeholder="password"/>
-			<br>
-			<input type="submit" value="Log In" />
-		</form>
-		
+		<section class="loginContainer">
+			<img src="./img/Milestones Logo.jpg" style="width: 200px;height:200px;" />
+			<form class="pane" action="/auth/login">
+				<!-- <h3>Log In</h3> -->
+				<div id="usernameBox">
+					<input type="text" name="username" placeholder="Type your name here" />
+				</div>
+				<div id="passwordBox">
+					<input type="password" name="password" placeholder="password" />
+				</div>
+				<br>
+				<div id="buttonBox">
+					<input type="submit" value="Log In" />
+				</div>
+			</form>
+		</section>
 	</main>
 
 
 </body>
+
 </html>

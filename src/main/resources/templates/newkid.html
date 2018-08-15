@@ -20,72 +20,66 @@
     <main>
         <section id="whiteBox"></section>
         <section class="newChildContainer">
-            <form method="POST" th:action="@{/add-new-channel}" id="add-new-channel">
+            <img src="./img/newKidLogo.jpg" style="width:80px;height:80px;">
+            <form method="POST" action="/uploadNewKid" id="add-new-channel" enctype="multipart/form-data">
                 <div id="nameBox">
                     <h2>Enter First Name: </h2>
-                    <input type="text" name="kidName" placeholder="Enter Child's Name">
+                    <input type="text" name="kidName" placeholder="Enter Child's Name" />
                 </div>
                 <div id="colorBox">
                     <h2>Choose favorite color: </h2>
                     <div id="colorChoices">
-                        <label class="container" >Red
-                            <input type="radio" checked="checked" name="radio">
+                        <label class="container"> Red
+                            <input type="radio" checked="checked" name="radio" value="1">
                             <span class="checkmark" id="colorRed"></span>
                         </label>
-                        <label class="container" >Orange
-                            <input type="radio" name="radio">
+                        <label class="container"> Orange
+                            <input type="radio" name="radio" value="2">
                             <span class="checkmark" id="colorOrange"></span>
                         </label>
-                        <label class="container" >Yellow
-                            <input type="radio" name="radio">
+                        <label class="container"> Yellow
+                            <input type="radio" name="radio" value="3">
                             <span class="checkmark" id="colorYellow"></span>
                         </label>
-                        <label class="container" >Green
-                            <input type="radio" name="radio">
+                        <label class="container"> Green
+                            <input type="radio" name="radio" value="4">
                             <span class="checkmark" id="colorGreen"></span>
                         </label>
-                        <label class="container" >Blue
-                            <input type="radio" name="radio">
+                        <label class="container"> Blue
+                            <input type="radio" name="radio" value="5">
                             <span class="checkmark" id="colorBlue"></span>
                         </label>
-                        <label class="container" >Purple
-                            <input type="radio" name="radio">
+                        <label class="container"> Purple
+                            <input type="radio" name="radio" value="6">
                             <span class="checkmark" id="colorPurple"></span>
                         </label>
                     </div>
-                    <!-- <div>
-                    <input type="radio" checked="checked" id="radioOne" name="radio" />
                 </div>
 
-                <div>
-                    <input type="radio" checked="checked" id="radioTwo" name="radio" />
-                </div>
-                <div>
-                    <input type="radio" checked="checked" id="radioThree" name="radio" />
-                </div>
-                <div>
-                    <input type="radio" checked="checked" id="radioFour" name="radio" />
-                </div>
-                <div>
-                    <input type="radio" checked="checked" id="radioFive" name="radio" />
-                </div>
-                <div>
-                    <input type="radio" checked="checked" id="radioSix" name="radio" />
-                </div> -->
 
-                </div>
+
+
                 <div id="picBox">
                     <h2>Upload profile picture: </h2>
-                    <input accept="image_file_path">
+
+                    <div id="fileBox">
+                        <input type="file" name="file" id="file" class="inputfile" />
+                        <label for="file">
+                            <span>Choose a file...</span>
+                        </label>
+                    </div>
                 </div>
 
                 <div id="buttonContainer">
                     <input id="submitButton" type="submit">
                 </div>
+
             </form>
         </section>
+
     </main>
 </body>
-<!-- <script src="./js/all-kids-viewer.js"></script> -->
+<script src="./js/upload-profilepic.js"></script>
+<script src="./js/add-new-kid.js"></script>
 
 </html>

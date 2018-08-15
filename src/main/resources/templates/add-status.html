@@ -6,7 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Create Status</title>
-
+    <script
+        src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="./css/style.css">
 </head>
 
@@ -19,10 +22,12 @@
 
         <main>
             <section id="whiteBox"></section>
+            <canvas id="newCanvas" width="480" height="270"></canvas>
 
-
-
-
+            <span id="kidId" style="display:none" th:text="${kid.id}"></span>
+            <div id="buttonContainer">
+                <a id="statusSubmitButton">Post Status</a>
+            </div>
 
 
 
@@ -31,7 +36,8 @@
 
         </main>
     </div>
-    <!-- <script src="./js/upload-image.js"></script> -->
+    <script src="./js/upload-status.js"></script>
+    
 </body>
 
 </html>
