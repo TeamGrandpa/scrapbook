@@ -82,47 +82,64 @@
                 let newDate = document.createElement('span');
                 newDate.setAttribute('class', 'timeStamp');
                 newDate.textContent = image.date;
+
+                //image.hearts.length; // TODO: set the heart count beside the heart
+                const heartCount = document.createElement('span');
+                heartCount.innerHTML = image.hearts.length;
+
                 let newHeart = document.createElement('img');
-                image.hearts.length;
-                newHeart.setAttribute('src', '/img/heart-off.svg');
+                //newHeart.setAttribute('src', '/img/heart-off.svg');
                 newHeart.classList.add('heartIcon');
+                const enduserUserName = getCookie('name');
+                if (image.hearts.find(heart => heart.enduser.userName === enduserUserName)) {
+                    newHeart.setAttribute('src', '/img/heart-on.svg');
+                    newHeart.classList.add('has-heart');
+                } else {
+                    newHeart.setAttribute('src', '/img/heart-off.svg');
+                    newHeart.classList.add('no-heart');
+                }
                 let newImg = document.createElement('img');
                 newImg.setAttribute('src', image.imageUrl);
                 let newFigcaption = document.createElement('figcaption');
                 newFigcaption.textContent = image.caption;
                 
-               // toggleHeart();
-                
+                              
                 newFigure.appendChild(newDate);
-               newFigure.appendChild(newHeart);
+                newFigure.appendChild(heartCount);
+                newFigure.appendChild(newHeart);
                 newFigure.appendChild(newImg);
                 newFigure.appendChild(newFigcaption);
                 newImageDiv.appendChild(newFigure);
-
-                // function toggleHeart() {
-                //     const heartCount = document.createElement('span');
-                //     heartCount.innerHTML = image.hearts.length;
-                //     const heart = document.createElement('img');
-                //      if (image.hearts.find(heart => heart.enduser.userName === 'enduserUserName')) {
-                //          heart.setAttribute('src', '/img/heart-on.svg');
-                //          heart.classList.add('has-heart');
-                //     }
-                //     else {
-                //         heart.setAttribute('src', '/img/heart-off.svg');
-                //         heart.classList.add('no-heart');
-                //    }
-                // heart.addEventListener('click', toggleHeart, {passive : true });
                 
-                //     const xhr = new XMLHttpRequest();
-                //     xhr.onreadystatechange = function () {
-                //         if (this.readyState == 4 && this.status == 200) {
-                //             toggleHeart = JSON.parse(xhr.response);
-                //             console.log(toggleHeart);
-                //         };
-                //     };
-                //     xhr.open('GET', '/hearts/' + enduserUserName + '/' + imageId);
-                //     xhr.send();
-                // };
+                newHeart.addEventListener('click', toggleHeart);
+
+                function toggleHeart() {
+                    const enduserUserName = getCookie('name');
+                    let updatedHeartCount = +heartCount.innerHTML;
+                    if (newHeart.classList.contains('no-heart')) {
+                        newHeart.classList.remove('no-heart');
+                        newHeart.setAttribute('src', '/img/heart-on.svg');
+                        newHeart.classList.add('has-heart');
+                        updatedHeartCount++;
+                    } else {
+                        newHeart.classList.remove('has-heart');
+                        newHeart.setAttribute('src', '/img/heart-off.svg');
+                        newHeart.classList.add('no-heart');
+                        updatedHeartCount--;
+                    }
+                
+                    const xhr = new XMLHttpRequest();
+                    xhr.onreadystatechange = function() {
+                        if (this.readyState == 4 && this.status == 200) {
+                            const imageHeartCount = JSON.parse(xhr.response);
+                            console.log(imageHeartCount);
+
+                            heartCount.innerHTML = updatedHeartCount;
+                        };
+                    };
+                    xhr.open('POST', '/hearts/enduserUserName/' + enduserUserName + '/imageid/' + image.id);
+                    xhr.send();
+                };
 
                 
 
