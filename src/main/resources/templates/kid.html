@@ -33,11 +33,11 @@
                 <div>Post New Photo</div>
             </a>
             <div th:class="@{'Color' + ${kid.colorNum}}" id="menuLine"></div>
-            <a th:href="@{/add-status(id=${kid.id})}">
+            <a th:href="@{/add-status-update(id=${kid.id})}">
                 <div>Post New Status</div>
             </a>
             <div th:class="@{'Color' + ${kid.colorNum}}" id="menuLine"></div>
-            <a id="lastNavItem">
+            <a th:href="@{/edit-channel(id=${kid.id})}" id="lastNavItem">
                 <div>Edit Channel</div>
             </a>
         </div>

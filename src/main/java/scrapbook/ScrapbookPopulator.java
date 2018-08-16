@@ -27,13 +27,13 @@ public class ScrapbookPopulator implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 
 		// Create Kids
-		Kid oliver = new Kid("Oliver", "OliverOne.png", 1, true);
+		Kid oliver = new Kid("Oliver", "/portraits/OliverOne.png", 1, true);
 		oliver = kidRepo.save(oliver);
 
 		Kid penny = new Kid("Penny", "/portraits/penny_portrait.jpg", 2, false);
 		penny = kidRepo.save(penny);
 
-		Kid alana = new Kid("Alana", "AlanaOne.jpg", 3, false);
+		Kid alana = new Kid("Alana", "/portraits/AlanaOne.jpg", 3, false);
 		alana = kidRepo.save(alana);
 
 		// Create Images

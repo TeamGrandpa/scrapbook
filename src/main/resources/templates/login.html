@@ -15,22 +15,21 @@
 	<main>
 		<section class="loginContainer">
 			<img src="./img/Milestones Logo.jpg" style="width: 200px;height:200px;" />
-			<form class="pane" action="/auth/login">
+			<form class="pane" action="/auth/login" id="inputForm">
 				<!-- <h3>Log In</h3> -->
 				<div id="usernameBox">
-					<input type="text" name="username" placeholder="Type your name here" />
+					<input type="text" name="username" placeholder="Type your name here" autofocus />
 				</div>
 				<div id="passwordBox">
-					<input type="password" name="password" placeholder="password" />
+					<input type="password" name="password" placeholder="password" id="passwordInput" />
 				</div>
-				<br>
 				<div id="buttonBox">
 					<input type="submit" value="Log In" />
 				</div>
 			</form>
 		</section>
 	</main>
-
+<script src="./js/login.js"></script>
 
 </body>
 

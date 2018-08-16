@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Create Status</title>
+
+  <style>
+    #myCanvas {
+      outline: 1px solid #000;
+    }
+
+    #generatedCanvas {
+      outline: 1px solid black;
+    }
+  </style>
+  <link rel="stylesheet" type="text/css" href="./css/newKid.css">
+</head>
+
+<body>
+  <div th:each="kid: ${kids}">
+    <header th:id="@{'Color' + ${kid.colorNum}}">
+      <h1>Post New Status</h1>
+      <a id="prev" th:href="@{/kid(id=${kid.id})}">&#10094;</a>
+    </header>
+
+    <main>
+      <section id="whiteBox"></section>
+      <span id="kidId" style="display:none" th:text="${kid.id}"></span>
+
+      <canvas id="generatedCanvas" width="480" height="270"></canvas>
+
+      <div id="backgroundColorInputContainer">
+        <p>Select a background color:</p>
+
+        <div>
+          <form id="backgroundColorInputForm">
+            <input type="radio" id="colorChoice1" name="backgroundColor" value="white" checked>
+            <label for="contactChoice1">White</label>
+
+            <input type="radio" id="colorChoice2" name="backgroundColor" value="black">
+            <label for="contactChoice1">Black</label>
+
+            <!-- TODO: Add other color choices. Possibly make the buttons the color of the background themselves -->
+
+          </form>
+          <!-- <pre id="colorSelection"></pre> -->
+
+        </div>
+
+      </div>
+
+      <div id="textInput">
+        <!-- TODO: Get rid of "maxlength"/change to 255(?) after incorporating text wrapping -->
+        <input type="text" id="inputStatusText" placeholder="Type status here">
+        <Button id="addStatusText">Add</Button>
+      </div>
+
+      <div id="submitStatus">
+        <button id="submitStatusButton">Submit Status Update</button>
+      </div>
+    </main>
+  </div>
+  <script src="./js/add-status.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Edit Channel</title>
+
+    <link rel="stylesheet" type="text/css" href="./css/newKid.css">
+</head>
+
+<body>
+    <div th:each="kid: ${kids}">
+        <header th:id="@{'Color' + ${kid.colorNum}}">
+            <h1>Edit Channel</h1>
+            <a id="prev" th:href="@{/kid(id=${kid.id})}">&#10094;</a>
+        </header>
+
+        <main>
+            <section id="whiteBox"></section>
+            <section class="newChildContainer">
+                <img src="./img/newKidLogo.jpg" style="width:80px;height:80px;">
+                <form method="POST" action="/uploadNewKid" id="add-new-channel" enctype="multipart/form-data">
+                    <div id="nameBox">
+                        <h2>Edit First Name: </h2>
+                        <input type="text" name="kidName" th:placeholder="${kid.name}" />
+                    </div>
+                    <div id="colorBox">
+                        <h2>Choose child's color: </h2>
+                        <div id="colorChoices">
+                            <span th:text="${kid.colorNum}"></span>
+                            <label class="container"> Red
+                                <input type="radio" name="radio" value="1">
+                                <span class="checkmark" id="Color1"></span>
+                            </label>
+                            <label class="container"> Orange
+                                <input type="radio" name="radio" value="2">
+                                <span class="checkmark" id="Color2"></span>
+                            </label>
+                            <label class="container"> Teal
+                                <input type="radio" name="radio" value="3">
+                                <span class="checkmark" id="Color3"></span>
+                            </label>
+                            <label class="container"> Green
+                                <input type="radio" name="radio" value="4">
+                                <span class="checkmark" id="Color4"></span>
+                            </label>
+                            <label class="container"> Blue
+                                <input type="radio" name="radio" value="5">
+                                <span class="checkmark" id="Color5"></span>
+                            </label>
+                            <label class="container"> Purple
+                                <input type="radio" name="radio" value="6">
+                                <span class="checkmark" id="Color6"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div id="picBox">
+                        <h2>Upload new profile picture: </h2>
+
+                        <div id="fileBox">
+                            <input type="file" name="file" id="file" class="inputfile" />
+                            <label for="file">
+                                <span>Choose a file...</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div id="buttonContainer">
+                        <input id="submitButton" type="submit">
+                    </div>
+
+                </form>
+            </section>
+
+        </main>
+    </div>
+</body>
+<script src="./js/upload-image.js"></script>
+
+</html>

@@ -106,6 +106,17 @@ public class ScrapbookController {
 		throw new KidNotFoundException();
 	}
 
+	@RequestMapping("/edit-channel")
+	public String editChannel(@RequestParam(value = "id") long id, Model model) throws KidNotFoundException {
+		Optional<Kid> kid = kidRepo.findById(id);
+
+		if (kid.isPresent()) {
+			model.addAttribute("kids", kid.get());
+			return "edit-channel";
+		}
+		throw new KidNotFoundException();
+	}
+
 	@RequestMapping("/add-status")
 	public String addStatus(@RequestParam(value = "id") long id, Model model) throws KidNotFoundException {
 		Optional<Kid> kid = kidRepo.findById(id);
@@ -113,6 +124,24 @@ public class ScrapbookController {
 		if (kid.isPresent()) {
 			model.addAttribute("kids", kid.get());
 			return "add-status";
+		}
+		throw new KidNotFoundException();
+	}
+
+	// Status Update Demo Mapping
+	@RequestMapping("/status-update-demo")
+	public String sendStatusUpdateToServer() {
+		return "status-update-demo";
+	}
+
+	// Status Update Form
+	@RequestMapping("/add-status-update")
+	public String addStatusUpdateForm(@RequestParam(value = "id") long id, Model model) throws KidNotFoundException {
+		Optional<Kid> kid = kidRepo.findById(id);
+
+		if (kid.isPresent()) {
+			model.addAttribute("kids", kid.get());
+			return "add-status-update";
 		}
 		throw new KidNotFoundException();
 	}
@@ -130,46 +159,40 @@ public class ScrapbookController {
 	}
 
 	@PostMapping("/uploadStatus")
-	public String uploadStatus(@RequestParam("kidId") long kidId, @RequestParam("imgBase64") String imageFile,
-			Model model) {
+	public String uploadStatus(@RequestParam("caption") String caption, @RequestParam("kidId") long kidId,
+			@RequestParam("file") MultipartFile imageFile, Model model) throws IOException {
 
-		System.out.println("*******************************");
-		System.out.println(kidId);
+		// Upload image - stream uploaded data to a temporary file
+		String fileName = "Status-" + new SimpleDateFormat("ddMMyy-hhmmss-SSS").format(new Date()) + ".blb";
+		
+		File tempFile = File.createTempFile(fileName, "");
+		FileOutputStream fos = new FileOutputStream(tempFile);
+		fos.write(imageFile.getBytes());
+		fos.close();
 
-//		String fileName = "test";
-//		File tempFile = File.createTempFile(fileName, "");
-//		FileOutputStream fos = new FileOutputStream(tempFile); 
-//        fos.write(imageFile.getBytes());
-//        fos.close(); 
-//		
-//        // Transfer the temporary file to its permanent location
-//        String uploadDirectory = getUploadDirectory();
-//		File fileUpload = new File(uploadDirectory, fileName); // TODO: ensure it doesn't already exist
-//		imageFile.transferTo(fileUpload);
-//		
-//		
-//		//Add image to imageRepo
-//		Optional<Kid> kidOptional = kidRepo.findByName(kidName);
-//		Kid kidForImage = kidOptional.get();
-//		long kidId = kidForImage.getId();
-//		
-//		String imageUrl = "/uploadedimage/" + fileName;
-//		Image image = imageRepo.save(new Image(imageUrl, caption, new SimpleDateFormat("MMMM d, yyyy").format(new Date()), kidForImage));
+		// Transfer the temporary file to its permanent location
+		String uploadDirectory = getUploadDirectory();
+		File fileUpload = new File(uploadDirectory, fileName); // TODO: ensure it doesn't already exist
+		imageFile.transferTo(fileUpload);
 
+		// Add image to imageRepo
+		Optional<Kid> kidOptional = kidRepo.findById(kidId);
+		Kid kidForImage = kidOptional.get();
+
+		String imageUrl = "/uploadedimage/" + fileName;
+		Image image = imageRepo.save(
+				new Image(imageUrl, caption, new SimpleDateFormat("MMMM d, yyyy").format(new Date()), kidForImage));
+		
 		return "redirect:/kid?id=" + kidId;
-
 	}
-
+	
 	@PostMapping("/uploadImage")
-	public String uploadImage(@RequestParam("caption") String caption, @RequestParam("childName") String kidName,
+	public String uploadImage(@RequestParam("caption") String caption, @RequestParam("kidId") long kidId,
 			@RequestParam("file") MultipartFile imageFile, Model model) throws IOException {
 
 		// Upload image - stream uploaded data to a temporary file
 		String fileName = imageFile.getOriginalFilename();
 		if ("".equalsIgnoreCase(fileName)) {
-			Optional<Kid> kidOptional = kidRepo.findByName(kidName);
-			Kid kidForImage = kidOptional.get();
-			long kidId = kidForImage.getId();
 			return "redirect:/kid?id=" + kidId;
 		}
 		File tempFile = File.createTempFile(fileName, "");
@@ -183,9 +206,8 @@ public class ScrapbookController {
 		imageFile.transferTo(fileUpload);
 
 		// Add image to imageRepo
-		Optional<Kid> kidOptional = kidRepo.findByName(kidName);
+		Optional<Kid> kidOptional = kidRepo.findById(kidId);
 		Kid kidForImage = kidOptional.get();
-		long kidId = kidForImage.getId();
 
 		String imageUrl = "/uploadedimage/" + fileName;
 		Image image = imageRepo.save(
@@ -221,18 +243,12 @@ public class ScrapbookController {
 	}
 
 	@PostMapping("/uploadNewKid")
-	public String uploadNewKid(
-			@RequestParam("kidName") String kidName, 
-			@RequestParam("radio") int colorNum,
-			@RequestParam("file") MultipartFile imageFile, 
-			Model model) throws IOException {
+	public String uploadNewKid(@RequestParam("kidName") String kidName, @RequestParam("radio") int colorNum,
+			@RequestParam("file") MultipartFile imageFile, Model model) throws IOException {
 
 		// Upload image - stream uploaded data to a temporary file
 		String fileName = imageFile.getOriginalFilename();
-		if ("".equalsIgnoreCase(fileName)) {
-//			Optional<Kid> kidOptional = kidRepo.findByName(kidName);
-//			Kid kidForImage = kidOptional.get();
-//			long kidId = kidForImage.getId();
+		if ("".equalsIgnoreCase(fileName) || "".equalsIgnoreCase(kidName)) {
 			return "redirect:/kids";
 		}
 		File tempFile = File.createTempFile(fileName, "");
@@ -246,10 +262,8 @@ public class ScrapbookController {
 		imageFile.transferTo(fileUpload);
 
 		// Add kid to kidRepo
-
 		String portraitUrl = "/uploadedimage/" + fileName;
-		Kid kid = kidRepo.save(
-				new Kid(kidName, portraitUrl, colorNum, true));
+		Kid kid = kidRepo.save(new Kid(kidName, portraitUrl, colorNum, true));
 
 		return "redirect:/kids";
 	}

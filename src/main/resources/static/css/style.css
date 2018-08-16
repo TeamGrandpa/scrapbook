@@ -7,9 +7,12 @@
 }
 
 :root {
-    --Color1: #af66b9;
-    --Color2: #b66161;
-    --Color3: #5c974e;
+    --Color1: #e00c0c;
+    --Color2: #f57803;
+    --Color3: #00aa8e;
+    --Color4: #66ce06;
+    --Color5: #1f29b6;
+    --Color6: #a227b3;
     
     --ColorDefault: #aaa;
 }
@@ -24,6 +27,18 @@
 
 .Color3 {
     background: var(--Color3);
+}
+
+.Color4 {
+    background: var(--Color4);
+}
+
+.Color5 {
+    background: var(--Color5);
+}
+
+.Color6 {
+    background: var(--Color6);
 }
 
 .ColorDefault {
@@ -135,10 +150,6 @@ h3 {
     border-radius: 1rem;
     cursor: pointer;  
 }
-
-
-
-
 
 #whiteBox {
 	background-color: #fff;
@@ -427,10 +438,4 @@ h3 {
 .inputfile:focus + label {
 	outline: 1px dotted #000;
 	outline: -webkit-focus-ring-color auto 5px;
-}
-
-#newCanvas {
-    margin-top: 2rem;
-    border: 1px solid #c3c3c3;
-    width: 100%;
 }
