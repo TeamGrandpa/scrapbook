@@ -16,6 +16,13 @@
     const kidId = document.querySelector('#kidId').textContent;
 
     const generatedCanvas = document.querySelector('#generatedCanvas');
+    const generatedCanvasProps = window.getComputedStyle(generatedCanvas); // grabbing rendered values from #generatedCanvas
+    
+    console.log(generatedCanvasProps);
+    console.log('height: ' + generatedCanvasProps.height);
+    console.log('width: ' + generatedCanvasProps.width);
+
+
     const ctx2 = generatedCanvas.getContext('2d');
 
     let canvasWidth = 480;
@@ -108,7 +115,7 @@
 
                 console.log('end of first line')
 
-                // All other lines
+            // All other lines
 
             } else {
                 /* Varibles */
@@ -155,18 +162,21 @@
                     finalLineText = submittedLineText;
                 }
 
-
+                /* Line yPos shifting/creation */
+                
+                // shifting lines before creating new line in lines[] array
                 // previous line yPos shift
                 for (let j = 0; j < lines.length; j++) {
                     lines[j].yPos -= 34;
                 }
 
-                // grabbing subtring of next line
+                // Line Creation
                 lines[i] = {
                     text: finalLineText,
                     yPos: currentLineYPos,
                 }
 
+                // Final Line Creation
                 console.log('end line ' + (i + 1))
 
                 let nextLine = submittedText.substring((charLimit * (i + 1)), (charLimit * (i + 2)));
