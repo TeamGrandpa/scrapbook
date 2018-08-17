@@ -165,7 +165,7 @@ h3 {
     position: relative;
 }
 
-#imageContainer figure img{
+.kidImages {
     margin-top: 0.5rem;
     width: 100%;
 }
@@ -248,17 +248,31 @@ h3 {
     grid-row-gap: 0.5rem;
     width: 100%;
 }
+
+.hCountDiv {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    
+
+}
+
+.hCountDiv span {
+    text-align: right;
+    margin-right: 0.5rem;
+}
+
 .dateLikeDiv {
     display: flex;
     justify-content: space-between;
 }
 
+
 .heartIcon {
     height: 1.6em;
-    margin-right: auto;
-    /* position: absolute; */
-    /* top: 2.4rem;
-    right: 0.6rem; */
+    margin-right: 0.8rem;
+    /* display: inline; */
+    /* position: absolute;  */
+    /* right: 0.2rem; */
 }
 
 
