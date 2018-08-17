@@ -17,7 +17,7 @@
 
     const generatedCanvas = document.querySelector('#generatedCanvas');
     const generatedCanvasProps = window.getComputedStyle(generatedCanvas); // grabbing rendered values from #generatedCanvas
-    
+
     console.log(generatedCanvasProps);
     console.log('height: ' + generatedCanvasProps.height);
     console.log('width: ' + generatedCanvasProps.width);
@@ -34,7 +34,7 @@
     generatedCanvas.setAttribute('height', ('' + canvasHeight));
     generatedCanvas.setAttribute('width', ('' + canvasWidth));
 
-    
+
     let bgColorSelection = 'white';
     let submittedText = "";
     const charLimit = 32;
@@ -47,14 +47,27 @@
 
     let setNewLine = false;
 
-    // Font Styles
+    // Font Style
     ctx2.font = "bold 24px Arial";
-    canvasFontSize = ctx2.font.substring(5, 7);
-    console.log('canvasFontSize: ' + canvasFontSize);
-    lineShiftByPx = (parseFloat(canvasFontSize) / 2);
+    console.log(ctx2.font);
 
-    console.log(lineShiftByPx)
+    /* RegEx Font Search */
+    let canvasFontSizeRegExp = /\d\dpx/; // TODO: create an expression that accounts for font sizes with differing numbers of digits
+    let fontSizeSubstring = ctx2.font.search(canvasFontSizeRegExp);
+    let canvasFontSize = parseFloat(ctx2.font.substring(parseFloat(fontSizeSubstring)));
     
+    
+    console.log(canvasFontSizeRegExp.test(ctx2.font));
+    console.log('regex indexes ' + ctx2.font.search(canvasFontSizeRegExp));
+    console.log('found font size: ' + canvasFontSize);
+
+    /* END RegEx Font Search */
+
+    let lineShiftByPx = (parseFloat(canvasFontSize) / 2);
+
+
+
+
     /* Input wiring */
 
     // Status Text Input
@@ -130,7 +143,7 @@
 
                 console.log('end of first line')
 
-            // All other lines
+                // All other lines
 
             } else {
                 /* Varibles */
@@ -183,7 +196,7 @@
                 // previous line yPos shift
                 for (let j = 0; j < lines.length; j++) {
                     lines[j].yPos -= lineShiftByPx;
-                    console.log ('Line ' + j + ' yPos: ' + lines[j].yPos)
+                    console.log('Line ' + j + ' yPos: ' + lines[j].yPos)
                 }
 
                 console.log(lines.length)
@@ -196,7 +209,7 @@
                 lines[i] = {
                     text: finalLineText,
                     yPos: newLineYPos,
-            
+
                 }
 
                 // Final Line Creation
@@ -240,13 +253,13 @@
         ctx2.clearRect(0, 0, canvasWidth, canvasHeight); // clears canvas for next render
 
         addBackgroundColor(bgColorSelection);
-       
+
         console.log(lines);
     }
 
-    function printLines(){
-         // print all lines
-         for (let x = 0; x < lines.length; x++) {
+    function printLines() {
+        // print all lines
+        for (let x = 0; x < lines.length; x++) {
             ctx2.textAlign = "center";
             ctx2.textBaseline = "middle";
             ctx2.fillText(lines[x].text, baselineXPos, lines[x].yPos);
@@ -286,7 +299,7 @@
 
         if (color === "black") {
             ctx2.fillStyle = 'black'; // changing color of the next "drawing method"
-            ctx2.fillRect(0, 0, canvasWidth , canvasHeight); // pixel start coordinates/size of drawing INSIDE canvas
+            ctx2.fillRect(0, 0, canvasWidth, canvasHeight); // pixel start coordinates/size of drawing INSIDE canvas
 
             ctx2.fillStyle = 'white'; // text color
 
