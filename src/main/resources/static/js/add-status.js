@@ -48,8 +48,10 @@
     let setNewLine = false;
 
     // Font Styles
-    ctx2.font = "24px Arial";
-    lineShiftByPx = (parseFloat(ctx2.font) / 2);
+    ctx2.font = "bold 24px Arial";
+    canvasFontSize = ctx2.font.substring(5, 7);
+    console.log('canvasFontSize: ' + canvasFontSize);
+    lineShiftByPx = (parseFloat(canvasFontSize) / 2);
 
     console.log(lineShiftByPx)
     
