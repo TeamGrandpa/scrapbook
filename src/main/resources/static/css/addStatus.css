@@ -49,7 +49,7 @@
 }
 
 #Color7 {
-    background: #fff;
+    background: rgb(245, 245, 245);
 }
 
 #Color8 {
@@ -91,62 +91,72 @@ h1 {
   margin-top: 0.1rem;
 }
 
- h2 {
+h2 {
     font-size: 1.3rem;
     text-align: center;
-} 
-
-.newChildContainer {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: auto;
-  margin: 0.5rem 2rem;
 }
 
-img {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+#generatedCanvas {
     margin-top: 0.5rem;
-    border-radius: 50%;
+    border-top: 2px solid #000;
+    border-bottom: 2px solid #000;
+    width: 100%;
 }
 
-
-#nameBox {
-    padding-bottom: 1.5rem;  
-    padding-top: 1rem;
-}
-
-#nameBox input {
-    margin-top: 0.3rem;
-    font-size: 1rem;
-    padding: 5px 10px;
-    width: 80%;
-    border: solid 1px black;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-#picBox {
+#backgroundColorInputContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 0.3rem;
+    background-color: #eee;
+    margin: 0.3rem 2rem 0.7rem 2rem;
+    padding: 0.8rem 1rem 1rem 1rem;
+    border-radius: 1rem;
 }
 
-#fileBox {
-    margin-top: 0.3rem;
+#backgroundColorInputContainer p {
+    font-size: 1.2rem;
 }
 
-#buttonContainer {
+#textInput {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 2rem;
+}
+
+#inputStatusText {
+    font-size: 1rem;
+    padding: 5px 10px;
+    width: 100%;
+    border: solid 1px black;
+}
+
+#addStatusText {
+    font-size: 1rem;
+    background-color: #eee;
+    border: none;
+    text-decoration: none;
+    padding: 0.4rem 1.3rem 0.4rem 1.3rem;
+    margin-top: 0.5rem;
+    border-radius: 1.5rem;
+    cursor: pointer;
+}
+
+.thinLine {
+    height: 1px;
+    width: 100%;
+    background-color: #ddd;
+    margin-top: 0.6rem;
+}
+
+#submitStatus {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 1.8rem;
+    margin-top: 1.3rem;
 }
 
-#submitButton {
+#submitStatusButton {
     font-size: 1rem;
     background-color: #eee;
     border: none;
@@ -156,32 +166,21 @@ img {
     cursor: pointer;
 }
 
-#colorBox {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 1rem;
-    padding: 0.5rem 1.5rem 0.5rem 1.5rem;
-    background-color: #eee;
-    border-radius: 1rem;
-}
-
-#colorBox h3 {
-    text-align:center;
-}
-
 #colorChoices {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: auto;
 }
 
 .container {
   display: block;
   position: relative;
-  padding-left: 50px;
+  padding-left: 19px;
+  padding-right: 19px;
   margin-top: 12px;
   margin-bottom: 12px;
   cursor: pointer;
+  color: #eee;
   font-size: 20px;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -199,77 +198,14 @@ img {
 .checkmark {
     position: absolute;
     top: -9px;
-    left: 0;
+    left: 6px;
     height: 44px;
     width: 44px;
     background-color: #eee;
-    border-radius: 50%;
+    border-radius: 4px;
     border: 3px solid #fff;
     box-shadow: 0 -2px 0 3px rgba(0, 0, 0, 0.1) inset, 0 3px 5px #444, 0 15px rgba(255, 255, 255, 0.25) inset;
     cursor: pointer;
     display: inline-block;
 }
 
-/* On mouse-over, add a grey background color */
-.container:hover input ~ .checkmark {
-  background-color: #ccc;
-}
-
-/* When the radio button is checked, add a blue background */
-.container input:checked ~ .checkmark {
-  background-color: #2196F3;
-}
-
-/* Create the indicator (the dot/circle - hidden when not checked) */
-.checkmark:after {
-  content: "";
-  position: absolute;
-  display: none;
-}
-
-/* Show the indicator (dot/circle) when checked */
-.container input:checked ~ .checkmark:after {
-  display: block;
-}
-
-/* Style the indicator (dot/circle) */
-.container .checkmark:after {
-  top: 12px;
-  left: 12px;
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.9);
-}
-
-.inputfile {
-	width: 0.1px;
-	height: 0.1px;
-	opacity: 0;
-	overflow: hidden;
-	position: absolute;
-	z-index: -1;
-}
-
-.inputfile + label {
-    font-size: 1rem;
-    font-weight: 700;
-    padding: 0.5rem 1rem;
-    color: white;
-    background-color: black;
-    display: inline-block;
-    cursor: pointer;
-}
-
-.inputfile:focus + label {
-	outline: 1px dotted #000;
-	outline: -webkit-focus-ring-color auto 5px;
-}
-
-#generatedCanvas {
-    margin-top: 1rem;
-    border-top: 2px solid #000;
-    border-bottom: 2px solid #000;
-    /* outline: 1px solid black; */
-    width: 100%;
-}

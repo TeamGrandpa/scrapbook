@@ -75,20 +75,20 @@ header {
 }
 
 h1 {
-  font-size: 1.8rem;
-  margin-top: 0.1rem;
+    font-size: 1.8rem;
+    margin-top: 0.1rem;
 }
 
- h2 {
+h2 {
     font-size: 1.3rem;
     text-align: center;
 } 
 
 .newChildContainer {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: auto;
-  margin: 0.5rem 2rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    margin: 0.5rem 2rem;
 }
 
 img {

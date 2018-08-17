@@ -37,9 +37,8 @@
 
     let bgColorSelection = 'white';
     let submittedText = "";
-    const charLimit = 31;
+    const charLimit = 30;
     let baselineYPos = Math.ceil((canvasHeight / 2) - 3);
-    console.log(baselineYPos);
     let baselineXPos = canvasWidth / 2;
 
     let lines = [];
@@ -47,11 +46,23 @@
 
     let setNewLine = false;
 
-    // Font Styles
-    ctx2.font = '24px Arial';
-    lineShiftByPx = (parseFloat(ctx2.font) / 1.8);
+    // Font Style
+    ctx2.font = "bold 24px Arial";
+    console.log(ctx2.font);
 
-    console.log(lineShiftByPx)
+    /* RegEx Font Search */
+    let canvasFontSizeRegExp = /\d\dpx/; // TODO: create an expression that accounts for font sizes with differing numbers of digits
+    let fontSizeSubstring = ctx2.font.search(canvasFontSizeRegExp);
+    let canvasFontSize = parseFloat(ctx2.font.substring(parseFloat(fontSizeSubstring)));
+    
+    
+    console.log(canvasFontSizeRegExp.test(ctx2.font));
+    console.log('regex indexes ' + ctx2.font.search(canvasFontSizeRegExp));
+    console.log('found font size: ' + canvasFontSize);
+
+    /* END RegEx Font Search */
+
+    let lineShiftByPx = (parseFloat(canvasFontSize) / 1.8);
 
     /* Input wiring */
 
@@ -73,6 +84,8 @@
             lines.pop();
         }
     }
+
+    addBackgroundColor(bgColorSelection);
 
     function addText() {
 
