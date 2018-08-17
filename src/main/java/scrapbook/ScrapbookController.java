@@ -22,6 +22,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -266,5 +267,16 @@ public class ScrapbookController {
 		Kid kid = kidRepo.save(new Kid(kidName, portraitUrl, colorNum, true));
 
 		return "redirect:/kids";
+	}
+	
+	@PutMapping("/deleteKid")
+	public String deleteOneKid(@RequestParam("kidId") long kidId, Model model) {
+		Optional<Kid> kidOptional = kidRepo.findById(kidId);
+		Kid kidToDelete = kidOptional.get();
+		
+		kidRepo.delete(kidToDelete);
+		
+		return "redirect:/kids";
+		
 	}
 }
