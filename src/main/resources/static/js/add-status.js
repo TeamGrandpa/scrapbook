@@ -39,7 +39,6 @@
     let submittedText = "";
     const charLimit = 32;
     let baselineYPos = Math.ceil((canvasHeight / 2) - 3);
-    console.log(baselineYPos);
     let baselineXPos = canvasWidth / 2;
 
     let lines = [];
@@ -64,9 +63,6 @@
     /* END RegEx Font Search */
 
     let lineShiftByPx = (parseFloat(canvasFontSize) / 2);
-
-
-
 
     /* Input wiring */
 
