@@ -7,16 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Create Status</title>
 
-  <style>
-    #myCanvas {
-      outline: 1px solid #000;
-    }
-
-    #generatedCanvas {
-      outline: 1px solid black;
-    }
-  </style>
-  <link rel="stylesheet" type="text/css" href="./css/newKid.css">
+  <link rel="stylesheet" type="text/css" href="./css/addStatus.css">
 </head>
 
 <body>
@@ -37,11 +28,46 @@
 
         <div>
           <form id="backgroundColorInputForm">
-            <input type="radio" id="colorChoice1" name="backgroundColor" value="white" checked>
+            <!-- <input type="radio" id="colorChoice1" name="backgroundColor" value="white" checked>
             <label for="contactChoice1">White</label>
 
             <input type="radio" id="colorChoice2" name="backgroundColor" value="black">
-            <label for="contactChoice1">Black</label>
+            <label for="contactChoice1">Black</label> -->
+
+            <div id="colorChoices">
+                <label class="container"> White
+                    <input type="radio" checked="checked" name="radio" value="white">
+                    <span class="checkmark" id="Color7"></span>
+                </label>
+                <label class="container"> Black
+                    <input type="radio" name="radio" value="black">
+                    <span class="checkmark" id="Color8"></span>
+                </label>
+                <label class="container"> Red
+                    <input type="radio" name="radio" value="red">
+                    <span class="checkmark" id="Color1"></span>
+                </label>
+                <label class="container"> Orange
+                    <input type="radio" name="radio" value="orange">
+                    <span class="checkmark" id="Color2"></span>
+                </label>
+                <label class="container"> Yellow
+                    <input type="radio" name="radio" value="yellow">
+                    <span class="checkmark" id="Color9"></span>
+                </label>
+                <label class="container"> Green
+                    <input type="radio" name="radio" value="green">
+                    <span class="checkmark" id="Color4"></span>
+                </label>
+                <label class="container"> Blue
+                    <input type="radio" name="radio" value="blue">
+                    <span class="checkmark" id="Color5"></span>
+                </label>
+                <label class="container"> Purple
+                    <input type="radio" name="radio" value="purple">
+                    <span class="checkmark" id="Color6"></span>
+                </label>
+            </div>
 
             <!-- TODO: Add other color choices. Possibly make the buttons the color of the background themselves -->
 

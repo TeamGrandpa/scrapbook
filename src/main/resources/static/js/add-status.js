@@ -16,15 +16,31 @@
     const kidId = document.querySelector('#kidId').textContent;
 
     const generatedCanvas = document.querySelector('#generatedCanvas');
+    const generatedCanvasProps = window.getComputedStyle(generatedCanvas); // grabbing rendered values from #generatedCanvas
+
+    console.log(generatedCanvasProps);
+    console.log('height: ' + generatedCanvasProps.height);
+    console.log('width: ' + generatedCanvasProps.width);
+
+
     const ctx2 = generatedCanvas.getContext('2d');
 
-    let canvasWidth = 480;
-    let canvasHeight = 270;
+    let canvasWidth = parseFloat(generatedCanvasProps.width); // currently rendered width
+    console.log(canvasWidth);
+    let canvasHeight = parseFloat(generatedCanvasProps.height); // currently rendered height
+    console.log(canvasHeight);
+
+    // setting canvas HTML attributes to match currently rendered canvas dimensions
+    generatedCanvas.setAttribute('height', ('' + canvasHeight));
+    generatedCanvas.setAttribute('width', ('' + canvasWidth));
+
+
     let bgColorSelection = 'white';
     let submittedText = "";
-    const charLimit = 30;
-    let currentLineYPos = 135;
-    let baselineXPos = 240;
+    const charLimit = 31;
+    let baselineYPos = Math.ceil((canvasHeight / 2) - 3);
+    console.log(baselineYPos);
+    let baselineXPos = canvasWidth / 2;
 
     let lines = [];
     let currentLine = 0;
@@ -32,7 +48,10 @@
     let setNewLine = false;
 
     // Font Styles
-    ctx2.font = "30px Arial";
+    ctx2.font = '24px Arial';
+    lineShiftByPx = (parseFloat(ctx2.font) / 1.8);
+
+    console.log(lineShiftByPx)
 
     /* Input wiring */
 
@@ -46,6 +65,7 @@
     textInputSubmit.addEventListener('click', function () {
         clearLines();
         addText();
+        printLines();
     })
 
     function clearLines() {
@@ -96,13 +116,13 @@
 
                     lines[i] = {
                         text: finalLineText,
-                        yPos: currentLineYPos,
+                        yPos: baselineYPos,
                     }
 
                 } else {
                     lines[i] = {
                         text: submittedText.substring(0, (submittedText.length)),
-                        yPos: currentLineYPos,
+                        yPos: baselineYPos,
                     }
                 }
 
@@ -155,18 +175,29 @@
                     finalLineText = submittedLineText;
                 }
 
+                /* Line yPos shifting/creation */
 
+                // shifting lines before creating new line in lines[] array
                 // previous line yPos shift
                 for (let j = 0; j < lines.length; j++) {
-                    lines[j].yPos -= 34;
+                    lines[j].yPos -= lineShiftByPx;
+                    console.log('Line ' + j + ' yPos: ' + lines[j].yPos)
                 }
 
-                // grabbing subtring of next line
+                console.log(lines.length)
+
+                // Line Creation
+
+                let newLineYPos = baselineYPos + (lineShiftByPx * lines.length);
+                console.log(lines.length)
+
                 lines[i] = {
                     text: finalLineText,
-                    yPos: currentLineYPos,
+                    yPos: newLineYPos,
+
                 }
 
+                // Final Line Creation
                 console.log('end line ' + (i + 1))
 
                 let nextLine = submittedText.substring((charLimit * (i + 1)), (charLimit * (i + 2)));
@@ -181,12 +212,13 @@
                             lines[i].text += ' ' + lineTextCut;
                         } else {
                             for (let j = 0; j < lines.length; j++) {
-                                lines[j].yPos -= 20;
+                                lines[j].yPos -= lineShiftByPx;
 
                             }
+                            newLineYPos = baselineYPos + (lineShiftByPx * lines.length);
                             lines[i + 1] = {
                                 text: lineTextCut,
-                                yPos: currentLineYPos,
+                                yPos: newLineYPos,
                             }
                         }
                         break;
@@ -207,13 +239,17 @@
 
         addBackgroundColor(bgColorSelection);
 
+        console.log(lines);
+    }
+
+    function printLines() {
         // print all lines
         for (let x = 0; x < lines.length; x++) {
             ctx2.textAlign = "center";
+            ctx2.textBaseline = "middle";
             ctx2.fillText(lines[x].text, baselineXPos, lines[x].yPos);
             console.log("In the render loop")
         }
-        console.log(lines);
     }
 
     // Background Color Input
@@ -230,6 +266,8 @@
         for (z = 0; z > bgColorData.length; z++) {
             console.log(bgColorData[z]);
         }
+
+        // needs to be here to find the color value string coming from form 
         for (const entry of bgColorData) {
             bgColorSelection = entry[1];
         };
@@ -237,24 +275,100 @@
 
         console.log(bgColorSelection);
         addBackgroundColor(bgColorSelection);
-        addText();
+        printLines();
     })
 
     function addBackgroundColor(color) {
 
         /* TODO: Add other color settings */
-
+        let grd = ctx2.createLinearGradient(0, 0, 0, canvasHeight);
         if (color === "black") {
-            ctx2.fillStyle = 'black'; // changing color of the next "drawing method"
+            grd.addColorStop(0, '#555');
+            grd.addColorStop(0.3, 'black');
+            grd.addColorStop(0.7, 'black');
+            grd.addColorStop(1, '#555');
+
+            ctx2.fillStyle = grd; // changing color of the next "drawing method"
             ctx2.fillRect(0, 0, canvasWidth, canvasHeight); // pixel start coordinates/size of drawing INSIDE canvas
 
             ctx2.fillStyle = 'white'; // text color
 
         } else if (color === "white") {
-            ctx2.fillStyle = 'white'; // changing color of the next "drawing method"
+            grd.addColorStop(0, '#bbb');
+            grd.addColorStop(0.3, 'white');
+            grd.addColorStop(0.7, 'white');
+            grd.addColorStop(1, '#bbb');
+
+            ctx2.fillStyle = grd; // changing color of the next "drawing method"
             ctx2.fillRect(0, 0, canvasWidth, canvasHeight); // pixel start coordinates/size of drawing INSIDE canvas
 
             ctx2.fillStyle = 'black'; // text color
+
+        } else if (color === "red") {
+            grd.addColorStop(0, '#a10808');
+            grd.addColorStop(0.3, '#e00c0c');
+            grd.addColorStop(0.7, '#e00c0c');
+            grd.addColorStop(1, '#a10808');
+
+            ctx2.fillStyle = grd; // changing color of the next "drawing method"
+            ctx2.fillRect(0, 0, canvasWidth, canvasHeight); // pixel start coordinates/size of drawing INSIDE canvas
+
+            ctx2.fillStyle = 'white'; // text color
+
+        } else if (color === "orange") {
+            grd.addColorStop(0, '#b55802');
+            grd.addColorStop(0.3, '#f57803');
+            grd.addColorStop(0.7, '#f57803');
+            grd.addColorStop(1, '#b55802');
+
+            ctx2.fillStyle = grd; // changing color of the next "drawing method"
+            ctx2.fillRect(0, 0, canvasWidth, canvasHeight); // pixel start coordinates/size of drawing INSIDE canvas
+
+            ctx2.fillStyle = 'white'; // text color
+
+        } else if (color === "yellow") {
+            grd.addColorStop(0, '#bcbf00');
+            grd.addColorStop(0.3, '#fbff00');
+            grd.addColorStop(0.7, '#fbff00');
+            grd.addColorStop(1, '#bcbf00');
+
+            ctx2.fillStyle = grd; // changing color of the next "drawing method"
+            ctx2.fillRect(0, 0, canvasWidth, canvasHeight); // pixel start coordinates/size of drawing INSIDE canvas
+
+            ctx2.fillStyle = 'black'; // text color
+
+        } else if (color === "green") {
+            grd.addColorStop(0, '#478f04');
+            grd.addColorStop(0.3, '#66ce06');
+            grd.addColorStop(0.7, '#66ce06');
+            grd.addColorStop(1, '#478f04');
+
+            ctx2.fillStyle = grd; // changing color of the next "drawing method"
+            ctx2.fillRect(0, 0, canvasWidth, canvasHeight); // pixel start coordinates/size of drawing INSIDE canvas
+
+            ctx2.fillStyle = 'white'; // text color
+
+        } else if (color === "blue") {
+            grd.addColorStop(0, '#141a75');
+            grd.addColorStop(0.3, '#1f29b6');
+            grd.addColorStop(0.7, '#1f29b6');
+            grd.addColorStop(1, '#141a75');
+
+            ctx2.fillStyle = grd; // changing color of the next "drawing method"
+            ctx2.fillRect(0, 0, canvasWidth, canvasHeight); // pixel start coordinates/size of drawing INSIDE canvas
+
+            ctx2.fillStyle = 'white'; // text color
+
+        } else if (color === "purple") {
+            grd.addColorStop(0, '#681973');
+            grd.addColorStop(0.3, '#a227b3');
+            grd.addColorStop(0.7, '#a227b3');
+            grd.addColorStop(1, '#681973');
+
+            ctx2.fillStyle = grd; // changing color of the next "drawing method"
+            ctx2.fillRect(0, 0, canvasWidth, canvasHeight); // pixel start coordinates/size of drawing INSIDE canvas
+
+            ctx2.fillStyle = 'white'; // text color
 
         }
 
