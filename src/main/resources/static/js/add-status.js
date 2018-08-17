@@ -25,13 +25,22 @@
 
     const ctx2 = generatedCanvas.getContext('2d');
 
-    let canvasWidth = 480;
-    let canvasHeight = 270;
+    let canvasWidth = parseFloat(generatedCanvasProps.width); // currently rendered width
+    console.log(canvasWidth);
+    let canvasHeight = parseFloat(generatedCanvasProps.height); // currently rendered height
+    console.log(canvasHeight);
+
+    // setting canvas HTML attributes to match currently rendered canvas dimensions
+    generatedCanvas.setAttribute('height', ('' + canvasHeight));
+    generatedCanvas.setAttribute('width', ('' + canvasWidth));
+
+    
     let bgColorSelection = 'white';
     let submittedText = "";
-    const charLimit = 30;
-    let currentLineYPos = 135;
-    let baselineXPos = 240;
+    const charLimit = 32;
+    let baselineYPos = Math.ceil((canvasHeight / 2) - 3);
+    console.log(baselineYPos);
+    let baselineXPos = canvasWidth / 2;
 
     let lines = [];
     let currentLine = 0;
@@ -39,8 +48,11 @@
     let setNewLine = false;
 
     // Font Styles
-    ctx2.font = "30px Arial";
+    ctx2.font = "24px Arial";
+    lineShiftByPx = (parseFloat(ctx2.font) / 2);
 
+    console.log(lineShiftByPx)
+    
     /* Input wiring */
 
     // Status Text Input
@@ -53,6 +65,7 @@
     textInputSubmit.addEventListener('click', function () {
         clearLines();
         addText();
+        printLines();
     })
 
     function clearLines() {
@@ -103,13 +116,13 @@
 
                     lines[i] = {
                         text: finalLineText,
-                        yPos: currentLineYPos,
+                        yPos: baselineYPos,
                     }
 
                 } else {
                     lines[i] = {
                         text: submittedText.substring(0, (submittedText.length)),
-                        yPos: currentLineYPos,
+                        yPos: baselineYPos,
                     }
                 }
 
@@ -163,17 +176,25 @@
                 }
 
                 /* Line yPos shifting/creation */
-                
+
                 // shifting lines before creating new line in lines[] array
                 // previous line yPos shift
                 for (let j = 0; j < lines.length; j++) {
-                    lines[j].yPos -= 34;
+                    lines[j].yPos -= lineShiftByPx;
+                    console.log ('Line ' + j + ' yPos: ' + lines[j].yPos)
                 }
 
+                console.log(lines.length)
+
                 // Line Creation
+
+                let newLineYPos = baselineYPos + (lineShiftByPx * lines.length);
+                console.log(lines.length)
+
                 lines[i] = {
                     text: finalLineText,
-                    yPos: currentLineYPos,
+                    yPos: newLineYPos,
+            
                 }
 
                 // Final Line Creation
@@ -191,12 +212,13 @@
                             lines[i].text += ' ' + lineTextCut;
                         } else {
                             for (let j = 0; j < lines.length; j++) {
-                                lines[j].yPos -= 20;
+                                lines[j].yPos -= lineShiftByPx;
 
                             }
+                            newLineYPos = baselineYPos + (lineShiftByPx * lines.length);
                             lines[i + 1] = {
                                 text: lineTextCut,
-                                yPos: currentLineYPos,
+                                yPos: newLineYPos,
                             }
                         }
                         break;
@@ -216,14 +238,18 @@
         ctx2.clearRect(0, 0, canvasWidth, canvasHeight); // clears canvas for next render
 
         addBackgroundColor(bgColorSelection);
+       
+        console.log(lines);
+    }
 
-        // print all lines
-        for (let x = 0; x < lines.length; x++) {
+    function printLines(){
+         // print all lines
+         for (let x = 0; x < lines.length; x++) {
             ctx2.textAlign = "center";
+            ctx2.textBaseline = "middle";
             ctx2.fillText(lines[x].text, baselineXPos, lines[x].yPos);
             console.log("In the render loop")
         }
-        console.log(lines);
     }
 
     // Background Color Input
@@ -240,6 +266,8 @@
         for (z = 0; z > bgColorData.length; z++) {
             console.log(bgColorData[z]);
         }
+
+        // needs to be here to find the color value string coming from form 
         for (const entry of bgColorData) {
             bgColorSelection = entry[1];
         };
@@ -247,7 +275,7 @@
 
         console.log(bgColorSelection);
         addBackgroundColor(bgColorSelection);
-        addText();
+        printLines();
     })
 
     function addBackgroundColor(color) {
@@ -256,7 +284,7 @@
 
         if (color === "black") {
             ctx2.fillStyle = 'black'; // changing color of the next "drawing method"
-            ctx2.fillRect(0, 0, canvasWidth, canvasHeight); // pixel start coordinates/size of drawing INSIDE canvas
+            ctx2.fillRect(0, 0, canvasWidth , canvasHeight); // pixel start coordinates/size of drawing INSIDE canvas
 
             ctx2.fillStyle = 'white'; // text color
 
