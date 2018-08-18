@@ -22,6 +22,9 @@ public class ScrapbookPopulator implements CommandLineRunner {
 
 	@Resource
 	private EnduserRepository enduserRepo;
+	
+	@Resource
+	private HeartRepository heartRepo;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -68,7 +71,20 @@ public class ScrapbookPopulator implements CommandLineRunner {
 		
 		Enduser Grandpa = new Enduser("Grandpa", false, "asdf");
 		Grandpa = enduserRepo.save(Grandpa);
-
+		
+		//Create Hearts
+		Heart heartGrandma = new Heart(Grandma, penny_img1);
+		heartGrandma = heartRepo.save(heartGrandma);
+		
+		Heart heartDad = new Heart(Dad, penny_img1);
+		heartDad = heartRepo.save(heartDad);
+		
+		Heart heartDad2 = new Heart(Dad, sam_img1);
+		heartDad2 = heartRepo.save(heartDad2);
+		
+		Heart heartGrandma2 = new Heart(Grandma, sam_baby);
+		heartGrandma2 = heartRepo.save(heartGrandma);
+		
 		// Create Comments
 
 		Comment comment1 = commentRepo.save(new Comment("I'm glad that it fits! He looks so handsome.", Grandma, oliver_jacket));

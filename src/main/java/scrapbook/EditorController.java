@@ -86,6 +86,7 @@ public class EditorController {
 		}
 		return "redirect:/auth";
 	}
+
 //
 //	@RequestMapping("/auth")
 //	public String editorPanel(@CookieValue(name = "role", defaultValue = "") String role, Model model) {
