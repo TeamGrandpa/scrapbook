@@ -44,7 +44,6 @@
         xhr.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
                 kidImages = JSON.parse(xhr.response);
-                console.log(kidImages);
                 kidImageListRender();
             };
         };
@@ -84,6 +83,7 @@
                 let newDate = document.createElement('span');
                 newDate.setAttribute('class', 'timeStamp');
                 newDate.textContent = image.date;
+
                 let heartAndCountDiv = document.createElement('div');
                 heartAndCountDiv.classList.add('hCountDiv');
                 const heartCount = document.createElement('span');
@@ -99,12 +99,13 @@
                     newHeart.setAttribute('src', '/img/heart-off.svg');
                     newHeart.classList.add('no-heart');
                 }
+
                 let newImg = document.createElement('img');
                 newImg.classList.add('kidImages');
                 newImg.setAttribute('src', image.imageUrl);
+
                 let newFigcaption = document.createElement('figcaption');
                 newFigcaption.textContent = image.caption;
-
 
                 newDateLikeDiv.appendChild(newDate);
                 heartAndCountDiv.appendChild(heartCount);
@@ -112,8 +113,6 @@
                 newDateLikeDiv.appendChild(heartAndCountDiv);
                 newFigure.appendChild(newDateLikeDiv);
                 newFigure.appendChild(newImg);
-                newFigure.appendChild(newFigcaption);
-                newImageDiv.appendChild(newFigure);
 
                 //Added Heart Functionality here
                 newHeart.addEventListener('click', toggleHeart);
@@ -144,6 +143,25 @@
                     xhr.open('POST', '/hearts/enduserUserName/' + enduserUserName + '/imageid/' + image.id);
                     xhr.send();
                 };
+
+                //Add delete button if user is editor
+                if (getCookie('role') === 'editor') {
+                    let imageDeleteButton = document.createElement('a');
+                    imageDeleteButton.setAttribute('class', 'imageDeleteButton');
+                    imageDeleteButton.textContent = String.fromCharCode(10006);
+                    newFigure.appendChild(imageDeleteButton);
+
+                    imageDeleteButton.addEventListener('click', function (event) {
+                        event.preventDefault();
+                        removeImage(image.id);
+                    });
+                }
+
+                let newFigcaption = document.createElement('figcaption');
+                newFigcaption.textContent = image.caption;
+
+                newFigure.appendChild(newFigcaption);
+                newImageDiv.appendChild(newFigure);
 
                 //Add image comments
                 let commentContainer = document.createElement('div');
@@ -183,7 +201,7 @@
                 let hiddenUserId = document.createElement('input');
                 hiddenUserId.setAttribute('type', 'hidden');
                 hiddenUserId.setAttribute('name', 'authorName');
-                hiddenUserId.setAttribute('value', 'Dad');
+                hiddenUserId.setAttribute('value', getCookie('name'));
                 commentForm.appendChild(hiddenUserId);
                 let hiddenImageId = document.createElement('input');
                 hiddenImageId.setAttribute('type', 'hidden');
@@ -208,10 +226,22 @@
         addImageComment();
     }
 
+    function removeImage(imageId) {
+
+        const xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                kidImages = JSON.parse(xhr.response);
+                kidImageListRender();
+            };
+        };
+        xhr.open('PUT', `/removeImage?imageId=${imageId}&kidId=${kidId}`);
+        xhr.send();
+    }
+
     function commentButtonEventListener() {
 
         const commentButtons = document.querySelectorAll('.commentButton');
-
         commentButtons.forEach(commentButton => {
             let commentButtonId = commentButton.id;
             let imageNum = commentButtonId.substring(1, commentButtonId.length);
@@ -311,64 +341,5 @@
             })
         }
     }
-
-    // This will be an event listener
-    // When each heart is rendered for the first time (above), set its
-    // click event listener to be this function
-    // function toggleHeart(event) {
-    //     const heart = this; // OR event.target... same thing here
-    //     Get a reference to the heart count
-    //     const heartcount = heart.parentElement.querySelector('.___');
-
-    // Check heart class to see if currently hearted
-    // if hearted...
-    // send request to un-heart / delete heart in database
-    // when response comes, change heart class to unhearted and reduce heart count
-    // else (if NOT hearted)...
-    // send request to heart / create heart in db
-    // on response, change heart class to appear red, increase heart count
-
-    //     var clicks = 0;
-    //     var hasClicked = false;
-    //            function onClick() 
-    //         {
-    //             if (!hasClicked) 
-    //                 {
-    //                     clicks += 1;
-    //                     document.getElementById("output").innerHTML = clicks;
-    //                     hasClicked = true; 
-    //                 };
-
-    //         };
-    // }
-
-    return;
-
-    $count.text(function (idx, txt) {
-        // convert text to number and increment by one
-        return +txt + 1;
-    });
-    $(document).on('click', ".notliked", function () {
-        var $this = $(this);
-        $this.removeClass('notliked');
-        $this.addClass('liked')
-        $count = $('.likes-count');
-        $count.text(function (idx, txt) {
-            return +txt + 1;
-        });
-
-    });
-
-    $(document).on('click', ".liked", function () {
-        var $this = $(this);
-        $this.removeClass('liked');
-        $this.addClass('notliked');
-        $count = $('.likes-count');
-        $count.text(function (idx, txt) {
-            return (+txt == 0) ? 0 : (+txt - 1);
-        });
-
-    });
-
-
+   
 })();

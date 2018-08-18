@@ -7,9 +7,12 @@
 }
 
 :root {
-    --Color1: #af66b9;
-    --Color2: #b66161;
-    --Color3: #5c974e;
+    --Color1: #e00c0c;
+    --Color2: #f57803;
+    --Color3: #00aa8e;
+    --Color4: #66ce06;
+    --Color5: #1f29b6;
+    --Color6: #a227b3;
     
     --ColorDefault: #aaa;
 }
@@ -24,6 +27,18 @@
 
 .Color3 {
     background: var(--Color3);
+}
+
+.Color4 {
+    background: var(--Color4);
+}
+
+.Color5 {
+    background: var(--Color5);
+}
+
+.Color6 {
+    background: var(--Color6);
 }
 
 .ColorDefault {
@@ -136,10 +151,6 @@ h3 {
     cursor: pointer;  
 }
 
-
-
-
-
 #whiteBox {
 	background-color: #fff;
 	height: 3.3rem;
@@ -165,9 +176,27 @@ h3 {
     position: relative;
 }
 
+#imageContainer figure {
+    position: relative;
+}
+
 .kidImages {
     margin-top: 0.5rem;
     width: 100%;
+}
+
+.imageDeleteButton {
+	display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    opacity: 0.7;
+    cursor: pointer;
+    position: absolute;
+    top: 2.4rem;
+    left: 0.6rem;
+    text-shadow: 0 0 3px #fff, 0 0 3px #fff;
 }
 
 #imageContainer figcaption {
@@ -196,17 +225,17 @@ h3 {
 }
 
 .commentDeleteButton {
-	/* display: flex;
+	display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center; */
+    justify-content: center;
     font-size: 0.8rem;
     cursor: pointer;
     position: absolute;
     top: 0.4rem;
     right: 0.4rem;
-    padding: 0 0.3rem;
-    border-radius: 1rem;
+    padding: 0 0.27rem 0 0.3rem;
+    border-radius: 50%;
     background-color: rgba(255, 255, 255, 0.7);
 }
 
@@ -344,7 +373,7 @@ h3 {
 }
 
 .slider.open {
-	max-height: 10rem;
+	max-height: 13rem;
 }
 
 #newPhotoContainer {
@@ -352,26 +381,56 @@ h3 {
     grid-template-columns: 1fr;
     grid-template-rows: auto;
     margin: 1.5rem 1.5rem;
-    grid-column-gap: 1.8rem;
-    grid-row-gap: 1.8rem;
-    /* max-width: 96vh;
-    width: 90%; */
 }
 
 #fileBox {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #ddd;
-    padding: 1rem;
+    background-color: #eee;
+    padding: 1.5rem 1rem;
     border-radius: 1rem;
 }
+
+#captionDiv {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1rem;
+    width: 100%;
+    font-size: 1.2rem;
+}
+
+#captionDiv textarea {
+    padding: 5px 10px;
+    font-size: 1rem;
+}
+
 
 #buttonContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 1rem;
+}
+
+#buttonContainer input[type=submit] {
+    font-size: 1rem;
+    background-color: #eee;
+    border: none;
+    text-decoration: none;
+    padding: 0.5rem 1.3rem 0.5rem 1.3rem;
+    border-radius: 1.5rem;
+    cursor: pointer;
+}
+
+#statusSubmitButton {
+    font-size: 1rem;
+    background-color: #eee;
+    border: none;
+    text-decoration: none;
+    padding: 0.5rem 1.3rem 0.5rem 1.3rem;
+    border-radius: 1.5rem;
+    cursor: pointer;
 }
 
 .inputfile {
@@ -384,7 +443,7 @@ h3 {
 }
 
 .inputfile + label {
-    font-size: 1.25rem;
+    font-size: 1.2rem;
     font-weight: 700;
     padding: 0.5rem 1rem;
     color: white;
@@ -393,10 +452,10 @@ h3 {
     cursor: pointer;
 }
 
-.inputfile:focus + label,
+/* .inputfile:focus + label,
 .inputfile + label:hover {
     background-color: blue;
-}
+} */
 
 .inputfile:focus + label {
 	outline: 1px dotted #000;
