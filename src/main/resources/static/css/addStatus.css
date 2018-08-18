@@ -1,0 +1,211 @@
+* {
+    font-family: Helvetica, Arial, sans-serif;
+    line-height: 1.5em;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --Color1: #e00c0c;
+    --Color2: #f57803;
+    --Color3: #00aa8e;
+    --Color4: #66ce06;
+    --Color5: #1f29b6;
+    --Color6: #a227b3;
+    --Color9: #fbff00;
+
+    --ColorDefault: #aaaaaa;
+}
+
+/* add kid channel styling */
+
+.colorDefault {
+	background-color: var(--ColorDefault);
+}
+
+#Color1 {
+    background: var(--Color1);
+}
+
+#Color2 {
+    background: var(--Color2);
+}
+
+#Color3 {
+    background: var(--Color3);
+}
+
+#Color4 {
+    background: var(--Color4);
+}
+
+#Color5 {
+    background: var(--Color5);
+}
+
+#Color6 {
+    background: var(--Color6);
+}
+
+#Color7 {
+    background: rgb(245, 245, 245);
+}
+
+#Color8 {
+    background: #000;
+}
+
+#Color9 {
+    background: var(--Color9);
+}
+
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    margin: 0 auto;
+    color: #fff;
+    text-align: center;
+    padding: 0.2rem;
+}
+
+#prev {
+  cursor: pointer;
+  position: fixed;
+  text-decoration: none;
+  font-size: 1.8rem;
+  margin-top: 0.1rem;
+  color: #fff;
+  top: 0.2rem;
+  left: 1rem;
+}
+
+#whiteBox {
+	background-color: #fff;
+	height: 3.3rem;
+}
+
+h1 {
+  font-size: 1.8rem;
+  margin-top: 0.1rem;
+}
+
+h2 {
+    font-size: 1.3rem;
+    text-align: center;
+}
+
+#generatedCanvas {
+    margin-top: 0.5rem;
+    border-top: 2px solid #000;
+    border-bottom: 2px solid #000;
+    width: 100%;
+}
+
+#backgroundColorInputContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #eee;
+    margin: 0.3rem 2rem 0.7rem 2rem;
+    padding: 0.8rem 1rem 1rem 1rem;
+    border-radius: 1rem;
+}
+
+#backgroundColorInputContainer p {
+    font-size: 1.2rem;
+}
+
+#textInput {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 2rem;
+}
+
+#inputStatusText {
+    font-size: 1rem;
+    padding: 5px 10px;
+    width: 100%;
+    border: solid 1px black;
+}
+
+#addStatusText {
+    font-size: 1rem;
+    background-color: #eee;
+    border: none;
+    text-decoration: none;
+    padding: 0.4rem 1.3rem 0.4rem 1.3rem;
+    margin-top: 0.5rem;
+    border-radius: 1.5rem;
+    cursor: pointer;
+}
+
+.thinLine {
+    height: 1px;
+    width: 100%;
+    background-color: #ddd;
+    margin-top: 0.7rem;
+}
+
+#submitStatus {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1.3rem;
+}
+
+#submitStatusButton {
+    font-size: 1rem;
+    background-color: #eee;
+    border: none;
+    text-decoration: none;
+    padding: 0.5rem 1.3rem 0.5rem 1.3rem;
+    border-radius: 1.5rem;
+    cursor: pointer;
+}
+
+#colorChoices {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: auto;
+}
+
+.container {
+  display: block;
+  position: relative;
+  padding-left: 19px;
+  padding-right: 19px;
+  margin-top: 12px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  color: #eee;
+  font-size: 20px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default radio button */
+.container input {
+  position: absolute;
+  opacity: 0;
+}
+
+/* Create a custom radio button */
+.checkmark {
+    position: absolute;
+    top: -9px;
+    left: 6px;
+    height: 44px;
+    width: 44px;
+    background-color: #eee;
+    border-radius: 4px;
+    border: 3px solid #fff;
+    box-shadow: 0 -2px 0 3px rgba(0, 0, 0, 0.1) inset, 0 3px 5px #444, 0 15px rgba(255, 255, 255, 0.25) inset;
+    cursor: pointer;
+    display: inline-block;
+}
+

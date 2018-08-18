@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Create Status</title>
+
+  <link rel="stylesheet" type="text/css" href="./css/addStatus.css">
+</head>
+
+<body>
+  <div th:each="kid: ${kids}">
+    <header th:id="@{'Color' + ${kid.colorNum}}">
+      <h1>Post New Status</h1>
+      <a id="prev" th:href="@{/kid(id=${kid.id})}">&#10094;</a>
+    </header>
+
+    <main>
+      <section id="whiteBox"></section>
+      <span id="kidId" style="display:none" th:text="${kid.id}"></span>
+
+      <canvas id="generatedCanvas" width="480" height="270"></canvas>
+
+      <div id="backgroundColorInputContainer">
+        <p>Select a background color:</p>
+
+        <div>
+          <form id="backgroundColorInputForm">
+            <div id="colorChoices">
+                <label class="container"> W
+                    <input type="radio" checked="checked" name="radio" value="white">
+                    <span class="checkmark" id="Color7"></span>
+                </label>
+                <label class="container"> B
+                    <input type="radio" name="radio" value="black">
+                    <span class="checkmark" id="Color8"></span>
+                </label>
+                <label class="container"> R
+                    <input type="radio" name="radio" value="red">
+                    <span class="checkmark" id="Color1"></span>
+                </label>
+                <label class="container"> O
+                    <input type="radio" name="radio" value="orange">
+                    <span class="checkmark" id="Color2"></span>
+                </label>
+                <label class="container"> Y
+                    <input type="radio" name="radio" value="yellow">
+                    <span class="checkmark" id="Color9"></span>
+                </label>
+                <label class="container"> G
+                    <input type="radio" name="radio" value="green">
+                    <span class="checkmark" id="Color4"></span>
+                </label>
+                <label class="container"> B
+                    <input type="radio" name="radio" value="blue">
+                    <span class="checkmark" id="Color5"></span>
+                </label>
+                <label class="container"> P
+                    <input type="radio" name="radio" value="purple">
+                    <span class="checkmark" id="Color6"></span>
+                </label>
+            </div>
+
+          </form>
+
+        </div>
+
+      </div>
+
+      <div id="textInput">
+        <textarea id="inputStatusText" rows="2" placeholder="Type status here"></textarea>
+        <Button id="addStatusText">Add Text</Button>
+      </div>
+      <div class="thinLine"></div>
+      <div id="submitStatus">
+        <button id="submitStatusButton">Submit Status Update</button>
+      </div>
+    </main>
+  </div>
+  <script src="./js/add-status.js"></script>
+</body>
+
+</html>

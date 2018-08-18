@@ -43,7 +43,6 @@ public class Enduser {
 		this.userName = userName;
 		this.isEditor = isEditor;
 		this.password = password;
-
 	}
 
 	public long getId() {
@@ -51,7 +50,6 @@ public class Enduser {
 	}
 
 	public String getUserName() {
-
 		return userName;
 	}
 
@@ -64,7 +62,6 @@ public class Enduser {
 	}
 
 	public Collection<Comment> getComments() {
-
 		return comments;
 	}
 

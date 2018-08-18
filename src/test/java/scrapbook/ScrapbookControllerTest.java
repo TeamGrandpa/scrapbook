@@ -27,9 +27,6 @@ public class ScrapbookControllerTest {
 	private ImageRepository imageRepo;
 	
 	@Mock
-	private MessageRepository messageRepo;
-	
-	@Mock
 	private CommentRepository commentRepo;
 	
 	@Mock
@@ -43,12 +40,6 @@ public class ScrapbookControllerTest {
 	
 	@Mock
 	private Image anotherImage;
-	
-	@Mock
-	private Message message;
-	
-	@Mock
-	private Message anotherMessage;
 	
 	@Mock
 	private Comment comment;
@@ -99,24 +90,6 @@ public class ScrapbookControllerTest {
 		
 		underTest.findAllImages(model);
 		verify(model).addAttribute("images", allImages);
-	}
-	
-	@Test
-	public void shouldAddSingleMessageToModel() throws MessageNotFoundException {
-		long arbitraryMessageId = 1;
-		when(messageRepo.findById(arbitraryMessageId)).thenReturn(Optional.of(message));
-		
-		underTest.findOneMessage(arbitraryMessageId, model);
-		verify(model).addAttribute("messages", message);		
-	}
-	
-	@Test
-	public void shouldAddAllMessagesToModel() {
-		Collection<Message> allMessages = Arrays.asList(message, anotherMessage);
-		when(messageRepo.findAll()).thenReturn(allMessages);
-		
-		underTest.findAllMessages(model);
-		verify(model).addAttribute("messages", allMessages);
 	}
 	
 	@Test

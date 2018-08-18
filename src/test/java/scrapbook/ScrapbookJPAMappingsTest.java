@@ -30,9 +30,6 @@ public class ScrapbookJPAMappingsTest {
 	private ImageRepository imageRepo;
 
 	@Resource
-	private MessageRepository messageRepo;
-
-	@Resource
 	private CommentRepository commentRepo;
 
 	@Resource
@@ -84,28 +81,6 @@ public class ScrapbookJPAMappingsTest {
 		Optional<Kid> result = kidRepo.findById(kidId);
 		kid = result.get();
 		assertThat(kid.getImages(), containsInAnyOrder(image1, image2));
-	}
-
-	@Test
-	public void shouldEstablishMessagestoKidRelationship() {
-
-		Kid kid = new Kid("name");
-		kidRepo.save(kid);
-		long kidId = kid.getId();
-
-		Message message = new Message("content", kid);
-		messageRepo.save(message);
-
-		Message message2 = new Message("content2", kid);
-		messageRepo.save(message2);
-
-		entityManager.flush();
-		entityManager.clear();
-
-		Optional<Kid> result = kidRepo.findById(kidId);
-		kid = result.get();
-		assertThat(kid.getMessages(), containsInAnyOrder(message, message2));
-
 	}
 
 	@Test

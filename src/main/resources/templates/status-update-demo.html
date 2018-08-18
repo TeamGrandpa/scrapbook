@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  
+  <style>
+    #canvas {
+      outline: 1px solid #333;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas" width=300 height=200></canvas>
+
+  <script>
+    (function(){
+      
+      /* Sample Canvas */
+      const canvas = document.getElementById('canvas');
+      const ctx = canvas.getContext('2d');
+      ctx.fillStyle = 'rgb(200, 0, 0)';
+      ctx.fillRect(10, 10, 50, 50);
+      ctx.fillStyle = 'rgba(0, 0, 200, 0.5)';
+      ctx.fillRect(30, 30, 50, 50);
+      
+      /* AJAX Request to upload canvas contents as an image file */
+      canvas.toBlob(canvasBlob => {
+        const formData = new FormData();
+        formData.append("caption", "Canvas Image!"); // assigning @RequestParam key / value pairs
+        formData.append("childName", "Oliver");
+        formData.append("file", canvasBlob);
+        const request = new XMLHttpRequest();
+        request.open('POST', 'http://localhost:8080/uploadImage'); // opens POST request to /uploadImage for upload processing
+        request.send(formData); // sends RequestParams and image file itself
+      });
+    })();
+  </script>
+</body>
+</html>

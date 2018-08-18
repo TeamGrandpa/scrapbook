@@ -1,0 +1,72 @@
+* {
+    font-family: Helvetica, Arial, sans-serif;
+    line-height: 1.5em;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --ShareBear: #a079a5;
+}
+
+.loginContainer {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    margin: 0.5rem 2rem;
+}
+
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 8.5rem;
+    border-radius: 0.7rem;
+}
+
+input {
+    display: flex;
+    margin: auto;
+    
+}
+
+#usernameBox input {
+    font-family: inherit;
+    font-size: 1rem;
+    margin-top: 2rem;
+    width: 200px;
+    padding: 5px 10px;
+    border: solid 1px black;
+    display: block;
+}
+
+#passwordBox input {
+    font-family: inherit;
+    font-size: 1rem;
+    margin-top: 1rem;
+    width: 200px;
+    padding: 5px 10px;
+    border: solid 1px black;
+    display: block;
+}
+
+#buttonBox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1.5rem;
+}
+
+#buttonBox input {
+    font-size: 1rem;
+    background-color: #eee;
+    border: none;
+    text-decoration: none;
+    padding: 0.5rem 1.3rem 0.5rem 1.3rem;
+    border-radius: 1.5rem;
+    cursor: pointer;
+}
+
+
+

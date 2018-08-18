@@ -44,7 +44,6 @@
         xhr.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
                 kidImages = JSON.parse(xhr.response);
-                console.log(kidImages);
                 kidImageListRender();
             };
         };
@@ -82,53 +81,30 @@
                 let newDate = document.createElement('span');
                 newDate.setAttribute('class', 'timeStamp');
                 newDate.textContent = image.date;
-                // let newHeart = document.createElement('img');
-                // image.hearts.length;
-                // newHeart.setAttribute('src', '/img/heart-off.svg');
-                // newHeart.classList.add('heartIcon');
+                newFigure.appendChild(newDate);
+                
                 let newImg = document.createElement('img');
                 newImg.setAttribute('src', image.imageUrl);
+                newFigure.appendChild(newImg);
+
+                //Add delete button if user is editor
+                if (getCookie('role') === 'editor') {
+                    let imageDeleteButton = document.createElement('a');
+                    imageDeleteButton.setAttribute('class', 'imageDeleteButton');
+                    imageDeleteButton.textContent = String.fromCharCode(10006);
+                    newFigure.appendChild(imageDeleteButton);
+
+                    imageDeleteButton.addEventListener('click', function (event) {
+                        event.preventDefault();
+                        removeImage(image.id);
+                    });
+                }
+
                 let newFigcaption = document.createElement('figcaption');
                 newFigcaption.textContent = image.caption;
 
-                // toggleHeart();
-
-                newFigure.appendChild(newDate);
-                //    newFigure.appendChild(newHeart);
-                newFigure.appendChild(newImg);
                 newFigure.appendChild(newFigcaption);
                 newImageDiv.appendChild(newFigure);
-
-                // function toggleHeart() {
-                //     const heartCount = document.createElement('span');
-                //     heartCount.innerHTML = image.hearts.length;
-                //     const newHeart = document.createElement('img');
-                //     console.log(image.hearts);
-                //     console.log(getCookie('name'));
-                //     if (image.hearts.find(heart => heart.enduser.userName === (getCookie('name')))) {
-                //         newHeart.setAttribute('src', '/img/heart-on.svg');
-                //         newHeart.classList.add('has-heart');
-                //     }
-                //     else {
-                //         newHeart.setAttribute('src', '/img/heart-off.svg');
-                //         newHeart.classList.add('no-heart');
-                //     }
-                //     newHeart.addEventListener('click', toggleHeart, { passive: true });
-
-                //     const xhr = new XMLHttpRequest();
-                //     xhr.onreadystatechange = function () {
-                //         if (this.readyState == 4 && this.status == 200) {
-                //             toggleHeart = JSON.parse(xhr.response);
-                //             console.log(toggleHeart);
-                //         };
-                //     };
-                //     xhr.open('GET', '/hearts/' + enduserUserName + '/' + imageId);
-                //     xhr.send();
-                // };
-
-
-
-
 
                 //Add image comments
                 let commentContainer = document.createElement('div');
@@ -168,7 +144,7 @@
                 let hiddenUserId = document.createElement('input');
                 hiddenUserId.setAttribute('type', 'hidden');
                 hiddenUserId.setAttribute('name', 'authorName');
-                hiddenUserId.setAttribute('value', 'Dad');
+                hiddenUserId.setAttribute('value', getCookie('name'));
                 commentForm.appendChild(hiddenUserId);
                 let hiddenImageId = document.createElement('input');
                 hiddenImageId.setAttribute('type', 'hidden');
@@ -193,10 +169,22 @@
         addImageComment();
     }
 
+    function removeImage(imageId) {
+
+        const xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                kidImages = JSON.parse(xhr.response);
+                kidImageListRender();
+            };
+        };
+        xhr.open('PUT', `/removeImage?imageId=${imageId}&kidId=${kidId}`);
+        xhr.send();
+    }
+
     function commentButtonEventListener() {
 
         const commentButtons = document.querySelectorAll('.commentButton');
-
         commentButtons.forEach(commentButton => {
             let commentButtonId = commentButton.id;
             let imageNum = commentButtonId.substring(1, commentButtonId.length);
@@ -296,64 +284,5 @@
             })
         }
     }
-
-    // This will be an event listener
-    // When each heart is rendered for the first time (above), set its
-    // click event listener to be this function
-    // function toggleHeart(event) {
-    //     const heart = this; // OR event.target... same thing here
-    //     Get a reference to the heart count
-    //     const heartcount = heart.parentElement.querySelector('.___');
-
-    // Check heart class to see if currently hearted
-    // if hearted...
-    // send request to un-heart / delete heart in database
-    // when response comes, change heart class to unhearted and reduce heart count
-    // else (if NOT hearted)...
-    // send request to heart / create heart in db
-    // on response, change heart class to appear red, increase heart count
-
-    //     var clicks = 0;
-    //     var hasClicked = false;
-    //            function onClick() 
-    //         {
-    //             if (!hasClicked) 
-    //                 {
-    //                     clicks += 1;
-    //                     document.getElementById("output").innerHTML = clicks;
-    //                     hasClicked = true; 
-    //                 };
-
-    //         };
-    // }
-
-    return;
-
-    $count.text(function (idx, txt) {
-        // convert text to number and increment by one
-        return +txt + 1;
-    });
-    $(document).on('click', ".notliked", function () {
-        var $this = $(this);
-        $this.removeClass('notliked');
-        $this.addClass('liked')
-        $count = $('.likes-count');
-        $count.text(function (idx, txt) {
-            return +txt + 1;
-        });
-
-    });
-
-    $(document).on('click', ".liked", function () {
-        var $this = $(this);
-        $this.removeClass('liked');
-        $this.addClass('notliked');
-        $count = $('.likes-count');
-        $count.text(function (idx, txt) {
-            return (+txt == 0) ? 0 : (+txt - 1);
-        });
-
-    });
-
 
 })();
