@@ -112,15 +112,15 @@ public class ScrapbookControllerTest {
 		
 	}
 	
-	/* Single Kid Removal */
-//	@Test
-//	public void shouldRemoveSingleKidFromModel() throws KidNotFoundException {
-//		long arbitraryKidId = 1;
-//		when(kidRepo.findById(arbitraryKidId)).thenReturn(Optional.of(kid));
-//		
-//		underTest.deleteOneKid(arbitraryKidId, model);
-//		verify(model).addAttribute("kids", kid);
-//	}
+	@Test
+	public void shouldRemoveKidByKidIdByOptional() {
+		Long kidId = 1L;
+		underTest.deleteOneKidById(kidId);
+		verify(kidRepo).deleteById(kidId);
+		
+	}
+	
+
 	
 	
 

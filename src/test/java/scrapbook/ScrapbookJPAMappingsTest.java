@@ -193,5 +193,7 @@ public class ScrapbookJPAMappingsTest {
 		assertThat(heart.getImage().getId(), is(imageId));
 		assertThat(heart.getEnduser().getId(), is(enduserId));
 	}
+	
+	
 
 }

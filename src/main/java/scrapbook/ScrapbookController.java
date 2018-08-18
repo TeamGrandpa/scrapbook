@@ -13,8 +13,11 @@ import java.util.Date;
 import java.util.Optional;
 
 import javax.annotation.Resource;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.transaction.Transactional;
 
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.stereotype.Controller;
@@ -38,7 +41,7 @@ public class ScrapbookController {
 
 	@Resource
 	CommentRepository commentRepo;
-
+	
 	@RequestMapping("/kid")
 	public String findOneKid(@RequestParam(value = "id") long id, Model model) throws KidNotFoundException {
 		Optional<Kid> kid = kidRepo.findById(id);
@@ -269,14 +272,14 @@ public class ScrapbookController {
 		return "redirect:/kids";
 	}
 	
-	@PutMapping("/deleteKid")
-	public String deleteOneKid(@RequestParam("kidId") long kidId, Model model) {
+	@RequestMapping("/delete-kid")
+	public String deleteOneKidById(@RequestParam("id") long kidId) {
+				
 		Optional<Kid> kidOptional = kidRepo.findById(kidId);
-		Kid kidToDelete = kidOptional.get();
+		Kid kid = kidOptional.get();
 		
-		kidRepo.delete(kidToDelete);
-		
+		kidRepo.delete(kid);
+	
 		return "redirect:/kids";
-		
 	}
 }
