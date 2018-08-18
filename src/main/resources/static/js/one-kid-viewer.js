@@ -86,16 +86,10 @@
                 newDate.textContent = image.date;
                 let heartAndCountDiv = document.createElement('div');
                 heartAndCountDiv.classList.add('hCountDiv');
-                // let newLikeDiv = document.createElement('div');
-                // newLikeDiv.classList.add('likeDiv');
-                // let like = document.createElement('span');
-                // like.textContent = ' Likes';
-                //image.hearts.length; // TODO: set the heart count beside the heart
                 const heartCount = document.createElement('span');
                 heartCount.innerHTML = image.hearts.length;
-
+                //Added heart icon
                 let newHeart = document.createElement('img');
-                //newHeart.setAttribute('src', '/img/heart-off.svg');
                 newHeart.classList.add('heartIcon');
                 const enduserUserName = getCookie('name');
                 if (image.hearts.find(heart => heart.enduser.userName === enduserUserName)) {
@@ -113,22 +107,16 @@
 
 
                 newDateLikeDiv.appendChild(newDate);
-                //newDateLikeDiv.appendChild(heartCount);
                 heartAndCountDiv.appendChild(heartCount);
                 heartAndCountDiv.appendChild(newHeart);
                 newDateLikeDiv.appendChild(heartAndCountDiv);
-                //newDateLikeDiv.appendChild(newHeart);
-                //newLikeDiv.appendChild(heartCount);
-                // newLikeDiv.appendChild(like);
-               // newDateLikeDiv.appendChild(newLikeDiv);
                 newFigure.appendChild(newDateLikeDiv);
-                //newFigure.appendChild(newHeart);
                 newFigure.appendChild(newImg);
                 newFigure.appendChild(newFigcaption);
                 newImageDiv.appendChild(newFigure);
 
+                //Added Heart Functionality here
                 newHeart.addEventListener('click', toggleHeart);
-
                 function toggleHeart() {
                     const enduserUserName = getCookie('name');
                     let updatedHeartCount = +heartCount.innerHTML;
@@ -156,10 +144,6 @@
                     xhr.open('POST', '/hearts/enduserUserName/' + enduserUserName + '/imageid/' + image.id);
                     xhr.send();
                 };
-
-
-
-
 
                 //Add image comments
                 let commentContainer = document.createElement('div');
