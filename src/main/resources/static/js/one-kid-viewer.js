@@ -37,7 +37,20 @@
 
         menuIcon.addEventListener('click', navClickHandler);
 
+        addDeleteKidChannelEventListener();
+
     };
+
+    function addDeleteKidChannelEventListener(){
+        const deleteChannelButton = document.querySelector('.deleteChannelButton');
+
+
+        deleteChannelButton.addEventListener('click', function(){
+            if(confirm("Do you really want to delete this channel?")){
+                document.location = `http://localhost:8080/delete-kid?id=${kidId}`;
+            }
+        })
+    }
 
     function getKidImages() {
         const xhr = new XMLHttpRequest();

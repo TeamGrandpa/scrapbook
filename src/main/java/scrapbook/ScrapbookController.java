@@ -9,6 +9,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
+import java.util.Collection;
 import java.util.Date;
 import java.util.Optional;
 
@@ -41,6 +42,9 @@ public class ScrapbookController {
 
 	@Resource
 	CommentRepository commentRepo;
+	
+	@Resource
+	HeartRepository heartRepo;
 	
 	@RequestMapping("/kid")
 	public String findOneKid(@RequestParam(value = "id") long id, Model model) throws KidNotFoundException {
@@ -272,11 +276,32 @@ public class ScrapbookController {
 		return "redirect:/kids";
 	}
 	
+		
 	@RequestMapping("/delete-kid")
 	public String deleteOneKidById(@RequestParam("id") long kidId) {
-				
+							
 		Optional<Kid> kidOptional = kidRepo.findById(kidId);
 		Kid kid = kidOptional.get();
+					
+		Collection<Image> images = kid.getImages();
+		
+		// TODO: Investigate if we deleted items far enough in the relationship bread crumb trail
+		// e.g. Do we have to remove the Enduser for each comment/heart?
+		
+		for (Image image: images) {
+			
+			Collection<Comment> comments = image.getComments();
+			for(Comment comment : comments) {
+				commentRepo.delete(comment);
+			}
+			
+			Collection<Heart> hearts = image.getHearts();
+			for(Heart heart : hearts) {
+				heartRepo.delete(heart);
+			}
+			
+			imageRepo.delete(image);
+		}
 		
 		kidRepo.delete(kid);
 	

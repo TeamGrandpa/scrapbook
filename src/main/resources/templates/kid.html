@@ -41,7 +41,7 @@
                 <div>Edit Channel</div>
             </a>
             <div th:class="@{'Color' + ${kid.colorNum}}" id="menuLine"></div>
-            <a th:href="@{/delete-kid(id=${kid.id})}" id="lastNavItem">
+            <a class="deleteChannelButton" id="lastNavItem">
                 <div>Delete Channel</div>
             </a>
         </div>
