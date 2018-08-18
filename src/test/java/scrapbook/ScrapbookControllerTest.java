@@ -112,6 +112,16 @@ public class ScrapbookControllerTest {
 		
 	}
 	
+	@Test
+	public void shouldRemoveKidByKidIdByOptional() {
+		Long kidId = 1L;
+		underTest.deleteOneKidById(kidId);
+		verify(kidRepo).deleteById(kidId);
+		
+	}
+	
+
+	
 	
 
 

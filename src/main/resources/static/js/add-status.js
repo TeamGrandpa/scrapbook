@@ -38,6 +38,7 @@
     let bgColorSelection = 'white';
     let submittedText = "";
     const charLimit = 30;
+
     let baselineYPos = Math.ceil((canvasHeight / 2) - 3);
     let baselineXPos = canvasWidth / 2;
 
@@ -67,7 +68,6 @@
     /* Input wiring */
 
     // Status Text Input
-
 
     const textInput = document.querySelector('#inputStatusText');
     // textInput.addEventListener('keyup', addText);

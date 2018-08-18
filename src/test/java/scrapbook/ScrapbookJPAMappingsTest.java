@@ -3,6 +3,7 @@ package scrapbook;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertThat;
 
 import java.util.Optional;
@@ -49,6 +50,26 @@ public class ScrapbookJPAMappingsTest {
 		Optional<Kid> result = kidRepo.findById(kidId);
 		kid = result.get();
 		assertThat(kid.getName(), is("sam"));
+	}
+	
+	@Test
+	public void shouldDeleteKid() {
+		Kid kid = kidRepo.save(new Kid("sam"));
+		long kidId = kid.getId();
+
+		entityManager.flush();
+		entityManager.clear();
+		
+		Optional<Kid> result = kidRepo.findById(kidId);
+		kid = result.get();
+		assertThat(kid.getName(), is("sam"));
+		
+		kidRepo.delete(kid);
+		
+		entityManager.flush();
+		entityManager.clear();
+		
+		assertThat(kidRepo.findById(kidId).isPresent(), is(false));
 	}
 
 	@Test
@@ -172,5 +193,7 @@ public class ScrapbookJPAMappingsTest {
 		assertThat(heart.getImage().getId(), is(imageId));
 		assertThat(heart.getEnduser().getId(), is(enduserId));
 	}
+	
+	
 
 }
