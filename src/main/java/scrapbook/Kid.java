@@ -73,6 +73,19 @@ public class Kid {
 		return images;
 	}
 	
+	//setters
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public void setColorNum(int colorNum) {
+		this.colorNum = colorNum;
+	}
+	
+	public void setPortraitUrl(String portraitUrl) {
+		this.portraitUrl = portraitUrl;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

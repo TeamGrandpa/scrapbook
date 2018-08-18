@@ -91,14 +91,71 @@
 
                 //Add image with timestamp above and caption below
                 let newFigure = document.createElement('figure');
+                let newDateLikeDiv = document.createElement('div');
+                newDateLikeDiv.classList.add('dateLikeDiv');
                 let newDate = document.createElement('span');
                 newDate.setAttribute('class', 'timeStamp');
                 newDate.textContent = image.date;
-                newFigure.appendChild(newDate);
-                
+
+                let heartAndCountDiv = document.createElement('div');
+                heartAndCountDiv.classList.add('hCountDiv');
+                const heartCount = document.createElement('span');
+                heartCount.innerHTML = image.hearts.length;
+                //Added heart icon
+                let newHeart = document.createElement('img');
+                newHeart.classList.add('heartIcon');
+                const enduserUserName = getCookie('name');
+                if (image.hearts.find(heart => heart.enduser.userName === enduserUserName)) {
+                    newHeart.setAttribute('src', '/img/heart-on.svg');
+                    newHeart.classList.add('has-heart');
+                } else {
+                    newHeart.setAttribute('src', '/img/heart-off.svg');
+                    newHeart.classList.add('no-heart');
+                }
+
                 let newImg = document.createElement('img');
+                newImg.classList.add('kidImages');
                 newImg.setAttribute('src', image.imageUrl);
+
+                let newFigcaption = document.createElement('figcaption');
+                newFigcaption.textContent = image.caption;
+
+                newDateLikeDiv.appendChild(newDate);
+                heartAndCountDiv.appendChild(heartCount);
+                heartAndCountDiv.appendChild(newHeart);
+                newDateLikeDiv.appendChild(heartAndCountDiv);
+                newFigure.appendChild(newDateLikeDiv);
                 newFigure.appendChild(newImg);
+
+                //Added Heart Functionality here
+                newHeart.addEventListener('click', toggleHeart);
+                function toggleHeart() {
+                    const enduserUserName = getCookie('name');
+                    let updatedHeartCount = +heartCount.innerHTML;
+                    if (newHeart.classList.contains('no-heart')) {
+                        newHeart.classList.remove('no-heart');
+                        newHeart.setAttribute('src', '/img/heart-on.svg');
+                        newHeart.classList.add('has-heart');
+                        updatedHeartCount++;
+                    } else {
+                        newHeart.classList.remove('has-heart');
+                        newHeart.setAttribute('src', '/img/heart-off.svg');
+                        newHeart.classList.add('no-heart');
+                        updatedHeartCount--;
+                    }
+
+                    const xhr = new XMLHttpRequest();
+                    xhr.onreadystatechange = function () {
+                        if (this.readyState == 4 && this.status == 200) {
+                            const imageHeartCount = JSON.parse(xhr.response);
+                            console.log(imageHeartCount);
+
+                            heartCount.innerHTML = updatedHeartCount;
+                        };
+                    };
+                    xhr.open('POST', '/hearts/enduserUserName/' + enduserUserName + '/imageid/' + image.id);
+                    xhr.send();
+                };
 
                 //Add delete button if user is editor
                 if (getCookie('role') === 'editor') {
@@ -297,5 +354,5 @@
             })
         }
     }
-
+   
 })();

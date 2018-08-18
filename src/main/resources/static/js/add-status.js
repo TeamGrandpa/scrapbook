@@ -37,7 +37,8 @@
 
     let bgColorSelection = 'white';
     let submittedText = "";
-    const charLimit = 32;
+    const charLimit = 30;
+
     let baselineYPos = Math.ceil((canvasHeight / 2) - 3);
     let baselineXPos = canvasWidth / 2;
 
@@ -62,12 +63,11 @@
 
     /* END RegEx Font Search */
 
-    let lineShiftByPx = (parseFloat(canvasFontSize) / 2);
+    let lineShiftByPx = (parseFloat(canvasFontSize) / 1.8);
 
     /* Input wiring */
 
     // Status Text Input
-
 
     const textInput = document.querySelector('#inputStatusText');
     // textInput.addEventListener('keyup', addText);
@@ -84,6 +84,8 @@
             lines.pop();
         }
     }
+
+    addBackgroundColor(bgColorSelection);
 
     function addText() {
 
@@ -292,18 +294,94 @@
     function addBackgroundColor(color) {
 
         /* TODO: Add other color settings */
-
+        let grd = ctx2.createLinearGradient(0, 0, 0, canvasHeight);
         if (color === "black") {
-            ctx2.fillStyle = 'black'; // changing color of the next "drawing method"
+            grd.addColorStop(0, '#555');
+            grd.addColorStop(0.3, 'black');
+            grd.addColorStop(0.7, 'black');
+            grd.addColorStop(1, '#555');
+
+            ctx2.fillStyle = grd; // changing color of the next "drawing method"
             ctx2.fillRect(0, 0, canvasWidth, canvasHeight); // pixel start coordinates/size of drawing INSIDE canvas
 
             ctx2.fillStyle = 'white'; // text color
 
         } else if (color === "white") {
-            ctx2.fillStyle = 'white'; // changing color of the next "drawing method"
+            grd.addColorStop(0, '#bbb');
+            grd.addColorStop(0.3, 'white');
+            grd.addColorStop(0.7, 'white');
+            grd.addColorStop(1, '#bbb');
+
+            ctx2.fillStyle = grd; // changing color of the next "drawing method"
             ctx2.fillRect(0, 0, canvasWidth, canvasHeight); // pixel start coordinates/size of drawing INSIDE canvas
 
             ctx2.fillStyle = 'black'; // text color
+
+        } else if (color === "red") {
+            grd.addColorStop(0, '#a10808');
+            grd.addColorStop(0.3, '#e00c0c');
+            grd.addColorStop(0.7, '#e00c0c');
+            grd.addColorStop(1, '#a10808');
+
+            ctx2.fillStyle = grd; // changing color of the next "drawing method"
+            ctx2.fillRect(0, 0, canvasWidth, canvasHeight); // pixel start coordinates/size of drawing INSIDE canvas
+
+            ctx2.fillStyle = 'white'; // text color
+
+        } else if (color === "orange") {
+            grd.addColorStop(0, '#b55802');
+            grd.addColorStop(0.3, '#f57803');
+            grd.addColorStop(0.7, '#f57803');
+            grd.addColorStop(1, '#b55802');
+
+            ctx2.fillStyle = grd; // changing color of the next "drawing method"
+            ctx2.fillRect(0, 0, canvasWidth, canvasHeight); // pixel start coordinates/size of drawing INSIDE canvas
+
+            ctx2.fillStyle = 'white'; // text color
+
+        } else if (color === "yellow") {
+            grd.addColorStop(0, '#bcbf00');
+            grd.addColorStop(0.3, '#fbff00');
+            grd.addColorStop(0.7, '#fbff00');
+            grd.addColorStop(1, '#bcbf00');
+
+            ctx2.fillStyle = grd; // changing color of the next "drawing method"
+            ctx2.fillRect(0, 0, canvasWidth, canvasHeight); // pixel start coordinates/size of drawing INSIDE canvas
+
+            ctx2.fillStyle = 'black'; // text color
+
+        } else if (color === "green") {
+            grd.addColorStop(0, '#478f04');
+            grd.addColorStop(0.3, '#66ce06');
+            grd.addColorStop(0.7, '#66ce06');
+            grd.addColorStop(1, '#478f04');
+
+            ctx2.fillStyle = grd; // changing color of the next "drawing method"
+            ctx2.fillRect(0, 0, canvasWidth, canvasHeight); // pixel start coordinates/size of drawing INSIDE canvas
+
+            ctx2.fillStyle = 'white'; // text color
+
+        } else if (color === "blue") {
+            grd.addColorStop(0, '#141a75');
+            grd.addColorStop(0.3, '#1f29b6');
+            grd.addColorStop(0.7, '#1f29b6');
+            grd.addColorStop(1, '#141a75');
+
+            ctx2.fillStyle = grd; // changing color of the next "drawing method"
+            ctx2.fillRect(0, 0, canvasWidth, canvasHeight); // pixel start coordinates/size of drawing INSIDE canvas
+
+            ctx2.fillStyle = 'white'; // text color
+
+        } else if (color === "purple") {
+            grd.addColorStop(0, '#681973');
+            grd.addColorStop(0.3, '#a227b3');
+            grd.addColorStop(0.7, '#a227b3');
+            grd.addColorStop(1, '#681973');
+
+            ctx2.fillStyle = grd; // changing color of the next "drawing method"
+            ctx2.fillRect(0, 0, canvasWidth, canvasHeight); // pixel start coordinates/size of drawing INSIDE canvas
+
+            ctx2.fillStyle = 'white'; // text color
 
         }
 

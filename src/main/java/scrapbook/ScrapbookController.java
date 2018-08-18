@@ -275,7 +275,6 @@ public class ScrapbookController {
 
 		return "redirect:/kids";
 	}
-	
 		
 	@RequestMapping("/delete-kid")
 	public String deleteOneKidById(@RequestParam("id") long kidId) {
@@ -307,4 +306,50 @@ public class ScrapbookController {
 	
 		return "redirect:/kids";
 	}
+
+	@PostMapping("/editKid")
+	public String editKid(
+			@RequestParam("kidId") long kidId,
+			@RequestParam("kidName") String kidName, 
+			@RequestParam("radio") int colorNum,
+			@RequestParam("file") MultipartFile imageFile, Model model) throws IOException {
+		
+		Optional<Kid> kidOptional = kidRepo.findById(kidId);
+		Kid kidToEdit = kidOptional.get();
+		
+		boolean setSomething = false;
+		
+		if (!kidName.equals("") && !kidName.equals(kidToEdit.getName())) {
+			kidToEdit.setName(kidName);
+			setSomething = true;
+		}
+		
+		if (colorNum != kidToEdit.getColorNum()) {
+			kidToEdit.setColorNum(colorNum);
+			setSomething = true;
+		}
+		
+		String fileName = imageFile.getOriginalFilename();
+		if (!"".equalsIgnoreCase(fileName)) {
+			File tempFile = File.createTempFile(fileName, "");
+			FileOutputStream fos = new FileOutputStream(tempFile);
+			fos.write(imageFile.getBytes());
+			fos.close();
+
+			String uploadDirectory = getUploadDirectory();
+			File fileUpload = new File(uploadDirectory, fileName); // TODO: ensure it doesn't already exist
+			imageFile.transferTo(fileUpload);
+
+			String portraitUrl = "/uploadedimage/" + fileName;
+			kidToEdit.setPortraitUrl(portraitUrl);
+			setSomething = true;
+		}
+		
+		if (setSomething) {
+			kidRepo.save(kidToEdit);
+		}
+		
+		return "redirect:/kid?id=" + kidId;
+	}
+	
 }
