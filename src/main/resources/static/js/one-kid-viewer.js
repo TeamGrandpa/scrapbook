@@ -41,15 +41,24 @@
 
     };
 
-    function addDeleteKidChannelEventListener(){
-        const deleteChannelButton = document.querySelector('.deleteChannelButton');
+    function addDeleteKidChannelEventListener() {
+        const deleteChannelNavButton = document.querySelector('.deleteChannelNavButton');
+        const deleteChannelModal = document.querySelector('#deleteKidModal');
+        const deleteChannelYes = document.querySelector('#deleteChannelYes');
+        const deleteChannelNo = document.querySelector('#deleteChannelNo');
 
-
-        deleteChannelButton.addEventListener('click', function(){
-            if(confirm("Do you really want to delete this channel?")){
-                document.location = `http://localhost:8080/delete-kid?id=${kidId}`;
-            }
+        deleteChannelNavButton.addEventListener('click', function () {
+            deleteChannelModal.style.display = "flex";
         })
+
+        deleteChannelYes.addEventListener('click', function () {
+            document.location = `http://localhost:8080/delete-kid?id=${kidId}`;
+        })
+
+        deleteChannelNo.addEventListener('click', function () {
+            deleteChannelModal.style.display = "none";
+        })
+
     }
 
     function getKidImages() {
@@ -350,5 +359,5 @@
             })
         }
     }
-   
+
 })();

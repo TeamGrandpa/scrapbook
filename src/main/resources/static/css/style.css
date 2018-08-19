@@ -461,3 +461,34 @@ h3 {
 	outline: 1px dotted #000;
 	outline: -webkit-focus-ring-color auto 5px;
 }
+
+/* Delete Kid Channel Modal */
+
+.modalContainer {
+    display: none;
+    flex-direction: row;
+    align-items: center;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: black;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modalContent {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    margin: 15% auto;
+    width: 80%;
+    padding: 5px;
+}
+
+#deleteKidModal{
+    display: none;
+}
+

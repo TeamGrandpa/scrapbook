@@ -42,11 +42,28 @@
             </a>
             <div th:class="@{'Color' + ${kid.colorNum}}" id="menuLine"></div>
 
-            <a class="deleteChannelButton" id="lastNavItem">
+            <a class="deleteChannelNavButton" id="lastNavItem">
 
                 <div>Delete Channel</div>
             </a>
         </div>
+
+        <div id="deleteKidModal" class="modalContainer">
+
+            <div id="deleteKidModalContent" class="modalContent">
+                <!-- <div class="closeContainer">
+                    <p id="frontEndClose" class="closeButton">&times;</p>
+                </div> -->
+                <h2>Are you sure you want to delete this Channel?</h2>
+                <p>Once you do, all picutres and status updates cannot be recovered.</p>
+                <span>
+                    <button id="deleteChannelYes" class="deleteChannelButton">YES</button>
+                    <button id="deleteChannelNo" class="deleteChannelButton">NO</button> 
+                </span>
+            </div>
+
+        </div>
+
     </div>
     <script src="./js/one-kid-viewer.js"></script>
 </body>
