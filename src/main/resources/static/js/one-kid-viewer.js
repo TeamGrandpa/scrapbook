@@ -77,11 +77,17 @@
         imageContainer.innerHTML = '';
 
         if (!kidImages.length) {
-            let newFigure = document.createElement('figure');
-            let newFigcaption = document.createElement('figcaption');
-            newFigcaption.textContent = 'No current images';
-            newFigure.appendChild(newFigcaption);
-            imageContainer.appendChild(newFigure);
+            let koalaDiv = document.createElement('div');
+            koalaDiv.classList.add('koalaDiv');
+            let newImg = document.createElement('img');
+            newImg.setAttribute('src', '/img/Sad Koala.jpg');
+            newImg.setAttribute('id', 'sadKoala');
+            let newKoalaH3 = document.createElement('h3');
+            newKoalaH3.setAttribute('id', 'koalaH3');
+            newKoalaH3.textContent = 'No current images';
+            koalaDiv.appendChild(newImg);
+            koalaDiv.appendChild(newKoalaH3);
+            imageContainer.appendChild(koalaDiv);
         }
         else {
             kidImages.forEach(image => {
@@ -330,6 +336,7 @@
                 newCommentAuthor.setAttribute('class', 'commentAuthor');
                 newCommentAuthor.textContent = comment.enduser.userName;
                 let newCommentText = document.createElement('span');
+                newCommentText.setAttribute('class', 'commentText');
                 newCommentText.textContent = comment.commentContent;
 
                 if (getCookie('name') === comment.enduser.userName || getCookie('role') === 'editor') {

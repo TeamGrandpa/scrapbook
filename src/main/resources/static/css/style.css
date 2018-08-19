@@ -53,6 +53,7 @@ header {
 	position: fixed;
 	top: 0;
     width: 100%;
+    height: 3.2rem;
     margin: 0 auto;
     color: #fff;
     text-align: center;
@@ -74,6 +75,14 @@ header {
 h1 {
     font-size: 1.8rem;
     margin-top: 0.1rem;
+}
+
+#milestones {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif, Arial, sans-serif;
+    font-size: 1.8rem;
+    margin-top: 0.1rem;
+    font-weight: 600;
+    letter-spacing: 1px;
 }
 
 h3 {
@@ -176,8 +185,23 @@ h3 {
     position: relative;
 }
 
-#imageContainer figure {
-    position: relative;
+.koalaDiv {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+}
+
+#koalaH3 {
+    font-size: 1.5rem;
+    color: #aaa;
+    text-align: center;
+}
+
+#sadKoala {
+    margin: 0 auto;
+    margin-top: 9rem;
+    margin-bottom: 1rem;
+    border-radius: 50%;
 }
 
 .kidImages {
@@ -201,6 +225,9 @@ h3 {
 
 #imageContainer figcaption {
     margin-left: 0.8rem;
+    line-height: 1.3rem;
+    margin-top: 0.1rem;
+    margin-bottom: 0.17rem;
 }
 
 .timeStamp {
@@ -222,6 +249,12 @@ h3 {
 
 .commentAuthor {
     font-weight: bold;
+}
+
+.commentText {
+    line-height: 1.3rem;
+    margin-top: 0.1rem;
+    margin-bottom: 0.18rem;
 }
 
 .commentDeleteButton {
