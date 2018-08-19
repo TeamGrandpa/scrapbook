@@ -126,6 +126,8 @@
                 newDateLikeDiv.appendChild(heartAndCountDiv);
                 newFigure.appendChild(newDateLikeDiv);
                 newFigure.appendChild(newImg);
+                newFigure.appendChild(newFigcaption);
+                newImageDiv.appendChild(newFigure);
 
                 //Added Heart Functionality here
                 newHeart.addEventListener('click', toggleHeart);
@@ -169,12 +171,6 @@
                         removeImage(image.id);
                     });
                 }
-
-                let newFigcaption = document.createElement('figcaption');
-                newFigcaption.textContent = image.caption;
-
-                newFigure.appendChild(newFigcaption);
-                newImageDiv.appendChild(newFigure);
 
                 //Add image comments
                 let commentContainer = document.createElement('div');

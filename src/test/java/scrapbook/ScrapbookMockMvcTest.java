@@ -40,6 +40,9 @@ public class ScrapbookMockMvcTest {
 	@MockBean 
 	private CommentRepository commentRepo;
 	
+	@MockBean
+	private HeartRepository heartRepo;
+	
 	@Mock
 	private Kid kid;
 	

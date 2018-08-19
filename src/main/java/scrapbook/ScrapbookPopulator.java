@@ -79,10 +79,10 @@ public class ScrapbookPopulator implements CommandLineRunner {
 		Heart heartDad = new Heart(Dad, penny_img1);
 		heartDad = heartRepo.save(heartDad);
 		
-		Heart heartDad2 = new Heart(Dad, sam_img1);
+		Heart heartDad2 = new Heart(Dad, alana_art);
 		heartDad2 = heartRepo.save(heartDad2);
 		
-		Heart heartGrandma2 = new Heart(Grandma, sam_baby);
+		Heart heartGrandma2 = new Heart(Grandma, oliver_jacket);
 		heartGrandma2 = heartRepo.save(heartGrandma);
 		
 		// Create Comments
