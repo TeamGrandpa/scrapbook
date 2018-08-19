@@ -7,33 +7,75 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Add Child</title>
 
-    <link rel="stylesheet" type="text/css" href="./css/style.css">
+    <link rel="stylesheet" type="text/css" href="./css/newKid.css">
 </head>
 
 <body>
-    
-    <form method="POST" th:action="@{/add-new-channel}" id="add-new-channel">
-        <div>
-           <h2>Enter First Name: </h2>
-           <input type="text" name="kidName" placeholder="Enter Child's Name">
-        </div>
-        <div>
-            <h2>Choose favorite color: </h2>
-            <select name="kidColor">
-                <option value="red">Red</option>
-                <option value="orange">Orange</option>
-                <option value="yellow">Yellow</option>
-                <option value="green">Green</option>
-                <option value="blue">Blue</option>
-                <option value="purple">Purple</option>
-            </select>
-        </div>
-        <div>
-            <h2>Upload profile picture: </h2>
-            <input accept="image_file_path">
-        </div>
-        <input type = "submit">
-        </form>
+
+    <header class="colorDefault">
+        <h1>Add New Child</h1>
+        <a id="prev" href="/kids">&#10094;</a>
+    </header>
+
+    <main>
+        <section id="whiteBox"></section>
+        <section class="newChildContainer">
+            <img src="./img/newKidLogo.jpg" style="width:80px;height:80px;">
+            <form method="POST" action="/uploadNewKid" id="add-new-channel" enctype="multipart/form-data">
+                <div id="nameBox">
+                    <h2>Enter First Name: </h2>
+                    <input type="text" name="kidName" placeholder="Enter Child's Name" />
+                </div>
+                <div id="colorBox">
+                    <h2>Choose Child's Color: </h2>
+                    <div id="colorChoices">
+                        <label class="container"> Red
+                            <input type="radio" checked="checked" name="radio" value="1">
+                            <span class="checkmark" id="Color1"></span>
+                        </label>
+                        <label class="container"> Orange
+                            <input type="radio" name="radio" value="2">
+                            <span class="checkmark" id="Color2"></span>
+                        </label>
+                        <label class="container"> Teal
+                            <input type="radio" name="radio" value="3">
+                            <span class="checkmark" id="Color3"></span>
+                        </label>
+                        <label class="container"> Green
+                            <input type="radio" name="radio" value="4">
+                            <span class="checkmark" id="Color4"></span>
+                        </label>
+                        <label class="container"> Blue
+                            <input type="radio" name="radio" value="5">
+                            <span class="checkmark" id="Color5"></span>
+                        </label>
+                        <label class="container"> Purple
+                            <input type="radio" name="radio" value="6">
+                            <span class="checkmark" id="Color6"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div id="picBox">
+                    <h2>Upload Profile Picture: </h2>
+
+                    <div id="fileBox">
+                        <input type="file" name="file" id="file" class="inputfile" />
+                        <label for="file">
+                            <span>Choose a file...</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div id="buttonContainer">
+                    <input id="submitButton" type="submit" value="Add Child">
+                </div>
+
+            </form>
+        </section>
+
+    </main>
 </body>
-<script src="./js/all-kids-viewer.js"></script>
+<script src="./js/upload-image.js"></script>
+
 </html>

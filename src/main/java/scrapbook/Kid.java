@@ -30,11 +30,6 @@ public class Kid {
 	@OneToMany(mappedBy = "kid")
 	private Collection<Image> images;
 	
-	@JsonIgnore
-	@OneToMany(mappedBy = "kid")
-	private Collection<Message> messages;
-	
-	
 	//empty constructor
 	protected Kid() {
 		
@@ -78,8 +73,17 @@ public class Kid {
 		return images;
 	}
 	
-	public Collection<Message> getMessages() {		
-		return messages;
+	//setters
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public void setColorNum(int colorNum) {
+		this.colorNum = colorNum;
+	}
+	
+	public void setPortraitUrl(String portraitUrl) {
+		this.portraitUrl = portraitUrl;
 	}
 	
 	@Override

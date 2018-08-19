@@ -1,0 +1,279 @@
+* {
+    font-family: Helvetica, Arial, sans-serif;
+    line-height: 1.5em;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --Color1: #e00c0c;
+    --Color2: #f57803;
+    --Color3: #00aa8e;
+    --Color4: #66ce06;
+    --Color5: #1f29b6;
+    --Color6: #a227b3;
+
+    --ColorDefault: #aaaaaa;
+    --ShareBear: #951B81;
+}
+
+/* add kid channel styling */
+
+.colorDefault {
+	background-color: var(--ColorDefault);
+}
+
+#Color1 {
+    background: var(--Color1);
+}
+
+#Color2 {
+    background: var(--Color2);
+}
+
+#Color3 {
+    background: var(--Color3);
+}
+
+#Color4 {
+    background: var(--Color4);
+}
+
+#Color5 {
+    background: var(--Color5);
+}
+
+#Color6 {
+    background: var(--Color6);
+}
+
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    margin: 0 auto;
+    color: #fff;
+    text-align: center;
+    padding: 0.2rem;
+}
+
+#prev {
+  cursor: pointer;
+  position: fixed;
+  text-decoration: none;
+  font-size: 1.8rem;
+  margin-top: 0.1rem;
+  color: #fff;
+  top: 0.2rem;
+  left: 1rem;
+}
+
+#whiteBox {
+	background-color: #fff;
+	height: 3.3rem;
+}
+
+h1 {
+    font-size: 1.8rem;
+    margin-top: 0.1rem;
+}
+
+h2 {
+    font-size: 1.3rem;
+    text-align: center;
+} 
+
+.newChildContainer {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    margin: 0.5rem 2rem;
+}
+
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0.5rem;
+    border-radius: 50%;
+}
+
+
+#nameBox {
+    padding-bottom: 1.5rem;  
+    padding-top: 1rem;
+}
+
+#nameBox input {
+    margin-top: 0.3rem;
+    font-size: 1rem;
+    padding: 5px 10px;
+    width: 80%;
+    border: solid 1px black;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* #nameBox input:focus {
+    border: solid 3px var(--ShareBear);  
+} */
+
+#picBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 0.3rem;
+}
+
+#fileBox {
+    margin-top: 0.3rem;
+}
+
+/* #picBox input {
+    margin-top: 0.3rem; 
+    width: 80%;
+    border: solid 1px black;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+} */
+
+/* #picBox input:focus {
+    border: solid 3px var(--ShareBear);  
+} */
+
+#buttonContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1.8rem;
+}
+
+#submitButton {
+    font-size: 1rem;
+    background-color: #eee;
+    border: none;
+    text-decoration: none;
+    padding: 0.5rem 1.3rem 0.5rem 1.3rem;
+    border-radius: 1.5rem;
+    cursor: pointer;
+}
+
+#colorBox {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+    /* border: 3px dashed black; */
+    padding: 0.5rem 1.5rem 0.5rem 1.5rem;
+    background-color: #eee;
+    border-radius: 1rem;
+}
+
+#colorBox h3 {
+    text-align:center;
+}
+
+#colorChoices {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
+}
+
+.container {
+  display: block;
+  position: relative;
+  padding-left: 50px;
+  margin-top: 12px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 20px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default radio button */
+.container input {
+  position: absolute;
+  opacity: 0;
+}
+
+/* Create a custom radio button */
+.checkmark {
+    position: absolute;
+    top: -9px;
+    left: 0;
+    height: 44px;
+    width: 44px;
+    background-color: #eee;
+    border-radius: 50%;
+    border: 3px solid #fff;
+    box-shadow: 0 -2px 0 3px rgba(0, 0, 0, 0.1) inset, 0 3px 5px #444, 0 15px rgba(255, 255, 255, 0.25) inset;
+    cursor: pointer;
+    display: inline-block;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the radio button is checked, add a blue background */
+.container input:checked ~ .checkmark {
+  background-color: #2196F3;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.container .checkmark:after {
+  top: 12px;
+  left: 12px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+.inputfile + label {
+    font-size: 1rem;
+    font-weight: 700;
+    padding: 0.5rem 1rem;
+    color: white;
+    background-color: black;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.inputfile:focus + label {
+	outline: 1px dotted #000;
+	outline: -webkit-focus-ring-color auto 5px;
+}
+
+#generatedCanvas {
+    margin-top: 1rem;
+    border: 1px solid #000;
+    width: 100%;
+}

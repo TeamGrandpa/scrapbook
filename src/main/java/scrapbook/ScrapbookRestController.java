@@ -1,5 +1,6 @@
 package scrapbook;
 
+import java.util.Collection;
 import java.util.Optional;
 
 import javax.annotation.Resource;
@@ -7,6 +8,7 @@ import javax.annotation.Resource;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -41,6 +43,22 @@ public class ScrapbookRestController {
 	public Iterable<Comment> findAllCommentsByImageId(@PathVariable long id) {
 		return commentRepo.findByImageId(id);
 	}
+	
+	@PutMapping("/removeImage")
+	public Iterable<Image> removeImage(
+			@RequestParam(name = "kidId") long kidId,
+			@RequestParam(name = "imageId") long imageId) {
+		Optional<Image> imageOptional = imageRepo.findById(imageId);
+		Image imageToRemove = imageOptional.get();
+		Collection<Comment> comments = imageToRemove.getComments();
+		for (Comment comment : comments) {
+			commentRepo.delete(comment);
+		}
+		
+		imageRepo.delete(imageToRemove);
+		
+		return imageRepo.findByKidIdOrderByIdDesc(kidId);
+	}
 
 	@PostMapping("/addComment")
 	public Iterable<Comment> addComment(
@@ -53,12 +71,25 @@ public class ScrapbookRestController {
 		
 		Optional<Enduser> enduserOptional = enduserRepo.findByUserName(authorName);
 		Enduser enduser = enduserOptional.get();
-
+		
 		if (commentText != "") {
 			commentRepo.save(new Comment(commentText, enduser, image));
 		}
 
 		return commentRepo.findByImageId(imageId);
 	}
+	
+	@PutMapping("/removeComment")
+	public Iterable<Comment> removeComment(@RequestParam(name = "commentId") long commentId) {
+		Optional<Comment> commentOptional = commentRepo.findById(commentId);
+		Comment commentToRemove = commentOptional.get();
+		Image image = commentToRemove.getImage();
+		long imageId = image.getId();	
+		
+		commentRepo.delete(commentToRemove);
+		
+		return commentRepo.findByImageId(imageId);	
+	}
+	
 
 }

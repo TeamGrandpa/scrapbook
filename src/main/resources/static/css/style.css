@@ -7,11 +7,14 @@
 }
 
 :root {
-    --Color1: #af66b9;
-    --Color2: #b66161;
-    --Color3: #5c974e;
+    --Color1: #e00c0c;
+    --Color2: #f57803;
+    --Color3: #00aa8e;
+    --Color4: #66ce06;
+    --Color5: #1f29b6;
+    --Color6: #a227b3;
     
-    --ColorDefault: #aaaaaa;
+    --ColorDefault: #aaa;
 }
 
 .Color1 {
@@ -24,6 +27,18 @@
 
 .Color3 {
     background: var(--Color3);
+}
+
+.Color4 {
+    background: var(--Color4);
+}
+
+.Color5 {
+    background: var(--Color5);
+}
+
+.Color6 {
+    background: var(--Color6);
 }
 
 .ColorDefault {
@@ -42,6 +57,7 @@ header {
     color: #fff;
     text-align: center;
     padding: 0.2rem;
+    z-index: 200;
 }
 
 #prev {
@@ -135,10 +151,6 @@ h3 {
     cursor: pointer;  
 }
 
-
-
-
-
 #whiteBox {
 	background-color: #fff;
 	height: 3.3rem;
@@ -160,10 +172,31 @@ h3 {
     grid-template-rows: auto;
     grid-row-gap: 0.5rem;
 }
+#imageContainer figure {
+    position: relative;
+}
 
-#imageContainer figure img{
+#imageContainer figure {
+    position: relative;
+}
+
+.kidImages {
     margin-top: 0.5rem;
     width: 100%;
+}
+
+.imageDeleteButton {
+	display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    opacity: 0.7;
+    cursor: pointer;
+    position: absolute;
+    top: 2.4rem;
+    left: 0.6rem;
+    text-shadow: 0 0 3px #fff, 0 0 3px #fff;
 }
 
 #imageContainer figcaption {
@@ -184,10 +217,26 @@ h3 {
     margin-left: 2rem;
     margin-right: 1rem;
     border-radius: 0.7rem;
+    position: relative;
 }
 
 .commentAuthor {
     font-weight: bold;
+}
+
+.commentDeleteButton {
+	display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    cursor: pointer;
+    position: absolute;
+    top: 0.4rem;
+    right: 0.4rem;
+    padding: 0 0.27rem 0 0.3rem;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.7);
 }
 
 .buttonDiv {
@@ -201,6 +250,7 @@ h3 {
     background-color: #eee;
     padding: 0.3rem 1rem 0.3rem 0.7rem;
     border-radius: 1rem;
+    cursor: pointer;
 }
 
 .commentForm {
@@ -211,8 +261,11 @@ h3 {
 }
 
 .commentTextInput {
+    font-family: inherit;
     font-size: 1rem;
     width: 100%;
+    padding: 5px 10px;
+    border: none;
 }
 
 #newkid {
@@ -225,3 +278,186 @@ h3 {
     width: 100%;
 }
 
+.hCountDiv {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    
+
+}
+
+.hCountDiv span {
+    text-align: right;
+    margin-right: 0.5rem;
+}
+
+.dateLikeDiv {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.heartIcon {
+    height: 1.6em;
+    margin-right: 0.8rem;
+}
+
+
+#menuIcon {
+    display: none;
+    position: fixed;
+    top: 0.35rem;
+    right: 0.8rem;
+    cursor: pointer;
+    z-index: 350;
+}
+
+.bar1, .bar2, .bar3 {
+    width: 30px;
+    height: 4px;
+    background-color: #fff;
+    margin: 6px 0;
+    transition: 0.4s;
+}
+
+.change .bar1 {
+    -webkit-transform: rotate(-45deg) translate(-7px, 6px) ;
+    transform: rotate(-45deg) translate(-7px, 6px) ;
+}
+
+.change .bar2 {
+    opacity: 0;
+}
+
+.change .bar3 {
+    -webkit-transform: rotate(45deg) translate(-8px, -8px) ;
+    transform: rotate(45deg) translate(-8px, -8px) ;
+}
+
+#menuLine {
+    height: 0.3rem;
+    width: 100%;
+}
+
+#navMenu {
+    display: block;
+    position: fixed;
+    top: 3.2rem;
+    right: 0;
+    padding-right: 0.5rem;
+    z-index: 199;
+}
+
+#navMenu a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.75rem 0.9rem;
+    background-color: #ddd;
+    color: #222;
+    text-decoration: none;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+#lastNavItem {
+    border-radius: 0 0 0.7rem 0.7rem;
+}
+
+.slider {
+	overflow-y: hidden;
+	max-height: 0; /* approximate max height */
+
+	transition-property: all;
+	transition-duration: 0.4s;
+	transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+}
+
+.slider.open {
+	max-height: 13rem;
+}
+
+#newPhotoContainer {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    margin: 1.5rem 1.5rem;
+}
+
+#fileBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #eee;
+    padding: 1.5rem 1rem;
+    border-radius: 1rem;
+}
+
+#captionDiv {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1rem;
+    width: 100%;
+    font-size: 1.2rem;
+}
+
+#captionDiv textarea {
+    padding: 5px 10px;
+    font-size: 1rem;
+}
+
+
+#buttonContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+}
+
+#buttonContainer input[type=submit] {
+    font-size: 1rem;
+    background-color: #eee;
+    border: none;
+    text-decoration: none;
+    padding: 0.5rem 1.3rem 0.5rem 1.3rem;
+    border-radius: 1.5rem;
+    cursor: pointer;
+}
+
+#statusSubmitButton {
+    font-size: 1rem;
+    background-color: #eee;
+    border: none;
+    text-decoration: none;
+    padding: 0.5rem 1.3rem 0.5rem 1.3rem;
+    border-radius: 1.5rem;
+    cursor: pointer;
+}
+
+.inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+.inputfile + label {
+    font-size: 1.2rem;
+    font-weight: 700;
+    padding: 0.5rem 1rem;
+    color: white;
+    background-color: black;
+    display: inline-block;
+    cursor: pointer;
+}
+
+/* .inputfile:focus + label,
+.inputfile + label:hover {
+    background-color: blue;
+} */
+
+.inputfile:focus + label {
+	outline: 1px dotted #000;
+	outline: -webkit-focus-ring-color auto 5px;
+}

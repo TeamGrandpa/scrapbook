@@ -12,7 +12,7 @@
 	<h1>A Single Image</h1>
 
 	<div th:each="image: ${images}">
-		<img th:src="@{'/img/' + ${image.imageUrl}}" />
+		<img th:src="@{${image.imageUrl}}" />
 		<h2 th:text="${image.caption}"></h2>
 	</div>
 	<!-- <div th:each="kid: ${kids}">

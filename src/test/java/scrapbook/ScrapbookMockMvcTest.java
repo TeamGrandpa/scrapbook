@@ -41,7 +41,7 @@ public class ScrapbookMockMvcTest {
 	private CommentRepository commentRepo;
 	
 	@MockBean
-	private MessageRepository messageRepo;
+	private HeartRepository heartRepo;
 	
 	@Mock
 	private Kid kid;
@@ -60,12 +60,6 @@ public class ScrapbookMockMvcTest {
 	
 	@Mock
 	private Comment anotherComment;
-	
-	@Mock
-	private Message message;
-	
-	@Mock
-	private Message anotherMessage;
 	
 	@Test
 	public void shouldRouteToSingleKidView() throws Exception{
@@ -191,48 +185,6 @@ public class ScrapbookMockMvcTest {
 		Collection<Comment> allComments = Arrays.asList(comment, anotherComment);
 		when(commentRepo.findAll()).thenReturn(allComments);
 		mvc.perform(get("/comments")).andExpect(model().attribute("comments", is(allComments)));
-	}
-	
-	@Test
-	public void shouldRouteToSingleMessageView() throws Exception {
-		long arbitraryMessageId = 1;
-		when(messageRepo.findById(arbitraryMessageId)).thenReturn(Optional.of(message));
-		mvc.perform(get("/message?id=1")).andExpect(view().name(is("message")));
-	}
-	
-	@Test
-	public void shouldBeOkForSingleMessage() throws Exception {
-		long arbitraryMessageId = 1;
-		when(messageRepo.findById(arbitraryMessageId)).thenReturn(Optional.of(message));
-		mvc.perform(get("/message?id=1")).andExpect(status().isOk());
-	}
-	
-	@Test
-	public void shouldNotBeOkForSingleMessage() throws Exception {
-		mvc.perform(get("/message?id=1")).andExpect(status().isNotFound());
-	}
-	
-	@Test
-	public void shouldPutSingleMessageIntoModel() throws Exception {
-		when(messageRepo.findById(1L)).thenReturn(Optional.of(message));
-		mvc.perform(get("/message?id=1")).andExpect(model().attribute("messages",  is(message)));
-	}
-	
-	@Test
-	public void shouldRouteToAllMessagesView() throws Exception {
-		mvc.perform(get("/messages")).andExpect(view().name(is("messages")));
-	}
-	
-	@Test
-	public void shouldBeOkForAllMessages() throws Exception {
-		mvc.perform(get("/messages")).andExpect(status().isOk());
-	}
-	
-	@Test
-	public void shouldPutAllMessagesIntoModel() throws Exception {
-		Collection<Message> allMessages = Arrays.asList(message, anotherMessage);
-		when(messageRepo.findAll()).thenReturn(allMessages);
-		mvc.perform(get("/messages")).andExpect(model().attribute("messages", is(allMessages)));
 	}
 	
 }

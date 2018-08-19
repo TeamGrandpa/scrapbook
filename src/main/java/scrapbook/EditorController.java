@@ -1,11 +1,5 @@
 package scrapbook;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.math.BigDecimal;
-import java.nio.file.Files;
 import java.util.Optional;
 
 import javax.annotation.Resource;
@@ -13,17 +7,9 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CookieValue;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class EditorController {
@@ -37,30 +23,55 @@ public class EditorController {
 	@Resource
 	private CommentRepository commentRepo;
 
-	// image uploader may go here??
+	@Resource
+	private EnduserRepository enduserRepo;
 
 	@RequestMapping("/login")
-	public String editorLoginPage() {
+	public String authLoginPage() {
 		// serves as login page
-
 		return "login";
 	}
 
-	@RequestMapping("/editor/login")
-	public String editorLogin(HttpServletResponse response // We need the response so we can add cookies,
-	) {
+	@RequestMapping("/auth/login")
+	public String authLogin(HttpServletResponse response, // We need the response so we can add cookies,
+			@RequestParam("username") String username, @RequestParam("password") String password) {
+		Optional<Enduser> enduserOpt = enduserRepo.findByUserName(username);
+		
+		if (!enduserOpt.isPresent()) {
+			return "redirect:/login";
+		}
 
-		Cookie editorRoleCookie = new Cookie("role", "editor");
-		editorRoleCookie.setHttpOnly(true); // Only server can modify the cookie
-		editorRoleCookie.setMaxAge(300); // Expires after 300 seconds (5 min)
+		Enduser enduser = enduserOpt.get();
+		String savedPassword = enduser.getPassword();
+
+		if(!(savedPassword.equalsIgnoreCase(password))) {
+			return "redirect:/login";
+		}
+		
+		String name = enduser.getUserName();
+		String role = "";
+
+		if (enduser.getIsEditor()) {
+			role = "editor";
+		} else {
+			role = "viewer";
+		}
+
+		Cookie editorRoleCookie = new Cookie("role", role);
+		editorRoleCookie.setPath("/");
+		editorRoleCookie.setMaxAge(60 * 60); // Expires after 3600 seconds (1 hour)
 		response.addCookie(editorRoleCookie);
+		
+		Cookie userNameCookie = new Cookie("name", name);
+		userNameCookie.setPath("/");
+		userNameCookie.setMaxAge(60 * 60);
+		response.addCookie(userNameCookie);
 
-		// Redirect the user back to the editor page once login is complete
-		// The new cookie will allow the user to access the page
-		return "redirect:/editor";
+		return "redirect:/kids";
+
 	}
 
-	@RequestMapping("/editor/logout")
+	@RequestMapping("/auth/logout")
 	public String editorLogin(HttpServletRequest request, HttpServletResponse response) {
 
 		// Find "role" cookie, set it to immediately expire, and send that update to the
@@ -73,23 +84,23 @@ public class EditorController {
 				break;
 			}
 		}
-
-		return "redirect:/editor";
+		return "redirect:/auth";
 	}
 
-	@RequestMapping("/editor")
-	public String editorPanel(@CookieValue(name = "role", defaultValue = "") String role, Model model) {
-
-		if (role == null || !role.equals("editor")) {
-			return "redirect:/login";
-		}
-
-		System.out.println("SUCCESS");
-
-		Iterable<Kid> kids = kidRepo.findAll();
-		model.addAttribute("kids", kids);
-
-		return "editor";
-	}
+//
+//	@RequestMapping("/auth")
+//	public String editorPanel(@CookieValue(name = "role", defaultValue = "") String role, Model model) {
+//
+//		if (role == null || !role.equals("auth")) {
+//			return "redirect:/login";
+//		}
+//
+//		System.out.println("SUCCESS");
+//
+//		Iterable<Kid> kids = kidRepo.findAll();
+//		model.addAttribute("kids", kids);
+//
+//		return "auth";
+//	}
 
 }

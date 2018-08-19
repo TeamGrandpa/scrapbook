@@ -56,6 +56,10 @@ public class Comment {
 		return commentContent;
 	}
 	
+	public Image getImage() {
+		return image;
+	}
+	
 	public String getEnduserName() {
 		return enduser.getUserName();
 	}

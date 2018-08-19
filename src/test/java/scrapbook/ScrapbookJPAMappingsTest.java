@@ -3,6 +3,7 @@ package scrapbook;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertThat;
 
 import java.util.Optional;
@@ -30,13 +31,13 @@ public class ScrapbookJPAMappingsTest {
 	private ImageRepository imageRepo;
 
 	@Resource
-	private MessageRepository messageRepo;
-
-	@Resource
 	private CommentRepository commentRepo;
 
 	@Resource
 	private EnduserRepository enduserRepo;
+	
+	@Resource
+	private HeartRepository heartRepo;
 
 	@Test
 	public void shouldSaveAndLoadKid() {
@@ -49,6 +50,26 @@ public class ScrapbookJPAMappingsTest {
 		Optional<Kid> result = kidRepo.findById(kidId);
 		kid = result.get();
 		assertThat(kid.getName(), is("sam"));
+	}
+	
+	@Test
+	public void shouldDeleteKid() {
+		Kid kid = kidRepo.save(new Kid("sam"));
+		long kidId = kid.getId();
+
+		entityManager.flush();
+		entityManager.clear();
+		
+		Optional<Kid> result = kidRepo.findById(kidId);
+		kid = result.get();
+		assertThat(kid.getName(), is("sam"));
+		
+		kidRepo.delete(kid);
+		
+		entityManager.flush();
+		entityManager.clear();
+		
+		assertThat(kidRepo.findById(kidId).isPresent(), is(false));
 	}
 
 	@Test
@@ -81,28 +102,6 @@ public class ScrapbookJPAMappingsTest {
 		Optional<Kid> result = kidRepo.findById(kidId);
 		kid = result.get();
 		assertThat(kid.getImages(), containsInAnyOrder(image1, image2));
-	}
-
-	@Test
-	public void shouldEstablishMessagestoKidRelationship() {
-
-		Kid kid = new Kid("name");
-		kidRepo.save(kid);
-		long kidId = kid.getId();
-
-		Message message = new Message("content", kid);
-		messageRepo.save(message);
-
-		Message message2 = new Message("content2", kid);
-		messageRepo.save(message2);
-
-		entityManager.flush();
-		entityManager.clear();
-
-		Optional<Kid> result = kidRepo.findById(kidId);
-		kid = result.get();
-		assertThat(kid.getMessages(), containsInAnyOrder(message, message2));
-
 	}
 
 	@Test
@@ -173,5 +172,28 @@ public class ScrapbookJPAMappingsTest {
 		
 		assertThat(enduser.getComments(), containsInAnyOrder(comment, comment2));
 	}
+	
+	@Test
+	public void shouldSaveAndLoadHeart() {
+		Enduser enduser = enduserRepo.save(new Enduser("userName", false));
+		long enduserId = enduser.getId();
+		
+		Image image = new Image("image", "caption", null);
+		imageRepo.save(image);
+		long imageId = image.getId();
+				
+		Heart heart = heartRepo.save(new Heart(enduser, image));
+		long heartId = heart.getId();
+
+		entityManager.flush();
+		entityManager.clear();
+
+		Optional<Heart> result = heartRepo.findById(heartId);
+		heart = result.get();
+		assertThat(heart.getImage().getId(), is(imageId));
+		assertThat(heart.getEnduser().getId(), is(enduserId));
+	}
+	
+	
 
 }

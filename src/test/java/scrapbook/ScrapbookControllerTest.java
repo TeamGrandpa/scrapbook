@@ -27,9 +27,6 @@ public class ScrapbookControllerTest {
 	private ImageRepository imageRepo;
 	
 	@Mock
-	private MessageRepository messageRepo;
-	
-	@Mock
 	private CommentRepository commentRepo;
 	
 	@Mock
@@ -43,12 +40,6 @@ public class ScrapbookControllerTest {
 	
 	@Mock
 	private Image anotherImage;
-	
-	@Mock
-	private Message message;
-	
-	@Mock
-	private Message anotherMessage;
 	
 	@Mock
 	private Comment comment;
@@ -102,24 +93,6 @@ public class ScrapbookControllerTest {
 	}
 	
 	@Test
-	public void shouldAddSingleMessageToModel() throws MessageNotFoundException {
-		long arbitraryMessageId = 1;
-		when(messageRepo.findById(arbitraryMessageId)).thenReturn(Optional.of(message));
-		
-		underTest.findOneMessage(arbitraryMessageId, model);
-		verify(model).addAttribute("messages", message);		
-	}
-	
-	@Test
-	public void shouldAddAllMessagesToModel() {
-		Collection<Message> allMessages = Arrays.asList(message, anotherMessage);
-		when(messageRepo.findAll()).thenReturn(allMessages);
-		
-		underTest.findAllMessages(model);
-		verify(model).addAttribute("messages", allMessages);
-	}
-	
-	@Test
 	public void shouldAddSingleCommentToModel() throws CommentNotFoundException {
 		long arbitraryCommentId = 1;
 		when(commentRepo.findById(arbitraryCommentId)).thenReturn(Optional.of(comment));
@@ -138,6 +111,18 @@ public class ScrapbookControllerTest {
 		verify(model).addAttribute("comments", allComments);	
 		
 	}
+	
+//	@Test
+//	public void shouldRemoveKidByKidIdByOptional() {
+//		long arbitraryKidId = 1L;
+//		when(kidRepo.findById(arbitraryKidId)).thenReturn(Optional.of(kid));
+//		
+//		underTest.deleteOneKidById(arbitraryKidId);
+//		verify(kidRepo).deleteById(arbitraryKidId);
+//		
+//	}
+	
+
 	
 	
 
