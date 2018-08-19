@@ -485,10 +485,25 @@ h3 {
     background-color: white;
     margin: 15% auto;
     width: 80%;
-    padding: 5px;
+    padding: 0.5rem 1.2rem;
+    border-radius: 0.7rem;
 }
 
-#deleteKidModal{
+#deleteKidChannelModalContent{
     display: none;
+}
+
+#deleteKidChannelButtonsContainer{
+    display: flex;
+    justify-content: space-around;
+}
+
+.deleteChannelButton{
+    display: flex;
+    justify-content: center;    
+    background-color: #eee;
+    padding: 0.3rem 1rem 0.3rem 0.7rem;
+    border-radius: 0.8rem;
+    cursor: pointer;
 }
 

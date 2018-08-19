@@ -43,12 +43,24 @@
 
     function addDeleteKidChannelEventListener() {
         const deleteChannelNavButton = document.querySelector('.deleteChannelNavButton');
-        const deleteChannelModal = document.querySelector('#deleteKidModal');
+        const deleteChannelModal = document.querySelector('#deleteKidChannelModal');
+        const deleteChannelModalContent = document.querySelector('#deleteKidChannelModalContent');
         const deleteChannelYes = document.querySelector('#deleteChannelYes');
         const deleteChannelNo = document.querySelector('#deleteChannelNo');
 
+        const navMenu = document.querySelector('#navMenu');
+        const menuIcon = document.querySelector('#menuIcon');
+
+        const navClickHandler = function () {
+            navMenu.classList.toggle('open');
+            menuIcon.classList.toggle('change');
+            event.stopPropagation();
+        };
+
         deleteChannelNavButton.addEventListener('click', function () {
             deleteChannelModal.style.display = "flex";
+            deleteChannelModalContent.style.display = "flex";
+            navClickHandler();
         })
 
         deleteChannelYes.addEventListener('click', function () {
