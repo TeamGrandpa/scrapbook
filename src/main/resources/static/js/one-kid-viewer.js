@@ -41,15 +41,36 @@
 
     };
 
-    function addDeleteKidChannelEventListener(){
-        const deleteChannelButton = document.querySelector('.deleteChannelButton');
+    function addDeleteKidChannelEventListener() {
+        const deleteChannelNavButton = document.querySelector('.deleteChannelNavButton');
+        const deleteChannelModal = document.querySelector('#deleteKidChannelModal');
+        const deleteChannelModalContent = document.querySelector('#deleteKidChannelModalContent');
+        const deleteChannelYes = document.querySelector('#deleteChannelYes');
+        const deleteChannelNo = document.querySelector('#deleteChannelNo');
 
+        const navMenu = document.querySelector('#navMenu');
+        const menuIcon = document.querySelector('#menuIcon');
 
-        deleteChannelButton.addEventListener('click', function(){
-            if(confirm("Do you really want to delete this channel?")){
-                document.location = `http://localhost:8080/delete-kid?id=${kidId}`;
-            }
+        const navClickHandler = function () {
+            navMenu.classList.toggle('open');
+            menuIcon.classList.toggle('change');
+            event.stopPropagation();
+        };
+
+        deleteChannelNavButton.addEventListener('click', function () {
+            deleteChannelModal.style.display = "flex";
+            deleteChannelModalContent.style.display = "flex";
+            navClickHandler();
         })
+
+        deleteChannelYes.addEventListener('click', function () {
+            document.location = `http://localhost:8080/delete-kid?id=${kidId}`;
+        })
+
+        deleteChannelNo.addEventListener('click', function () {
+            deleteChannelModal.style.display = "none";
+        })
+
     }
 
     function getKidImages() {
@@ -357,5 +378,5 @@
             })
         }
     }
-   
+
 })();
