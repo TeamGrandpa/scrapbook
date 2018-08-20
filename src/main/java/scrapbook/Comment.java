@@ -2,7 +2,6 @@ package scrapbook;
 
 import java.time.Instant;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -31,7 +30,7 @@ public class Comment {
 	@ManyToOne
 	private Enduser enduser;
 	
-		
+	//empty constructor	
 	protected Comment() {
 		
 	}
@@ -47,7 +46,7 @@ public class Comment {
 		this.image = image;
 	}
 	
-	//Getters
+	//getters
 	public long getId() {
 		return id;
 	}

@@ -28,6 +28,9 @@ public class ScrapbookRestController {
 	
 	@Resource
 	public EnduserRepository enduserRepo;
+	
+	@Resource
+	public HeartRepository heartRepo;
 
 	@GetMapping("/all-kids")
 	public Iterable<Kid> findAllKids() {
@@ -48,11 +51,18 @@ public class ScrapbookRestController {
 	public Iterable<Image> removeImage(
 			@RequestParam(name = "kidId") long kidId,
 			@RequestParam(name = "imageId") long imageId) {
+		
 		Optional<Image> imageOptional = imageRepo.findById(imageId);
 		Image imageToRemove = imageOptional.get();
+		
 		Collection<Comment> comments = imageToRemove.getComments();
 		for (Comment comment : comments) {
 			commentRepo.delete(comment);
+		}
+		
+		Collection<Heart> hearts = imageToRemove.getHearts();
+		for(Heart heart : hearts) {
+			heartRepo.delete(heart);
 		}
 		
 		imageRepo.delete(imageToRemove);

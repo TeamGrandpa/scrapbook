@@ -14,7 +14,7 @@
     --Color5: #1f29b6;
     --Color6: #a227b3;
     
-    --ColorDefault: #aaa;
+    --ColorDefault: #666;
 }
 
 .Color1 {
@@ -516,9 +516,9 @@ h3 {
     display: flex;
     flex-direction: column;
     background-color: white;
-    margin: 15% auto;
+    margin: 0 auto;
     width: 80%;
-    padding: 0.5rem 1.2rem;
+    padding: 1rem 1rem;
     border-radius: 0.7rem;
 }
 
@@ -529,14 +529,21 @@ h3 {
 #deleteKidChannelButtonsContainer{
     display: flex;
     justify-content: space-around;
+    margin-top: 1rem;
+}
+
+#deleteQuestion {
+font-size: 1.2rem;
+font-weight: bold;
+text-align: center;
 }
 
 .deleteChannelButton{
     display: flex;
     justify-content: center;    
     background-color: #eee;
-    padding: 0.3rem 1rem 0.3rem 0.7rem;
-    border-radius: 0.8rem;
+    padding: 0.5rem 1.3rem 0.5rem 1.3rem;
+    border-radius: 1.5rem;
     cursor: pointer;
 }
 

@@ -12,7 +12,4 @@ public interface ImageRepository extends CrudRepository<Image, Long> {
 
 	Iterable<Image> findByKidIdOrderByIdAsc(long id);
 
-
-	
-
 }

@@ -87,20 +87,4 @@ public class EditorController {
 		return "redirect:/auth";
 	}
 
-//
-//	@RequestMapping("/auth")
-//	public String editorPanel(@CookieValue(name = "role", defaultValue = "") String role, Model model) {
-//
-//		if (role == null || !role.equals("auth")) {
-//			return "redirect:/login";
-//		}
-//
-//		System.out.println("SUCCESS");
-//
-//		Iterable<Kid> kids = kidRepo.findAll();
-//		model.addAttribute("kids", kids);
-//
-//		return "auth";
-//	}
-
 }

@@ -7,7 +7,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Optional;
 
-
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -112,19 +111,6 @@ public class ScrapbookControllerTest {
 		
 	}
 	
-//	@Test
-//	public void shouldRemoveKidByKidIdByOptional() {
-//		long arbitraryKidId = 1L;
-//		when(kidRepo.findById(arbitraryKidId)).thenReturn(Optional.of(kid));
-//		
-//		underTest.deleteOneKidById(arbitraryKidId);
-//		verify(kidRepo).deleteById(arbitraryKidId);
-//		
-//	}
-	
 
 	
-	
-
-
 }

@@ -45,6 +45,7 @@ public class Enduser {
 		this.password = password;
 	}
 
+	//getters
 	public long getId() {
 		return id;
 	}

@@ -1,6 +1,5 @@
 package scrapbook;
 
-import java.util.Collection;
 import java.util.Optional;
 
 import org.springframework.data.repository.CrudRepository;

@@ -14,11 +14,8 @@ import java.util.Date;
 import java.util.Optional;
 
 import javax.annotation.Resource;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.transaction.Transactional;
 
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.stereotype.Controller;
@@ -26,7 +23,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -180,7 +176,7 @@ public class ScrapbookController {
 
 		// Transfer the temporary file to its permanent location
 		String uploadDirectory = getUploadDirectory();
-		File fileUpload = new File(uploadDirectory, fileName); // TODO: ensure it doesn't already exist
+		File fileUpload = new File(uploadDirectory, fileName);
 		imageFile.transferTo(fileUpload);
 
 		// Add image to imageRepo
@@ -210,7 +206,7 @@ public class ScrapbookController {
 
 		// Transfer the temporary file to its permanent location
 		String uploadDirectory = getUploadDirectory();
-		File fileUpload = new File(uploadDirectory, fileName); // TODO: ensure it doesn't already exist
+		File fileUpload = new File(uploadDirectory, fileName);
 		imageFile.transferTo(fileUpload);
 
 		// Add image to imageRepo
@@ -266,7 +262,7 @@ public class ScrapbookController {
 
 		// Transfer the temporary file to its permanent location
 		String uploadDirectory = getUploadDirectory();
-		File fileUpload = new File(uploadDirectory, fileName); // TODO: ensure it doesn't already exist
+		File fileUpload = new File(uploadDirectory, fileName);
 		imageFile.transferTo(fileUpload);
 
 		// Add kid to kidRepo
@@ -283,9 +279,6 @@ public class ScrapbookController {
 		Kid kid = kidOptional.get();
 					
 		Collection<Image> images = kid.getImages();
-		
-		// TODO: Investigate if we deleted items far enough in the relationship bread crumb trail
-		// e.g. Do we have to remove the Enduser for each comment/heart?
 		
 		for (Image image: images) {
 			
@@ -337,7 +330,7 @@ public class ScrapbookController {
 			fos.close();
 
 			String uploadDirectory = getUploadDirectory();
-			File fileUpload = new File(uploadDirectory, fileName); // TODO: ensure it doesn't already exist
+			File fileUpload = new File(uploadDirectory, fileName);
 			imageFile.transferTo(fileUpload);
 
 			String portraitUrl = "/uploadedimage/" + fileName;
