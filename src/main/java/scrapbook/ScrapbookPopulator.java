@@ -91,6 +91,12 @@ public class ScrapbookPopulator implements CommandLineRunner {
 
 		Heart heartDad7 = new Heart(Dad, penny_three);
 		heartDad7 = heartRepo.save(heartDad7);
+		
+		Heart heartGrandpa = new Heart(Grandpa, penny_three);
+		heartGrandpa = heartRepo.save(heartGrandpa);
+		
+		Heart heartGrandpa2 = new Heart(Grandpa, penny_two);
+		heartGrandpa2 = heartRepo.save(heartGrandpa2);
 
 		Heart heartDad8 = new Heart(Dad, penny_art);
 		heartDad8 = heartRepo.save(heartDad8);
@@ -103,6 +109,9 @@ public class ScrapbookPopulator implements CommandLineRunner {
 
 		Heart heartDad3 = new Heart(Dad, oliver_jacket);
 		heartDad3 = heartRepo.save(heartDad3);
+		
+		Heart heartGrandpa3 = new Heart(Grandpa, oliver_jacket);
+		heartGrandpa3 = heartRepo.save(heartGrandpa3);
 
 		Heart heartDad4 = new Heart(Dad, oliver_art);
 		heartDad4 = heartRepo.save(heartDad4);

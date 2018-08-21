@@ -177,8 +177,6 @@
                     xhr.onreadystatechange = function () {
                         if (this.readyState == 4 && this.status == 200) {
                             const imageHeartCount = JSON.parse(xhr.response);
-                            console.log(imageHeartCount);
-
                             heartCount.innerHTML = updatedHeartCount;
                         };
                     };

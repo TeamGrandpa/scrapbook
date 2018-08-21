@@ -116,10 +116,6 @@ img {
     margin-right: auto;
 }
 
-/* #nameBox input:focus {
-    border: solid 3px var(--ShareBear);  
-} */
-
 #picBox {
     display: flex;
     flex-direction: column;
@@ -130,19 +126,6 @@ img {
 #fileBox {
     margin-top: 0.3rem;
 }
-
-/* #picBox input {
-    margin-top: 0.3rem; 
-    width: 80%;
-    border: solid 1px black;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-} */
-
-/* #picBox input:focus {
-    border: solid 3px var(--ShareBear);  
-} */
 
 #buttonContainer {
     display: flex;
@@ -165,7 +148,6 @@ img {
     display: flex;
     flex-direction: column;
     margin-bottom: 1rem;
-    /* border: 3px dashed black; */
     padding: 0.5rem 1.5rem 0.5rem 1.5rem;
     background-color: #eee;
     border-radius: 1rem;
