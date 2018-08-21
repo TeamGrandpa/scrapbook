@@ -2,7 +2,6 @@ package scrapbook;
 
 import java.util.Collection;
 
-import javax.persistence.Cacheable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -30,6 +29,7 @@ public class Image {
 	@OneToMany(mappedBy = "image")
 	private Collection<Heart> hearts;
 
+	//empty constructor
 	protected Image() {
 
 	}
@@ -47,6 +47,7 @@ public class Image {
 		this.kid = kid;
 	}
 
+	//getters
 	public long getId() {
 		return id;
 	}

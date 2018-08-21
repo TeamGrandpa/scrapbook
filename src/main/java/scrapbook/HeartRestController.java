@@ -34,9 +34,7 @@ public class HeartRestController {
 		Optional<Image> image = imageRepo.findById(imageId);
 		if (!image.isPresent()) {
 			throw new ImageNotFoundException();
-		}
-		
-		System.out.println(image.get().getHearts().size());
+		}		
 		
 		Optional<Enduser> enduser = enduserRepo.findByUserName(enduserUserName);
 		if (!enduser.isPresent()) {
@@ -50,8 +48,6 @@ public class HeartRestController {
 			heartRepo.deleteByEnduserAndImage(enduser.get(), image.get());
 		}
 		
-		System.out.println(image.get().getHearts().size());
-
 		return image.get().getHearts().size();
 	}
 

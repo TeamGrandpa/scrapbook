@@ -42,11 +42,28 @@
             </a>
             <div th:class="@{'Color' + ${kid.colorNum}}" id="menuLine"></div>
 
-            <a class="deleteChannelButton" id="lastNavItem">
+            <a class="deleteChannelNavButton" id="lastNavItem">
 
                 <div>Delete Channel</div>
             </a>
         </div>
+
+        <div id="deleteKidChannelModal" class="modalContainer">
+
+            <div id="deleteKidChannelModalContent" class="modalContent">
+                <span id="deleteQuestion">Are you sure?</span>
+                <span  id="deleteKidChannelButtonsContainer">
+                    <div id="deleteChannelYes" class="deleteChannelButton">
+                        <p>YES</p>
+                    </div>
+                    <div id="deleteChannelNo" class="deleteChannelButton">
+                        <p>NO</p>
+                    </div>
+                </span>
+            </div>
+
+        </div>
+
     </div>
     <script src="./js/one-kid-viewer.js"></script>
 </body>

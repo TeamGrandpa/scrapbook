@@ -15,10 +15,8 @@
     --Color6: #a227b3;
     --Color9: #fbff00;
 
-    --ColorDefault: #aaaaaa;
+    --ColorDefault: #666;
 }
-
-/* add kid channel styling */
 
 .colorDefault {
 	background-color: var(--ColorDefault);

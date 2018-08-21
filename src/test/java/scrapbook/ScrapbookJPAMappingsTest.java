@@ -3,14 +3,12 @@ package scrapbook;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.greaterThan;
-import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertThat;
 
 import java.util.Optional;
 
 import javax.annotation.Resource;
 
-import org.h2.engine.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -155,8 +153,6 @@ public class ScrapbookJPAMappingsTest {
 	public void shouldEstablishEnduserToCommentsRelationship() {
 		Enduser enduser = enduserRepo.save(new Enduser("userName", false));
 		long enduserId = enduser.getId();
-		
-//		Image image = imageRepo.save(new Image("", "", null));
 		
 		Comment comment = new Comment("comment content", enduser, null);
 		commentRepo.save(comment);
