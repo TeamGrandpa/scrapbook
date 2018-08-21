@@ -168,13 +168,8 @@ public class ScrapbookController {
 
 		// Upload image - stream uploaded data to a temporary file
 		String fileName = "Status-" + new SimpleDateFormat("ddMMyy-hhmmss-SSS").format(new Date()) + ".blb";
-		
-		File tempFile = File.createTempFile(fileName, "");
-		FileOutputStream fos = new FileOutputStream(tempFile);
-		fos.write(imageFile.getBytes());
-		fos.close();
 
-		// Transfer the temporary file to its permanent location
+		// Transfer file to its permanent location
 		String uploadDirectory = getUploadDirectory();
 		File fileUpload = new File(uploadDirectory, fileName);
 		imageFile.transferTo(fileUpload);
@@ -199,12 +194,8 @@ public class ScrapbookController {
 		if ("".equalsIgnoreCase(fileName)) {
 			return "redirect:/kid?id=" + kidId;
 		}
-		File tempFile = File.createTempFile(fileName, "");
-		FileOutputStream fos = new FileOutputStream(tempFile);
-		fos.write(imageFile.getBytes());
-		fos.close();
 
-		// Transfer the temporary file to its permanent location
+		// Transfer file to its permanent location
 		String uploadDirectory = getUploadDirectory();
 		File fileUpload = new File(uploadDirectory, fileName);
 		imageFile.transferTo(fileUpload);
@@ -255,12 +246,8 @@ public class ScrapbookController {
 		if ("".equalsIgnoreCase(fileName) || "".equalsIgnoreCase(kidName)) {
 			return "redirect:/kids";
 		}
-		File tempFile = File.createTempFile(fileName, "");
-		FileOutputStream fos = new FileOutputStream(tempFile);
-		fos.write(imageFile.getBytes());
-		fos.close();
 
-		// Transfer the temporary file to its permanent location
+		// Transfer file to its permanent location
 		String uploadDirectory = getUploadDirectory();
 		File fileUpload = new File(uploadDirectory, fileName);
 		imageFile.transferTo(fileUpload);
@@ -324,10 +311,6 @@ public class ScrapbookController {
 		
 		String fileName = imageFile.getOriginalFilename();
 		if (!"".equalsIgnoreCase(fileName)) {
-			File tempFile = File.createTempFile(fileName, "");
-			FileOutputStream fos = new FileOutputStream(tempFile);
-			fos.write(imageFile.getBytes());
-			fos.close();
 
 			String uploadDirectory = getUploadDirectory();
 			File fileUpload = new File(uploadDirectory, fileName);

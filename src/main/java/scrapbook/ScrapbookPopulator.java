@@ -41,7 +41,7 @@ public class ScrapbookPopulator implements CommandLineRunner {
 
 		// Create Images
 		Image oliver_jacket = new Image("/img/OliverTwo.jpg",
-				"Oliver loves his new leather jacket. Looking cool thanks to Grandma!", "October 24, 2016", oliver);
+				"Oliver loves his new leather jacket. Looking cool thanks to Grandma!", "October 24, 2017", oliver);
 		oliver_jacket = imageRepo.save(oliver_jacket);
 
 		Image oliver_sleep = new Image("/img/OliverThree.jpg", "Oli at nap time.", "May 12, 2018", oliver);
@@ -60,18 +60,19 @@ public class ScrapbookPopulator implements CommandLineRunner {
 		Image penny_two = new Image("/img/Penny_Two.jpg", "Picking flowers and making wishes", "June 5, 2018", penny);
 		penny_two = imageRepo.save(penny_two);
 
-		Image alana_laugh = new Image("/img/AlanaTwo.jpg", "Alana is such a happy baby!", "January 23, 2018", alana);
-		alana_laugh = imageRepo.save(alana_laugh);
-
-		Image alana_art = new Image("/img/AlanaArt.jpg",
-				"She said this was a picture of daddy. Not his best look...lol.", "February 1, 2018", alana);
-		alana_art = imageRepo.save(alana_art);
-
-		Image alana_baby = new Image("/img/AlanaFour.jpg", "Can't believe she's already 5!", "March 9, 2018", alana);
-		alana_baby = imageRepo.save(alana_baby);
-
 		Image alana_inPink = new Image("/img/AlanaThree.jpg", "Alana's Easter dress", "April 1, 2018", alana);
 		alana_inPink = imageRepo.save(alana_inPink);
+
+		Image alana_art = new Image("/img/AlanaArt.jpg",
+				"She said this was a picture of daddy. Not his best look...lol.", "May 19, 2018", alana);
+		alana_art = imageRepo.save(alana_art);
+
+		Image alana_baby = new Image("/img/AlanaFour.jpg", "Can't believe she's already 5!", "May 24, 2018", alana);
+		alana_baby = imageRepo.save(alana_baby);
+		
+		Image alana_laugh = new Image("/img/AlanaTwo.jpg", "Alana is such a happy baby!", "June 23, 2018", alana);
+		alana_laugh = imageRepo.save(alana_laugh);
+
 
 		// Create Endusers
 		Enduser Grandma = new Enduser("Grandma", false, "asdf");
