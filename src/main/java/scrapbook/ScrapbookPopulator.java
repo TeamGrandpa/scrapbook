@@ -47,8 +47,7 @@ public class ScrapbookPopulator implements CommandLineRunner {
 		Image oliver_sleep = new Image("/img/OliverThree.jpg", "Oli at nap time.", "May 12, 2018", oliver);
 		oliver_sleep = imageRepo.save(oliver_sleep);
 
-		Image oliver_art = new Image("/img/ocean.jpg", "Drawn at daycare today!",
-				new SimpleDateFormat("MMMM d, yyyy").format(new Date()), oliver);
+		Image oliver_art = new Image("/img/ocean.jpg", "Drawn at daycare today!", new SimpleDateFormat("MMMM d, yyyy").format(new Date()), oliver);
 		oliver_art = imageRepo.save(oliver_art);
 
 		Image penny_three = new Image("/img/Penny_Three.jpg", "Halloween 2017", "October 31, 2017", penny);
